@@ -14,7 +14,7 @@ Develop a web-based application that allows users to order food from various res
 - Mohammad Tamanna
 - Yonatan Weldemichael
 
-## Technologies used
+## Technologies Used
 - TBD
 
 
