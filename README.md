@@ -14,11 +14,8 @@ Develop a web-based application that allows users to order food from various res
 - Mohammad Tamanna
 - Yonatan Weldemichael
 
-## Technologies Used
+## Management Tools & Technologies
 - TBD
 
-## Project Management Tools & Technologies
-- TBD
-
-## Project Naming Conventions
+## Naming Conventions
 - TBD
