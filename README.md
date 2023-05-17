@@ -17,7 +17,7 @@ Develop a web-based application that allows users to order food from various res
 ## Technologies Used
 - TBD
 
-## Project Management Style
+## Project Management Tools & Technologies
 - TBD
 
 
