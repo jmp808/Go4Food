@@ -20,4 +20,5 @@ Develop a web-based application that allows users to order food from various res
 ## Project Management Tools & Technologies
 - TBD
 
-
+## Project Naming Conventions
+- TBD
