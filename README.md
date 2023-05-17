@@ -1,6 +1,6 @@
 # Go4Food
 
-Online Food Ordering System Project for CS 476 
+Online Food Ordering System Project for CS 476-02 (Spring 2023): Software Development Project
 
 ## Project Description: 
 
