@@ -9,3 +9,9 @@ Project Description: Develop a web-based application that allows users to order 
 - Justine Jhon Papeleras
 - Mohammad Tamanna
 - Yonatan Weldemichael
+
+## Technologies used
+- TBD
+
+
+
