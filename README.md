@@ -12,7 +12,6 @@ Develop a web-based application that allows users to order food from various res
 - Adnan Uddin Mohammed
 - Justine Jhon Papeleras
 - Mohammad Tamanna
-- Yonatan Weldemichael
 
 ## Management Tools & Technologies
 - TBD
