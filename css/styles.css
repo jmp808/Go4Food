@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Belanosima&display=swap');
+*{
+    font-family: 'Belanosima', sans-serif;
+    padding: 0;
+    margin: 0;
+    scroll-padding-top: 1.5 rem;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+.titleContainer
+{
+    color:#EF3D3D;
+    font-size: 55px;
+    padding-left: 150px;
+    padding-top: 120px;
+}
+
+.iconContainer
+{
+    padding-left: 330px;
+    padding-top: 5px;
+}
+
+.loginContainer
+{
+    padding-left: 830px;
+    padding-top: 10px;
+    
+}
+
+.formContainer
+{
+    padding-left: 50%;
+    padding-right: 50px;
+
+}
+
+.loginForm
+{
+    margin: auto;
+    padding: 25px;
+    text-align: center;
+    color: #EF3D3D;
+    border: 2px solid;
+    border-color: #EF3D3D;
+    border-radius: 25px;
+}
+
+.registerForm
+{
+    margin: auto;
+    padding: 25px;
+    text-align: center;
+    color: #EF3D3D;
+    border: 2px solid;
+    border-color: #EF3D3D;
+    border-radius: 25px;
+
+
+}
+
+.button 
+{
+    background-color: #EF3D3D; 
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 50px;
+    margin: 35px 35px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button2 
+{
+    background-color: #EF3D3D; 
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 35px 35px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 
+{
+    background-color: #EF3D3D; 
+    border-radius: 10px;
+    margin: 20px 20px;
+    width: 50%;
+    border-style: none;
+    box-sizing: border-box;
+}
+
+.button2 
+{
+    background-color: #EF3D3D; 
+    border-radius: 10px;
+    margin: 10px 10px;
+    width: 10%;
+    border-style: none;
+    box-sizing: border-box;
+}
+
+.button-1:hover,
+.button-1:focus 
+{
+  background-color: white;
+}
+
+input, textarea {
+    border-color: #EF3D3D;
+  }
