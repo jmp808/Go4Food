@@ -13,8 +13,4 @@ Develop a web-based application that allows users to order food from various res
 - Justine Jhon Papeleras
 - Mohammad Tamanna
 
-## Management Tools & Technologies
-- TBD
 
-## Naming Conventions
-- TBD
