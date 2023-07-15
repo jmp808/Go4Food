@@ -1,7 +1,22 @@
 const express = require("express");
-const { auth } = require("../controllers/restaurant");
+const {
+  getLogin,
+  getSingup,
+  postSignup,
+  postLogin,
+  logout,
+  dashboard,
+} = require("../controllers/restaurant");
+const is_restaurant_auth = require("../middleware/is_restaurant_auth");
 const router = express.Router();
 
-router.get("/login", auth);
+router.get("/login", getLogin);
+router.get("/signup", getSingup);
+router.post("/signup", postSignup);
+router.post("/login", postLogin);
+router.post("/logout", logout);
+
+// dashboard
+router.get("/dashboard", is_restaurant_auth, dashboard);
 
 module.exports = router;

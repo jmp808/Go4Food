@@ -1,3 +1,98 @@
-exports.auth = (req, res, next) => {
-  res.render("signin");
+const Restaurant = require("../models/restaurant");
+const bcrypt = require("bcrypt");
+
+exports.getLogin = (req, res, next) => {
+  res.render("restaurant/signin", {
+    msg: null,
+  });
+};
+
+exports.getSingup = (req, res, next) => {
+  res.render("restaurant/signup", {
+    msg: null,
+  });
+};
+
+exports.postSignup = async (req, res, next) => {
+  const { name, email, cpswd, pswd, address, phone } = req.body;
+  if (cpswd !== pswd) {
+    return res.render("restaurant/signup", {
+      msg: "Password and confirm password does not match",
+    });
+  }
+  const r = Restaurant.findOne({ email: email });
+
+  if (r) {
+    return res.render("restaurant/signup", {
+      msg: "Email already exists",
+    });
+  }
+
+  bcrypt
+    .hash(pswd, 12)
+    .then((hashedPassword) => {
+      const restaurant = new Restaurant({
+        name,
+        email,
+        password: hashedPassword,
+        address,
+        phone,
+      });
+      return restaurant.save();
+    })
+    .then((result) => {
+      res.redirect("/restaurant/login", {
+        msg: "Account created successfully",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// login
+exports.postLogin = (req, res, next) => {
+  const { email, pswd } = req.body;
+  //   return console.log(email, pswd);
+  Restaurant.findOne({ email: email })
+    .then((restaurant) => {
+      if (!restaurant) {
+        res.render("restaurant/signin", {
+          msg: "Invalid email or password",
+        });
+      }
+      bcrypt
+        .compare(pswd, restaurant.password)
+        .then((doMatch) => {
+          if (doMatch) {
+            // req.session.isLoggedIn = true;
+            req.session.restaurant = restaurant;
+            return req.session.save((err) => {
+              //   console.log(err);
+              res.redirect("/restaurant/dashboard");
+            });
+          }
+          res.render("restaurant/signin", {
+            msg: "Invalid email or password",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.render("restaurant/signin", {
+            msg: "Invalid email or password",
+          });
+        });
+    })
+    .catch((err) => console.log(err));
+};
+
+exports.dashboard = (req, res, next) => {
+  res.render("restaurant/dash", {
+    restaurant: req.session.restaurant,
+  });
+};
+
+exports.logout = (req, res, next) => {
+  req.session.restaurant = null;
+  res.redirect("/restaurant/login");
 };
