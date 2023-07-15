@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go4Food Restaurant Catalog</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <style>
+    .contentHeader {
+      display: flex;
+      margin: 20px;
+    }
+    .item-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-left: 5%;
+    }
+    .card_item {
+      width: calc(33% - 20px);
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .card_item img {
+      width: 100%;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .card_item h3 {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #ef3d3d;
+      text-align: left;
+    }
+
+    .card_item p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #777;
+      text-align: left;
+    }
+  </style>
+  <body>
+    <div class="container" style="max-width: 100%">
+      <%- include('navbar') %>
+    </div>
+    <div class="content" style="max-height: 100%; margin-top: 0px">
+      <%- include('sidebar') %>
+      <div class="restaurant-catalog">
+        <div class="name" style="display: flex; justify-content: space-between">
+          <h1 style="color: #ef3d3d">Restaurant name</h1>
+          <h2>imag</h2>
+        </div>
+        <h2 style="margin-left: 5%; color: #ef3d3d">Top Rated item</h2>
+        <br />
+        <div class="item-list">
+          <div class="card_item">
+            <h3>McDonald's</h3>
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              alt="Restaurant 1"
+            />
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              sequi debitis reiciendis doloribus error culpa sapiente maxime
+              perspiciatis excepturi quod.
+            </p>
+            <div class="button-container">
+              <button class="prev-button">Add To Card</button>
+              <button class="next-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="card_item">
+            <h3>McDonald's</h3>
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              alt="Restaurant 1"
+            />
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              sequi debitis reiciendis doloribus error culpa sapiente maxime
+              perspiciatis excepturi quod.
+            </p>
+            <div class="button-container">
+              <button class="prev-button">Add To Card</button>
+              <button class="next-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="card_item">
+            <h3>McDonald's</h3>
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              alt="Restaurant 1"
+            />
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              sequi debitis reiciendis doloribus error culpa sapiente maxime
+              perspiciatis excepturi quod.
+            </p>
+            <div class="button-container">
+              <button class="prev-button">Add To Card</button>
+              <button class="next-button">Buy Now</button>
+            </div>
+          </div>
+
+          <!-- Add more top-rated restaurant items here -->
+        </div>
+        <div class="button-container">
+          <button class="prev-button">Previous</button>
+          <button class="next-button">Next</button>
+        </div>
+        <h2 style="margin-left: 5%; color: #ef3d3d">item</h2>
+        <br />
+        <div class="item-list">
+          <div class="card_item">
+            <h3>McDonald's</h3>
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              alt="Restaurant 1"
+            />
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              sequi debitis reiciendis doloribus error culpa sapiente maxime
+              perspiciatis excepturi quod.
+            </p>
+            <div class="button-container">
+              <button class="prev-button">Add To Card</button>
+              <button class="next-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="card_item">
+            <h3>McDonald's</h3>
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              alt="Restaurant 1"
+            />
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              sequi debitis reiciendis doloribus error culpa sapiente maxime
+              perspiciatis excepturi quod.
+            </p>
+            <div class="button-container">
+              <button class="prev-button">Add To Card</button>
+              <button class="next-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="card_item">
+            <h3>McDonald's</h3>
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              alt="Restaurant 1"
+            />
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              sequi debitis reiciendis doloribus error culpa sapiente maxime
+              perspiciatis excepturi quod.
+            </p>
+            <div class="button-container">
+              <button class="prev-button">Add To Card</button>
+              <button class="next-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="card_item">
+            <h3>McDonald's</h3>
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              alt="Restaurant 1"
+            />
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              sequi debitis reiciendis doloribus error culpa sapiente maxime
+              perspiciatis excepturi quod.
+            </p>
+            <div class="button-container">
+              <button class="prev-button">Add To Card</button>
+              <button class="next-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="card_item">
+            <h3>McDonald's</h3>
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              alt="Restaurant 1"
+            />
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              sequi debitis reiciendis doloribus error culpa sapiente maxime
+              perspiciatis excepturi quod.
+            </p>
+            <div class="button-container">
+              <button class="prev-button">Add To Card</button>
+              <button class="next-button">Buy Now</button>
+            </div>
+          </div>
+          <div class="card_item">
+            <h3>McDonald's</h3>
+            <img
+              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              alt="Restaurant 1"
+            />
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              sequi debitis reiciendis doloribus error culpa sapiente maxime
+              perspiciatis excepturi quod.
+            </p>
+            <div class="button-container">
+              <button class="prev-button">Add To Card</button>
+              <button class="next-button">Buy Now</button>
+            </div>
+          </div>
+
+          <!-- Add more top-rated restaurant items here -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

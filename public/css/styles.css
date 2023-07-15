@@ -11,23 +11,11 @@
 .titleContainer {
   color: #ef3d3d;
   font-size: 25px;
-  /* padding-left: 150px;
-    padding-top: 120px; */
 }
 
 .iconContainer {
   padding-left: 330px;
   padding-top: 5px;
-}
-
-.loginContainer {
-  /* padding-left: 830px;
-  padding-top: 10px; */
-}
-
-.formContainer {
-  /* padding-left: 20%;
-  padding-right: 50px; */
 }
 
 .loginForm {
@@ -158,7 +146,7 @@ header {
 .content {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .sidebar {
@@ -339,7 +327,8 @@ header {
 .content {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  /* margin-top: 20px;
+   */
 }
 
 .sidebar {
@@ -658,12 +647,6 @@ header {
   border-radius: 0 5px 5px 0;
   color: #ef3d3d;
   cursor: pointer;
-}
-
-.content {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
 }
 
 .sidebar {

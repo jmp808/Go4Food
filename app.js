@@ -41,6 +41,9 @@ app.use(customerRoutes);
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.get("/allitems", (req, res) => {
+  res.render("allitems");
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
