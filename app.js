@@ -8,7 +8,10 @@ require("dotenv").config();
 const app = express();
 
 
-app.set('view engine', 'html')
-app.use(express.static('public'))
+app.set('view engine', 'html');
+app.use(express.static('public'));
 
-app.listen(3000)
+app.listen(3000);
+
+const Product = require('../model/product');
+
