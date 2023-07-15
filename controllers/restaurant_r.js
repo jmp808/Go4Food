@@ -6,6 +6,7 @@ const {
   postLogin,
   logout,
   dashboard,
+  createMenu,
 } = require("../controllers/restaurant");
 const is_restaurant_auth = require("../middleware/is_restaurant_auth");
 const router = express.Router();
@@ -18,5 +19,6 @@ router.post("/logout", logout);
 
 // dashboard
 router.get("/dashboard", is_restaurant_auth, dashboard);
+router.get("/createmenu", createMenu);
 
 module.exports = router;

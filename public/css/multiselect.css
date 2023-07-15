@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .drop {
   position: relative;
   -webkit-user-select: none;
@@ -19,7 +18,6 @@
 }
 .drop.open .drop-display {
   z-index: 200;
-  /* border-color: #465; */
 }
 .drop select {
   display: none;
@@ -28,18 +26,11 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  /* background: #000; */
   top: 0px;
   left: 0px;
   opacity: 0;
   display: none;
   z-index: 1;
-}
-
-.link {
-  text-align: center;
-  margin: 20px 0px;
-  color: #8cacd7;
 }
 
 .drop .drop-display {
@@ -63,7 +54,7 @@
   right: 10px;
   top: 12px;
   font-size: 24px;
-  color: #444;
+  color: #ef3d3d;
 }
 .drop .drop-display .item {
   position: relative;
@@ -76,16 +67,14 @@
   line-height: 36px;
 }
 .drop .drop-display .item .btnclose {
-  color: #444;
+  color: #ef3d3d;
   position: absolute;
   font-size: 16px;
   right: 5px;
   top: 10px;
   cursor: pointer;
 }
-.drop .drop-display .item .btnclose:hover {
-  opacity: 0.75;
-}
+
 .drop .drop-display .item.remove {
   -webkit-animation: removeSelected 0.2s, hide 1s infinite;
   animation: removeSelected 0.2s, hide 1s infinite;
@@ -100,8 +89,6 @@
   display: none;
 }
 .drop .drop-options {
-  /* background: #444; */
-  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25); */
   position: absolute;
   width: 100%;
   background-color: #ef3d3d;

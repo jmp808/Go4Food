@@ -15,13 +15,14 @@ exports.getSingup = (req, res, next) => {
 
 exports.postSignup = async (req, res, next) => {
   const { name, email, cpswd, pswd, address, phone } = req.body;
+  console.log(name, email, pswd, cpswd, address, phone);
   if (cpswd !== pswd) {
     return res.render("restaurant/signup", {
       msg: "Password and confirm password does not match",
     });
   }
   const r = Restaurant.findOne({ email: email });
-
+  console.log(r);
   if (r) {
     return res.render("restaurant/signup", {
       msg: "Email already exists",
@@ -95,4 +96,8 @@ exports.dashboard = (req, res, next) => {
 exports.logout = (req, res, next) => {
   req.session.restaurant = null;
   res.redirect("/restaurant/login");
+};
+
+exports.createMenu = (req, res, next) => {
+  res.render("restaurant/createMenu");
 };

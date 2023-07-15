@@ -203,6 +203,6 @@ var options = [
 
 var myDrop = new drop({
   selector: "#myMulti",
-  preselected: [0, 2],
+  preselected: [],
 });
 myDrop.toggle();
