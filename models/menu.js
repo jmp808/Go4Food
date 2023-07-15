@@ -11,6 +11,13 @@ const menuSchema = new Schema({
     ref: "Restaurant",
   },
   quantity: Number,
+
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Menu", menuSchema);
