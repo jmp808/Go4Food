@@ -86,16 +86,19 @@
           <div class="restaurant-list">
             <div class="slider">
               <div class="cards-container">
-                <div class="card  restaurant-item ">
-                  <img src="https://houstonpizza.ca/wp-content/uploads/2022/09/gourmet-beef-pizza.png" alt="Image 1">
-                  <div class="card-content">
-                    <h3>Houston's Pizza</h3>
-                    <p>Address: Lorem ipsum dolor sit amet</p>
-                    <p>Rating: 4.8/5</p>
+                <%  for(let i=0 ;i<8 ;i++) { %>
+                  <div class="card  restaurant-item ">
+                    <img src="https://houstonpizza.ca/wp-content/uploads/2022/09/gourmet-beef-pizza.png" alt="Image 1">
+                    <div class="card-content">
+                      <h3>Houston's Pizza</h3>
+                      <p>Address: Lorem ipsum dolor sit amet</p>
+                      <p>Rating: 4.8/5</p>
+                    </div>
+                    <button class="view-buttons">View</button>
                   </div>
-                  <button class="view-buttons">View</button>
-                </div>
-                <div class="card  restaurant-item ">
+                 <% } %>
+              
+                <!-- <div class="card  restaurant-item ">
                   <img src="https://houstonpizza.ca/wp-content/uploads/2022/09/gourmet-beef-pizza.png" alt="Image 1">
                   <div class="card-content">
                     <h3>Houston's Pizza</h3>
@@ -123,7 +126,7 @@
                     <p>Rating: 4.8/5</p>
                   </div>
                   <button class="view-buttons">View</button>
-              </div>
+              </div> -->
              
             </div>
             <div class="slider-buttons">
@@ -137,64 +140,22 @@
         <h2>All Restaurants</h2>
         <br />
         <div class="restaurant-list">
-       
+        <%  for(let i=0; i<6; i++ ){ %>
+          <div class="restaurants-item">
+            <img
+              src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?cs=srgb&dl=pexels-engin-akyurt-1437267.jpg&fm=jpg"
+              alt="Restaurant 3"
+            />
+            <h3>Luigi's Pasta</h3>
+            <p>Address: Lorem ipsum dolor sit amet</p>
+            <p>Rating: 4.0/5</p>
 
-            <div class="restaurant-item">
-              <img
-                src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?cs=srgb&dl=pexels-engin-akyurt-1437267.jpg&fm=jpg"
-                alt="Restaurant 3"
-              />
-              <h3>Luigi's Pasta</h3>
-              <p>Address: Lorem ipsum dolor sit amet</p>
-              <p>Rating: 4.0/5</p>
-            </div>
-       
-        
-          <div class="restaurant-item">
-            <img
-              src="https://cookwithcandy.com/wp-content/uploads/2021/01/Vegan-Persian-Kabob.jpg"
-              alt="Restaurant 4"
-            />
-            <h3>Andala's Cuisine</h3>
-            <p>Address: Lorem ipsum dolor sit amet</p>
-            <p>Rating: 3.8/5</p>
+            <button class="view-buttons">View</button>
           </div>
-          <div class="restaurant-item">
-            <img
-              src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?cs=srgb&dl=pexels-engin-akyurt-1437267.jpg&fm=jpg"
-              alt="Restaurant 3"
-            />
-            <h3>Luigi's Pasta</h3>
-            <p>Address: Lorem ipsum dolor sit amet</p>
-            <p>Rating: 4.0/5</p>
-          </div>
-          <div class="restaurant-item">
-            <img
-              src="https://cookwithcandy.com/wp-content/uploads/2021/01/Vegan-Persian-Kabob.jpg"
-              alt="Restaurant 4"
-            />
-            <h3>Andala's Cuisine</h3>
-            <p>Address: Lorem ipsum dolor sit amet</p>
-            <p>Rating: 3.8/5</p>
-          </div>
-          <div class="restaurant-item">
-            <img
-              src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?cs=srgb&dl=pexels-engin-akyurt-1437267.jpg&fm=jpg"
-              alt="Restaurant 3"
-            />
-            <h3>Luigi's Pasta</h3>
-            <p>Address: Lorem ipsum dolor sit amet</p>
-            <p>Rating: 4.0/5</p>
-          </div>
-          <div class="restaurant-item">
-            <img
-              src="https://cookwithcandy.com/wp-content/uploads/2021/01/Vegan-Persian-Kabob.jpg"
-              alt="Restaurant 4"
-            />
-            <h3>Andala's Cuisine</h3>
-            <p>Address: Lorem ipsum dolor sit amet</p>
-            <p>Rating: 3.8/5</p>
-          </div>
+      <%   }  %>
+
+            
+      
           <!-- Add more restaurants here -->
         </div>
       
