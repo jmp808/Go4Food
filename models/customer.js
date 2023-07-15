@@ -14,6 +14,17 @@ const customerSchema = new Schema({
       ref: "Order",
     },
   ],
+  cart: {
+    type: Schema.Types.ObjectId,
+    ref: "Cart",
+  },
+
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Customer", customerSchema);

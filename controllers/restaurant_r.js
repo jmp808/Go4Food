@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.get("/login", getLogin);
 router.get("/signup", getSingup);
-router.post("/signup", postSignup);
+router.post("/signup", upload.single("images"), postSignup);
 router.post("/login", postLogin);
 router.post("/logout", logout);
 

@@ -15,6 +15,7 @@ exports.getSingup = (req, res, next) => {
 
 exports.postSignup = async (req, res, next) => {
   const { name, email, cpswd, pswd, address, phone } = req.body;
+  const image = req.file.filename;
   //console.log(name, email, pswd, cpswd, address, phone);
   if (cpswd !== pswd) {
     return res.render("restaurant/signup", {
@@ -35,6 +36,7 @@ exports.postSignup = async (req, res, next) => {
       const restaurant = new Restaurant({
         name,
         email,
+        image,
         password: hashedPassword,
         address,
         phone,
@@ -102,12 +104,12 @@ exports.createMenu = (req, res, next) => {
   res.render("restaurant/createMenu");
 };
 
-exports.postCreateMenu = (req, res, next) => {
-  const { name, price, description, t, quantity } = req.body;
-  const images = req.files.map((f) => ({ url: f.path, filename: f.filename }));
-  const restaurant = req.session.restaurant;
+exports.postCreateMenu = async (req, res, next) => {
+  const { title, price, description, t, quantity } = req.body;
+  const images = req.files.map((f) => f.filename);
+  const restaurant = await Restaurant.findById(req.session.restaurant._id);
   const menu = new Menu({
-    name,
+    title,
     price,
     description,
     images,
@@ -115,8 +117,13 @@ exports.postCreateMenu = (req, res, next) => {
     quantity,
     restaurant: restaurant._id,
   });
+
   menu
     .save()
+    .then((result) => {
+      restaurant.menu.push(result._id);
+      return restaurant.save();
+    })
     .then((result) => {
       res.redirect("/restaurant/dashboard");
     })

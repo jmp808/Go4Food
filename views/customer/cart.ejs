@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Go4Food - Cart</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-logo">
+          <img src="https://i.imgur.com/fVuzO73.png" />
+          <h2 style="margin-left: 10px">Go4Food</h2>
+        </div>
+        <form class="search-form">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search for products..."
+          />
+          <button class="search-button">Search</button>
+        </form>
+      </header>
+
+      <div class="content">
+        <div class="sidebar">
+          <ul>
+            <li><a href="browse.html">Restaurants</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="track.html">Track Order</a></li>
+            <li><a href="schedule.html">Schedule Order</a></li>
+            <li><a href="history.html">Order History</a></li>
+            <li><a href="profile.html">Profile Info</a></li>
+            <li><a href="/logout">Sign Out</a></li>
+          </ul>
+        </div>
+
+        <div class="cart-content">
+          <h1>Shopping Cart</h1>
+            
+          <% if((cart.menus.length)==0 ){%>
+            <h2>Cart is empty</h2>
+            <% }else{ %>
+                <% var totalPrice =0; var qty=0 %>
+                <% for(var i=0;i<cart.menus.length;i++){ %>
+
+          <div class="cart-item">
+            <img src="/images/<%=cart.menus[i].menu_id.images[0] %>" alt="Product Image" />
+            <div class="cart-item-details">
+              <h3>Product <%= cart.menus[i].menu_id.title %></h3>
+              <p>Price: $<%=cart.menus[i].menu_id.price*cart.menus[i].quantity %></p>
+              <p>Quantity: <%=cart.menus[i].quantity %></p>
+            </div>
+            <div class="cart-item-actions">
+              <button class="remove-item">Remove</button>
+            </div>
+          </div>
+            <% totalPrice += cart.menus[i].menu_id.price*cart.menus[i].quantity %>
+            <% qty ++ %>
+          <% }} %>
+          <div class="cart-item">
+             <div class="cart-item-details">
+              <h3></h3>
+              <p>Total Price: $<%=totalPrice %></p>
+              <p>Total Quantity: <%=qty %></p>
+              <button class="remove-item">Buy Now</button>
+              <button class="remove-item">Pre Planned Order</button>
+
+            </div>
+             
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

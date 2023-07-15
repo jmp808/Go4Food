@@ -1,5 +1,8 @@
 const Customer = require("../models/customer");
+const Cart = require("../models/cart");
+const Menu = require("../models/menu");
 const bcrypt = require("bcrypt");
+
 exports.login = (req, res, next) => {
   res.render("customer/signin", {
     msg: null,
@@ -94,8 +97,75 @@ exports.getDash = (req, res, next) => {
   });
 };
 
-exports.getCart = (req, res, next) => {
-  res.render("cart", {
-    customer: req.session.customer,
+exports.getCart = async (req, res, next) => {
+  const { customer } = req.session;
+  const c = await Customer.findById(customer._id);
+  if (!c.cart) {
+    const cart = new Cart({
+      customer: c._id,
+      menus: [],
+    });
+    await cart.save();
+    c.cart = cart._id;
+    await c.save();
+  }
+  Cart.findById(c.cart)
+    .populate("menus.menu_id")
+    .then((cart) => {
+      res.render("customer/cart", {
+        customer: req.session.customer,
+        cart: cart,
+      });
+    });
+};
+
+exports.addToCart = async (req, res, next) => {
+  const { menu_id } = req.body;
+  const { customer } = req.session;
+  const c = await Customer.findById(customer._id);
+  if (!c.cart) {
+    const cart = new Cart({
+      customer: c._id,
+      menus: [],
+    });
+    await cart.save();
+    c.cart = cart._id;
+    await c.save();
+  }
+  const cart = await Cart.findById(c.cart);
+  const menu = await Menu.findById(menu_id);
+  //   find menu in cart.menu and increase quantity
+  const index = cart.menus.findIndex((m) => m.menu_id.toString() === menu_id);
+  if (index !== -1) {
+    cart.menus[index].quantity = cart.menus[index].quantity + 1;
+  } else {
+    cart.menus.push({
+      menu_id: menu_id,
+      quantity: 1,
+    });
+  }
+
+  cart.total = cart.total + 1;
+  cart.price = cart.price + menu.price;
+
+  await cart.save();
+  res.redirect("/cart");
+};
+
+exports.removeFromCart = async (req, res, next) => {
+  const { id } = req.body;
+  const { customer } = req.session;
+  const c = await Customer.findById(customer._id);
+  const cart = await Cart.findById(c.cart);
+  cart.menu = cart.menu.filter((m) => m.toString() !== id);
+  await cart.save();
+  res.redirect("/cart");
+};
+
+exports.getOrders = async (req, res, next) => {
+  const { customer } = req.session;
+  const c = await Customer.findById(customer._id).populate("orders");
+  res.render("customer/orders", {
+    orders: c.orders,
   });
 };

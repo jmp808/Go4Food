@@ -9,6 +9,7 @@ const { connectDB } = require("./config/db");
 
 const restaurantRoutes = require("./controllers/restaurant_r");
 const customerRoutes = require("./controllers/customer_r");
+const productsRoutes = require("./controllers/products_r");
 require("dotenv").config();
 connectDB();
 const app = express();
@@ -39,12 +40,12 @@ app.use(
 // restaurant routes
 app.use("/restaurant", restaurantRoutes);
 app.use(customerRoutes);
+app.use(productsRoutes);
+
 app.get("/", (req, res) => {
   res.render("index");
 });
-app.get("/allitems", (req, res) => {
-  res.render("allitems");
-});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

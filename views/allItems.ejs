@@ -58,63 +58,41 @@
       <div class="restaurant-catalog">
         <div class="name" style="display: flex; justify-content: space-between">
           <h1 style="color: #ef3d3d">Restaurant name</h1>
-          <h2>imag</h2>
+         
         </div>
         <h2 style="margin-left: 5%; color: #ef3d3d">Top Rated item</h2>
         <br />
         <div class="item-list">
+ 
+          <% if(per_menus.length==0){ %>
+          <h1>No items found</h1>
+          <% }else { %>
+          <% for(var i=0;i<per_menus.length;i++){ %>
           <div class="card_item">
-            <h3>McDonald's</h3>
+            <h3><%=per_menus[i].restaurant.name %>'s</h3>
             <img
-              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              src="/images/<%=per_menus[i].images[0] %>"
               alt="Restaurant 1"
             />
 
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-              sequi debitis reiciendis doloribus error culpa sapiente maxime
-              perspiciatis excepturi quod.
+              <strong><%=per_menus[i].title %></strong>
+              <%=per_menus[i].description %>
             </p>
             <div class="button-container">
-              <button class="prev-button">Add To Card</button>
+              <form action="/cart" method="post">
+              <input type="hidden" name="menu_id" value="<%=per_menus[i]._id %>">
+              <button class="prev-button" type="submit">Add To Card</button>
+            </form>
+            <form action="/buynow" method="post">
+              <input type="hidden" name="menu_id" value="<%=per_menus[i]._id %>">
               <button class="next-button">Buy Now</button>
+            </form>
             </div>
           </div>
-          <div class="card_item">
-            <h3>McDonald's</h3>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
-              alt="Restaurant 1"
-            />
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-              sequi debitis reiciendis doloribus error culpa sapiente maxime
-              perspiciatis excepturi quod.
-            </p>
-            <div class="button-container">
-              <button class="prev-button">Add To Card</button>
-              <button class="next-button">Buy Now</button>
-            </div>
-          </div>
-          <div class="card_item">
-            <h3>McDonald's</h3>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
-              alt="Restaurant 1"
-            />
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-              sequi debitis reiciendis doloribus error culpa sapiente maxime
-              perspiciatis excepturi quod.
-            </p>
-            <div class="button-container">
-              <button class="prev-button">Add To Card</button>
-              <button class="next-button">Buy Now</button>
-            </div>
-          </div>
-
+          <% } %>
+          <% } %>
+      
           <!-- Add more top-rated restaurant items here -->
         </div>
         <div class="button-container">
@@ -124,109 +102,36 @@
         <h2 style="margin-left: 5%; color: #ef3d3d">item</h2>
         <br />
         <div class="item-list">
+        <% if(allMenus.length==0){ %>
+          <h1>No items found</h1>
+          <% }else { %>
+          <% for(var i=0;i<allMenus.length;i++){ %>
+
           <div class="card_item">
-            <h3>McDonald's</h3>
+            <h3><%=allMenus[i].restaurant.name %>'s</h3>
             <img
-              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
+              src="/images/<%=allMenus[i].images[0] %>"
               alt="Restaurant 1"
             />
 
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-              sequi debitis reiciendis doloribus error culpa sapiente maxime
-              perspiciatis excepturi quod.
+              <strong><%=allMenus[i].title %></strong>
+              <%=allMenus[i].description %>
             </p>
             <div class="button-container">
-              <button class="prev-button">Add To Card</button>
-              <button class="next-button">Buy Now</button>
+              <form action="/cart" method="post">
+                <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
+                <button class="prev-button" type="submit">Add To Card</button>
+              </form>
+              <form action="/buynow" method="post">
+                <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
+                <button class="next-button">Buy Now</button>
+              </form>
             </div>
           </div>
-          <div class="card_item">
-            <h3>McDonald's</h3>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
-              alt="Restaurant 1"
-            />
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-              sequi debitis reiciendis doloribus error culpa sapiente maxime
-              perspiciatis excepturi quod.
-            </p>
-            <div class="button-container">
-              <button class="prev-button">Add To Card</button>
-              <button class="next-button">Buy Now</button>
-            </div>
-          </div>
-          <div class="card_item">
-            <h3>McDonald's</h3>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
-              alt="Restaurant 1"
-            />
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-              sequi debitis reiciendis doloribus error culpa sapiente maxime
-              perspiciatis excepturi quod.
-            </p>
-            <div class="button-container">
-              <button class="prev-button">Add To Card</button>
-              <button class="next-button">Buy Now</button>
-            </div>
-          </div>
-          <div class="card_item">
-            <h3>McDonald's</h3>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
-              alt="Restaurant 1"
-            />
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-              sequi debitis reiciendis doloribus error culpa sapiente maxime
-              perspiciatis excepturi quod.
-            </p>
-            <div class="button-container">
-              <button class="prev-button">Add To Card</button>
-              <button class="next-button">Buy Now</button>
-            </div>
-          </div>
-          <div class="card_item">
-            <h3>McDonald's</h3>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
-              alt="Restaurant 1"
-            />
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-              sequi debitis reiciendis doloribus error culpa sapiente maxime
-              perspiciatis excepturi quod.
-            </p>
-            <div class="button-container">
-              <button class="prev-button">Add To Card</button>
-              <button class="next-button">Buy Now</button>
-            </div>
-          </div>
-          <div class="card_item">
-            <h3>McDonald's</h3>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg"
-              alt="Restaurant 1"
-            />
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-              sequi debitis reiciendis doloribus error culpa sapiente maxime
-              perspiciatis excepturi quod.
-            </p>
-            <div class="button-container">
-              <button class="prev-button">Add To Card</button>
-              <button class="next-button">Buy Now</button>
-            </div>
-          </div>
-
+          <% } %>
+          <% } %>
+        
           <!-- Add more top-rated restaurant items here -->
         </div>
       </div>

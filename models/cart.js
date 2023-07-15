@@ -6,15 +6,27 @@ const cartSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Customer",
   },
-  menu: [
+  menus: [
     {
-      type: Schema.Types.ObjectId,
-      ref: "Menu",
+      menu_id: {
+        type: Schema.Types.ObjectId,
+        ref: "Menu",
+      },
+      quantity: {
+        type: Number,
+        default: 0,
+      },
     },
   ],
-  quantity: Number,
-  price: Number,
-  total: Number,
+
+  price: {
+    type: Number,
+    default: 0,
+  },
+  total: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("Cart", cartSchema);
