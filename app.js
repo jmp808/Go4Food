@@ -45,6 +45,9 @@ app.use(productsRoutes);
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.get("/payment", (req, res) => {
+  res.render("Payment");
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
