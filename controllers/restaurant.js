@@ -15,19 +15,19 @@ exports.getSingup = (req, res, next) => {
 
 exports.postSignup = async (req, res, next) => {
   const { name, email, cpswd, pswd, address, phone } = req.body;
-  console.log(name, email, pswd, cpswd, address, phone);
+  //console.log(name, email, pswd, cpswd, address, phone);
   if (cpswd !== pswd) {
     return res.render("restaurant/signup", {
       msg: "Password and confirm password does not match",
     });
   }
   const r = Restaurant.findOne({ email: email });
-  console.log(r);
-  if (r) {
-    return res.render("restaurant/signup", {
-      msg: "Email already exists",
-    });
-  }
+  //console.log(r);
+  // if (r) {
+  //   return res.render("restaurant/signup", {
+  //     msg: "Email already exists",
+  //   });
+  // }
 
   bcrypt
     .hash(pswd, 12)
