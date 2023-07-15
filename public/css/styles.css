@@ -107,18 +107,6 @@ input,
 textarea {
   border-color: #ef3d3d;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Belanosima", sans-serif;
-  background-color: #f9f9f9;
-}
-
 .container {
   max-width: 1200px;
   border-radius: 10px;
@@ -300,17 +288,6 @@ h1 {
   background-color: #cc3333;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Belanosima", sans-serif;
-  background-color: #f9f9f9;
-}
-
 .container {
   max-width: 1200px;
   border-radius: 10px;
@@ -393,6 +370,10 @@ header {
 }
 
 .sidebar a:hover {
+  background-color: #fff;
+  color: #ef3d3d;
+}
+.form button:hover {
   background-color: #fff;
   color: #ef3d3d;
 }
