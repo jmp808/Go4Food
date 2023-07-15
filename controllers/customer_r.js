@@ -5,6 +5,7 @@ const {
   postLogin,
   getDash,
   logout,
+  getCart,
 } = require("./customer");
 const express = require("express");
 const is_customer = require("../middleware/is_customer");
@@ -18,5 +19,6 @@ router.post("/login", postLogin);
 router.post("/logout", logout);
 
 router.get("/dashboard", is_customer, getDash);
+router.get("/cart", is_customer, getCart);
 
 module.exports = router;

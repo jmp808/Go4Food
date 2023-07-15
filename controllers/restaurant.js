@@ -1,6 +1,6 @@
 const Restaurant = require("../models/restaurant");
 const bcrypt = require("bcrypt");
-
+const Menu = require("../models/menu");
 exports.getLogin = (req, res, next) => {
   res.render("restaurant/signin", {
     msg: null,
@@ -100,4 +100,25 @@ exports.logout = (req, res, next) => {
 
 exports.createMenu = (req, res, next) => {
   res.render("restaurant/createMenu");
+};
+
+exports.postCreateMenu = (req, res, next) => {
+  const { name, price, description, t, quantity } = req.body;
+  const images = req.files.map((f) => ({ url: f.path, filename: f.filename }));
+  const restaurant = req.session.restaurant;
+  const menu = new Menu({
+    name,
+    price,
+    description,
+    images,
+    tags: t,
+    quantity,
+    restaurant: restaurant._id,
+  });
+  menu
+    .save()
+    .then((result) => {
+      res.redirect("/restaurant/dashboard");
+    })
+    .catch((err) => console.log(err));
 };
