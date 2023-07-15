@@ -18,7 +18,7 @@
             <h1>Create Menu</h1>
             <div class="dishform-main-wrapper">
                 <div class="dishform-form-wrapper">
-                  <form action="#" method="POST" id="my-form"  enctype="multipart/form-data">
+                  <form action="/restaurant/create-menu" method="POST" id="my-form" enctype="multipart/form-data">
                     <div class="dishform-input">
                       <div>
                         <label for="firstname" class="dishform-form-label">
@@ -26,7 +26,7 @@
                         </label>
                         <input
                           type="text"
-                          name="disname"
+                          name="title"
                            placeholder="Enter Dish name"
                           class="dishform-form-input"
                         />
@@ -48,7 +48,7 @@
                         <label for="phone" class="dishform-form-label"> Dish Quantity </label>
                         <input
                           type="number"
-                          name="Quantity"
+                          name="quantity"
                            placeholder="Enter Quantity"
                           class="dishform-form-input"
                         />
@@ -61,7 +61,7 @@
                       </label>
                       <textarea
                         type="text"
-                        name=" dish Discription"
+                        name="description"
                          placeholder="Discription"
                         class="dishform-form-input"
                          rows="5"
@@ -73,7 +73,13 @@
                       <label for="address2" class="dishform-form-label">
                        Dish Teg 
                       </label>
-                      <select multiple="multiple" id="myMulti" >
+                      <!-- <select multiple="multiple" id="myMulti" name="tags">
+                        <option  value=" item 2">item 2</option>
+                        <option  value="item3">item 3</option>
+                        <option  value="item4">item 4</option>
+                        <option value=" item1">Item 1</option>
+                      </select> -->
+                      <select multiple="multiple"  name="t">
                         <option  value=" item 2">item 2</option>
                         <option  value="item3">item 3</option>
                         <option  value="item4">item 4</option>
@@ -93,7 +99,7 @@
                       </div>      
                     </div>
                   </div>
-                    <button class="dishform-btn">Create Now</button>
+                    <button class="dishform-btn" type="submit">Create Now</button>
                   </form>
                 
               </div>

@@ -93,3 +93,9 @@ exports.getDash = (req, res, next) => {
     customer: req.session.customer,
   });
 };
+
+exports.getCart = (req, res, next) => {
+  res.render("cart", {
+    customer: req.session.customer,
+  });
+};

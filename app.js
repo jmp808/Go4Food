@@ -20,10 +20,11 @@ const store = new mongoDbStore({
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(bodyParser.json());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-app.use("/profile", express.static("upload/images"));
+app.use("/images", express.static("upload/images"));
 
 // session middleware
 app.use(
