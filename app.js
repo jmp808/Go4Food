@@ -7,8 +7,8 @@ const PORT = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 const { connectDB } = require("./config/db");
 
-const restaurantRoutes = require("./routes/restaurant");
-const customerRoutes = require("./routes/customer");
+const restaurantRoutes = require("./controllers/restaurant_r");
+const customerRoutes = require("./controllers/customer_r");
 require("dotenv").config();
 connectDB();
 const app = express();

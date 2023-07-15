@@ -12,10 +12,10 @@ const User= new mongoose.model
         [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'role'
+                ref: 'role',
             }
         ]
     })
 );
 
-const user = moongoose.model('User', UserSchema)
+const user = moongoose.model('User', UserSchema);

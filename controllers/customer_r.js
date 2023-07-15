@@ -5,7 +5,7 @@ const {
   postLogin,
   getDash,
   logout,
-} = require("../controllers/customer");
+} = require("./customer");
 const express = require("express");
 const is_customer = require("../middleware/is_customer");
 
