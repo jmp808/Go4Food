@@ -41,23 +41,32 @@
               <p>Quantity: <%=cart.menus[i].quantity %></p>
             </div>
             <div class="cart-item-actions">
-              <button class="remove-item">Remove</button>
+                <form action="/remove-from-cart" method="post">
+                    <input type="hidden" name="id" value="<%=cart.menus[i].menu_id._id %>" > 
+                      <button type="submit" class="remove-item">Remove</button>
+                    </form>
             </div>
           </div>
             <% totalPrice += cart.menus[i].menu_id.price*cart.menus[i].quantity %>
             <% qty ++ %>
-          <% }} %>
+          <% } %>
           <div class="cart-item">
              <div class="cart-item-details">
               <h3></h3>
               <p>Total Price: $<%=totalPrice %></p>
-              <p>Total Quantity: <%=qty %></p>
+              <p>Total Order to be made: <%=qty %></p>
+              <p>Total items : <%=cart.total %></p>
+
+              <form action="/buynow" method="post">
+                <input type="hidden" name="type" value="multiple">
               <button class="remove-item  buttons" style="margin-right: 10px; margin-top: 10px;">Buy Now</button>
+            </form>
               <button class="remove-item buttons">Pre Planned Order</button>
 
             </div>
              
             </div>
+            <% } %>
         </div>
       </div>
     </div>

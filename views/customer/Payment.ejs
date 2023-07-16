@@ -180,57 +180,38 @@
   </head>
   <body>
     <div class="container-fluid">
-      <%- include('navbar') %>
+      <%- include('../navbar') %>
 
       <div class="content" style="margin-top: 0px">
-        <%- include('sidebar') %>
+        <%- include('../sidebar') %>
         <!-- <h1>Payment</h1> -->
         <div class="payment-content">
           <div class="orderSummary cart-form">
             <div class="header">Order Summary</div>
-            <p>2 items</p>
+            <% if(type==="single"){ %>
+            <p>1 items</p>
             <div class="items" style="display: flex; margin-top: 10px">
               <div class="">
                 <img
                   style="width: 70px; height: auto"
                   class="img-fluid"
-                  src="https://i.imgur.com/79M6pU0.png"
+                  src="/images/<%=menu.images[0] %>"
                 />
               </div>
               <div class="" style="margin-left: 15px">
-                <div>RS 26.99</div>
+                <div>$ <%=menu.price %></div>
                 <div
                   class="row text-muted"
                   style="font-size: 14px; opacity: 0.5"
                 >
-                  Be Legandary Lipstick-Nude rose
+                  <%=menu.title %>
                 </div>
                 <div style="font-size: 14px">Qty:1</div>
               </div>
             </div>
-            <div class="items" style="display: flex; margin-top: 10px">
-              <div class="">
-                <img
-                  style="width: 70px; height: auto"
-                  class="img-fluid"
-                  src="https://i.imgur.com/79M6pU0.png"
-                />
-              </div>
-              <div class="" style="margin-left: 15px">
-                <div><b> RS 26.99</b></div>
-                <div
-                  class="row text-muted"
-                  style="font-size: 14px; opacity: 0.5"
-                >
-                  Be Legandary Lipstick-Nude rose
-                </div>
-                <div style="font-size: 14px">Qty:1</div>
-              </div>
-            </div>
-
             <div class="row lower">
               <div class="col text-left">Subtotal</div>
-              <div class="col text-right">$ 46.98</div>
+              <div class="col text-right">$ <%=menu.price %></div>
             </div>
             <div class="row lower">
               <div class="col text-left">Delivery</div>
@@ -238,17 +219,59 @@
             </div>
             <div class="row lower">
               <div class="col text-left"><b>Total to pay</b></div>
-              <div class="col text-right"><b>$ 46.98</b></div>
+              <div class="col text-right"><b>$ <%=menu.price %></b></div>
             </div>
           </div>
+            <% }else{ %>
+            <p><%=cart.total %> items</p>
+            <% for(var i=0; i<menus.length; i++){ %>
+            <div class="items" style="display: flex; margin-top: 10px">
+              <div class="">
+                <img
+                  style="width: 70px; height: auto"
+                  class="img-fluid"
+                  src="/images/<%=menus[i].menu_id.images[0] %>"
+                />
+              </div>
+              <div class="" style="margin-left: 15px">
+                <div><b> $ <%=menus[i].quantity*menus[i].menu_id.price %></b></div>
+                <div
+                  class="row text-muted"
+                  style="font-size: 14px; opacity: 0.5"
+                >
+                  <%=menus[i].menu_id.title %>
+                </div>
+                <div style="font-size: 14px">Qty:<%=menus[i].quantity %></div>
+              </div>
+            </div>
+<% } %>
+<div class="row lower">
+  <div class="col text-left">Subtotal</div>
+  <div class="col text-right">$ <%=cart.price %></div>
+</div>
+<div class="row lower">
+  <div class="col text-left">Delivery</div>
+  <div class="col text-right">Free</div>
+</div>
+<div class="row lower">
+  <div class="col text-left"><b>Total to pay</b></div>
+  <div class="col text-right"><b>$ <%=cart.price %></b></div>
+</div>
+</div>
+            
+          <% } %>
 
           <div class="payment-form">
+            <form action="/payment" method="post">
+              <% if(msg){ %>
+              <p style="color: red"><%=msg %></p>
+              <% } %>
             <div class="form-group">
               <label for="card-number">Card Number</label>
               <input
                 type="text"
                 id="card-number"
-                name="card-number"
+                name="cardNumber"
                 placeholder="Enter your card number"
               />
             </div>
@@ -258,7 +281,7 @@
               <input
                 type="text"
                 id="card-holder"
-                name="card-holder"
+                name="cardName"
                 placeholder="Enter the card holder name"
               />
             </div>
@@ -268,7 +291,7 @@
               <input
                 type="text"
                 id="expiry-date"
-                name="expiry-date"
+                name="expiryDate"
                 placeholder="Enter the expiry date (MM/YYYY)"
               />
             </div>
@@ -278,8 +301,17 @@
               <input
                 type="text"
                 id="cvv"
-                name="cvv"
+                name="cvc"
                 placeholder="Enter the CVV"
+              />
+            </div>
+            <div class="form-group">
+              <label for="cvv">Amount $</label>
+              <input
+                type="number"
+                id="cvv"
+                name="amount"
+                placeholder="Enter the amount"
               />
             </div>
 
@@ -288,7 +320,7 @@
               <input
                 type="text"
                 id="billing-address"
-                name="billing-address"
+                name="billingAddress"
                 placeholder="Enter your billing address"
               />
             </div>
@@ -297,6 +329,7 @@
               <input type="submit" value="Confirm Payment" />
             </div>
           </div>
+        </form>
         </div>
       </div>
     </div>
