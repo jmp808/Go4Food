@@ -185,18 +185,21 @@
                 <h1>No orders found</h1>
                 <% }else { %>
                 <% for(var i=0;i<orders.length;i++){ %>
+                <a href="/trackorder/<%=orders[i]._id %>" >
                 <div class="order">
                     <div class="order-header">
                         <span class="order-number">Order #<%=orders[i]._id %></span>
-                        <span class="order-details">Delivery Address: 123 Main St, Cityville</span>
+                        <span class="order-details">Delivery Address: <%=customer.address %></span>
                     </div>
-                    <p>Item 1: Product A - Quantity: 2</p>
-                    <p>Item 2: Product B - Quantity: 1</p>
-                    <p>Item 3: Product C - Quantity: 3</p>
+                    <% for(var j=0; j<orders[i].menus.length; j++) {%>
+                    <p>Item <%=j+1 %>: Product <%= orders[i].menus[j].menu_id.title %> - Quantity: <%= orders[i].menus[j].quantity %> </p>
+                    <% } %>
+                    <p>Order Total: $<%=orders[i].price %></p>
                     <div class="order-actions">
-                        <button class="order-again-button">Order Again</button>
+                        <button class="order-again-button">Cancel Order</button>
                     </div>
                 </div>
+            </a>
                 <% } %>
                 <% } %>
  

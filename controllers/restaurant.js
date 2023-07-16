@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const Menu = require("../models/menu");
 const fs = require("fs");
 const fileHelper = require("../utils/file");
+const Order = require("../models/order");
 
 exports.getLogin = (req, res, next) => {
   res.render("restaurant/signin", {
@@ -146,12 +147,106 @@ exports.postCreateMenu = async (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.createMenu = (req, res, next) => {
-  res.render("restaurant/createMenu");
-};
 exports.orderstatus = (req, res, next) => {
   res.render("restaurant/orderStatus");
 };
-exports.orderNotification = (req, res, next) => {
-  res.render("restaurant/orderNotification");
+exports.orderNotification = async (req, res, next) => {
+  const orders = [];
+  const restaurant = await Restaurant.findById(req.session.restaurant._id);
+  // return console.log(restaurant);
+  for (let i = 0; i < restaurant.orders.length; i++) {
+    const menus = [];
+    const order = await Order.findOne({
+      _id: restaurant.orders[i]._id,
+      status: "pending",
+    })
+      .populate("menus.menu_id")
+      .populate("customer");
+    if (order == null) continue;
+    for (let j = 0; j < order.menus.length; j++) {
+      if (
+        order.menus[j].menu_id.restaurant.toString() ==
+        restaurant._id.toString()
+      ) {
+        const menu = await Menu.findById(order.menus[j].menu_id);
+        menus.push({
+          menu: menu,
+          quantity: order.menus[j].quantity,
+        });
+      }
+    }
+    orders.push({
+      order_id: order._id,
+      customer: order.customer,
+      menus: menus,
+    });
+  }
+  // return console.log(orders);
+
+  res.render("restaurant/orderNotification", {
+    orders: orders,
+  });
+};
+
+exports.confirmOrder = async (req, res, next) => {
+  const { order_id } = req.body;
+  const order = await Order.findById(order_id);
+  order.status = "confirmed";
+  order
+    .save()
+    .then((result) => {
+      res.redirect("/restaurant/ordernotification");
+    })
+    .catch((err) => console.log(err));
+};
+exports.cancelOrder = async (req, res, next) => {
+  const { order_id } = req.body;
+
+  const order = await Order.findById(order_id);
+  order.status = "cancel";
+  order
+    .save()
+    .then((result) => {
+      res.redirect("/restaurant/ordernotification");
+    })
+    .catch((err) => console.log(err));
+};
+exports.getConfirmOrders = async (req, res, next) => {
+  const orders = [];
+  const restaurant = await Restaurant.findById(req.session.restaurant._id);
+  // return console.log(restaurant);
+  for (let i = 0; i < restaurant.orders.length; i++) {
+    const menus = [];
+    const order = await Order.findOne({
+      _id: restaurant.orders[i]._id,
+      status: "confirmed",
+    })
+      .populate("menus.menu_id")
+      .populate("customer");
+
+    if (order == null) continue;
+    for (let j = 0; j < order.menus.length; j++) {
+      if (
+        order.menus[j].menu_id.restaurant.toString() ==
+        restaurant._id.toString()
+      ) {
+        const menu = await Menu.findById(order.menus[j].menu_id);
+        menus.push({
+          menu: menu,
+          quantity: order.menus[j].quantity,
+        });
+      }
+    }
+    orders.push({
+      order_id: order._id,
+      price: order.price,
+      customer: order.customer,
+      menus: menus,
+    });
+  }
+  // return console.log(orders);
+
+  res.render("restaurant/confirmOrders", {
+    orders: orders,
+  });
 };

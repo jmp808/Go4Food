@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Go4Food Restaurant Catalog</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -213,24 +213,26 @@
             <article class="custom-card">
               <header class="custom-card-header">My Orders / Tracking</header>
               <div class="custom-card-body">
-                <h6>Order ID: OD45345345435</h6>
+                <h6>Order ID: <%=order._id %></h6>
                 <article class="custom-card">
                   <div class="custom-card-body custom-row">
                     <div class="custom-col">
                       <strong>Estimated Delivery time:</strong> <br />
-                      29 nov 2019
+                      <%=order.shippingDetails.expectedTime %>
                     </div>
                     <div class="custom-col">
                       <strong>Shipping BY:</strong> <br />
-                      BLUEDART, | <i class="fa fa-phone"></i> +1598675986
+                      <%=order.shippingDetails.deliveryPerson %>, |
+                      <i class="fa fa-phone"></i> +
+                      <%=order.shippingDetails.phone %>
                     </div>
                     <div class="custom-col">
                       <strong>Status:</strong> <br />
-                      Picked by the courier
+                      <%=order.status %>
                     </div>
                     <div class="custom-col">
                       <strong>Tracking #:</strong> <br />
-                      BD045903594059
+                      <%=order._id %>
                     </div>
                   </div>
                 </article>
@@ -241,7 +243,7 @@
                     </span>
                     <span class="custom-text">Order confirmed</span>
                   </div>
-                  <div class="custom-step active">
+                  <div class="custom-step">
                     <span class="custom-icon">
                       <i class="fa fa-user"></i>
                     </span>
@@ -259,6 +261,7 @@
                   </div>
                 </div>
                 <hr />
+                <!-- items -->
                 <ul class="custom-row">
                   <li class="custom-col">
                     <figure class="custom-itemside mb-3">

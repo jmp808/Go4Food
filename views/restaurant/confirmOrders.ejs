@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Go4Food Restaurant Order History</title>
+        <link rel="stylesheet" href="../css/styles.css" />
+        <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+        <link rel="stylesheet" href="../css/multiselect.css"> 
+      
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!-- navbar -->
+      <%- include('header') %>
+      <!-- Side bar -->
+      <div class="content" style="min-height: 100vh; margin-top: 0px">
+        <%- include('sidebar') %>
+            
+            <div class="order-history-content">
+                <h1>Order History</h1>
+                <% if(orders.length==0){ %>
+                <h1>No orders found</h1>
+                <% }else { %>
+                <% for(var i=0;i<orders.length;i++){ %>
+                <a href="/restaurant/updateorder/<%=orders[i].order_id %>" >
+                <div class="order">
+                    <div class="order-header">
+                        <span class="order-number">Order #<%=orders[i].order_id %></span>
+                        <span class="order-details">Delivery Address: <%=orders[i].customer.address %></span>
+                    </div>
+                    <% for(var j=0; j<orders[i].menus.length; j++) {%>
+                    <p>Item <%=j+1 %>: Product <%= orders[i].menus[j].menu.title %> - Quantity: <%= orders[i].menus[j].quantity %> </p>
+                    <% } %>
+                   
+                    <div class="order-actions">
+                        <button class="order-again-button">Cancel Order</button>
+                    </div>
+                </div>
+            </a>
+                <% } %>
+                <% } %>
+ 
+                
+                <!-- Add more orders here -->
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

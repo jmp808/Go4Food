@@ -36,4 +36,6 @@ router.post("/buynow", is_customer, buyNow);
 router.post("/buynowsingle", is_customer, buyNowSingle);
 router.post("/payment", is_customer, paymentBuyNow);
 
+router.get("/trackorder/:id", is_customer, trackOrder);
+
 module.exports = router;

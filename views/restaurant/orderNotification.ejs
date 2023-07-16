@@ -109,28 +109,38 @@
           <div class="card_item">
             <h3 style="color: #ef3d3d; text-align: center">Orders</h3>
             <div class="order_list">
+              <% if(orders.length===0){ %>
+              <h3 style="color: #ef3d3d; text-align: center">No orders</h3>
+              <% } %>
+              <% orders.forEach(function(order){ %>
               <div class="confirm_order_box">
-                <h4 style="margin-top: 10px; color: #ef3d3d">Order Number</h4>
+                <h4 style="margin-top: 10px; color: #ef3d3d">Order Number : <%=order.order_id %></h4>
                 <div class="order_info">
-                  <p class="order_discription">Discription:</p>
-                  <p class="order_customer_info">Customer info:</p>
-                  <p class="order_deliver_info">Delivery info:</p>
+                   
+                  <p class="order_customer_info">Customer info: <%=order.customer.name %></p>
+                  <p class="order_deliver_info">Delivery Address: <%=order.customer.address %></p>
+                  <p class="order_deliver_info">Delivery Phone: <%=order.customer.phone %></p>
+                  <!-- Menus -->
+                  <p class="order_deliver_info">Menus: </p>
+                  <% order.menus.forEach(function(menu){ %>
+                  <p class="order_deliver_info">- <%=menu.menu.title %> x <%=menu.quantity %> = $ <%=menu.quantity *menu.menu.price%></p>
+                  <% }) %>
                 </div>
                 <div class="confirm_btn">
-                  <button type="button" class="item_btn">Confirm</button>
+                <form action="/restaurant/confirmorder" method="post">
+                  <input type="hidden" name="order_id" value="<%=order.order_id %>">
+                  <button type="submit" class="item_btn" style="background-color: green;">Confirm</button>
+                </form>
+                  <form action="/restaurant/cancelorder" method="post">
+                    <input type="hidden" name="order_id" value="<%=order.order_id %>">
+                    
+                  <button type="submit"  class="item_btn">Cancel</button>
+                  </form>
                 </div>
+                
               </div>
-              <div class="confirm_order_box">
-                <h4 style="margin-top: 10px; color: #ef3d3d">Order Number</h4>
-                <div class="order_info">
-                  <p class="order_discription">Discription:</p>
-                  <p class="order_customer_info">Customer info:</p>
-                  <p class="order_deliver_info">Delivery info:</p>
-                </div>
-                <div class="confirm_btn">
-                  <button type="button" class="item_btn">Confirm</button>
-                </div>
-              </div>
+              <% }) %>
+              
             </div>
           </div>
         </div>

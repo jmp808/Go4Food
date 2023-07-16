@@ -306,7 +306,16 @@ exports.paymentBuyNow = async (req, res, next) => {
 
 exports.getOrders = async (req, res, next) => {
   const { customer } = req.session;
-  const c = await Customer.findById(customer._id).populate("orders");
+  const c = await Customer.findById(customer._id)
+    .populate("orders")
+    .populate({
+      path: "orders",
+      populate: {
+        path: "menus.menu_id",
+        model: "Menu",
+      },
+    });
+  //   return console.log(c.orders);
   res.render("customer/history", {
     orders: c.orders,
     customer: req.session.customer,
@@ -314,5 +323,12 @@ exports.getOrders = async (req, res, next) => {
 };
 
 exports.trackOrder = async (req, res, next) => {
-  res.render("customer/trackorder");
+  const { id } = req.params;
+  const order = await Order.findById(id)
+    .populate("menus.menu_id")
+    .populate("restaurants");
+  res.render("customer/trackorder", {
+    order: order,
+    customer: req.session.customer,
+  });
 };

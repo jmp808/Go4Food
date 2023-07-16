@@ -46,6 +46,20 @@ const orderSchema = new Schema(
       billingAddress: String,
       amount: Number,
     },
+    shippingDetails: {
+      deliveryPerson: {
+        type: String,
+        default: "Yet to be assigned",
+      },
+      phone: {
+        type: String,
+        default: "Yet to be assigned",
+      },
+      expectedTime: {
+        type: String,
+        default: "Yet to be assigned",
+      },
+    },
   },
   { timestamps: true }
 );
