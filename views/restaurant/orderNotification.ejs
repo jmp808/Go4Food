@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go4Food Restaurant Catalog</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <style>
+    .contentHeader {
+      display: flex;
+      margin: 20px;
+    }
+    .item-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-left: 5%;
+      justify-content: space-around;
+    }
+    .card_item {
+      width: calc(77% - 20px);
+      margin-bottom: 20px;
+      padding: 20px;
+      /* background-color: #fff; */
+      border: 1px solid #ef3d3d;
+      /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);  */
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .card_item img {
+      width: 100%;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .card_item h3 {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #ef3d3d;
+      text-align: left;
+    }
+
+    .card_item p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #777;
+      text-align: left;
+    }
+    .item_btn {
+      padding: 10px;
+      background-color: #ef3d3d;
+      margin-top: 10px;
+      color: white;
+      width: 200px;
+      border: none;
+      border-radius: 100px;
+      border: 2px solid black;
+      border: 0;
+    }
+    .order_list {
+      display: flex;
+      gap: 10px;
+    }
+    .confirm_order_box {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .order_info {
+      text-align: left;
+      padding: 20px;
+    }
+    .order_info p {
+      color: #ef3d3d;
+    }
+    .item_btn {
+      padding: 5px;
+      background-color: #ef3d3d;
+      margin-top: 10px;
+      color: white;
+      width: 100px;
+      border: none;
+      border-radius: 100px;
+      border: 2px solid black;
+      border: 0;
+      cursor: pointer;
+    }
+    .confirm_btn {
+      padding: 20px;
+    }
+  </style>
+  <body>
+    <div class="container-fluid" >
+    <%- include('header') %>
+
+    <div class="content" style="min-height: 100vh; margin-top: 0px">
+      <%- include('sidebar') %>
+
+      <div class="restaurant-catalog">
+        <h2 style="color: #ef3d3d">Order Notification</h2>
+        <br />
+        <div class="item-list">
+          <div class="card_item">
+            <h3 style="color: #ef3d3d; text-align: center">Orders</h3>
+            <div class="order_list">
+              <div class="confirm_order_box">
+                <h4 style="margin-top: 10px; color: #ef3d3d">Order Number</h4>
+                <div class="order_info">
+                  <p class="order_discription">Discription:</p>
+                  <p class="order_customer_info">Customer info:</p>
+                  <p class="order_deliver_info">Delivery info:</p>
+                </div>
+                <div class="confirm_btn">
+                  <button type="button" class="item_btn">Confirm</button>
+                </div>
+              </div>
+              <div class="confirm_order_box">
+                <h4 style="margin-top: 10px; color: #ef3d3d">Order Number</h4>
+                <div class="order_info">
+                  <p class="order_discription">Discription:</p>
+                  <p class="order_customer_info">Customer info:</p>
+                  <p class="order_deliver_info">Delivery info:</p>
+                </div>
+                <div class="confirm_btn">
+                  <button type="button" class="item_btn">Confirm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -290,7 +290,9 @@ exports.paymentBuyNow = async (req, res, next) => {
     res.redirect("/orders");
   }
 };
-
+exports.trackOrder = async (req, res, next) => {
+  res.render("customer/trackorder");
+};
 exports.getOrders = async (req, res, next) => {
   const { customer } = req.session;
   const c = await Customer.findById(customer._id).populate("orders");

@@ -106,6 +106,9 @@ exports.createMenu = (req, res, next) => {
 exports.orderstatus = (req, res, next) => {
   res.render("restaurant/orderStatus");
 };
+exports.orderNotification = (req, res, next) => {
+  res.render("restaurant/orderNotification");
+};
 
 exports.postCreateMenu = async (req, res, next) => {
   const { title, price, description, t, quantity } = req.body;
