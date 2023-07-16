@@ -11,6 +11,7 @@ const {
   removeFromCart,
   buyNow,
   paymentBuyNow,
+  buyNowSingle,
   trackOrder,
 } = require("./customer");
 const express = require("express");
@@ -31,7 +32,8 @@ router.get("/orders", is_customer, getOrders);
 router.get("/trackorder", is_customer, trackOrder);
 router.post("/remove-from-cart", is_customer, removeFromCart);
 
-router.post("/buyNow", is_customer, buyNow);
+router.post("/buynow", is_customer, buyNow);
+router.post("/buynowsingle", is_customer, buyNowSingle);
 router.post("/payment", is_customer, paymentBuyNow);
 
 module.exports = router;

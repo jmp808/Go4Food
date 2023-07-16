@@ -42,9 +42,6 @@ app.use("/restaurant", restaurantRoutes);
 app.use(customerRoutes);
 app.use(productsRoutes);
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
 app.get("/payment", (req, res) => {
   res.render("Payment");
 });

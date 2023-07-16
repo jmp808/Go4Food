@@ -7,20 +7,24 @@ const orderSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Customer",
     },
-    restaurant: {
-      type: Schema.Types.ObjectId,
-      ref: "Restaurant",
-    },
-    menu: {
-      menu_id: {
+    restaurants: [
+      {
         type: Schema.Types.ObjectId,
-        ref: "Menu",
+        ref: "Restaurant",
       },
-      quantity: {
-        type: Number,
-        default: 0,
+    ],
+    menus: [
+      {
+        menu_id: {
+          type: Schema.Types.ObjectId,
+          ref: "Menu",
+        },
+        quantity: {
+          type: Number,
+          default: 0,
+        },
       },
-    },
+    ],
 
     price: {
       type: Number,

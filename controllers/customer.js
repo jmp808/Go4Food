@@ -176,52 +176,59 @@ exports.removeFromCart = async (req, res, next) => {
 };
 
 exports.buyNow = async (req, res, next) => {
-  const { type } = req.body;
-
-  if (type === "single") {
-    const menu = await Menu.findById(req.body.menu_id);
-    res.render("customer/Payment", {
-      customer: req.session.customer,
-      type: type,
-      msg: null,
-      menu: menu,
-    });
-  } else {
-    const { customer } = req.session;
-    const c = await Customer.findById(customer._id);
-    const cart = await Cart.findById(c.cart).populate("menus.menu_id");
-
-    res.render("customer/Payment", {
-      customer: req.session.customer,
-      type: type,
-      menus: cart.menus,
-      cart: cart,
-      msg: null,
-    });
-  }
+  const { customer } = req.session;
+  const c = await Customer.findById(customer._id);
+  const cart = await Cart.findById(c.cart).populate("menus.menu_id");
+  res.render("customer/Payment", {
+    customer: req.session.customer,
+    type: "multiple",
+    menus: cart.menus,
+    cart: cart,
+    msg: null,
+  });
 };
+
+exports.buyNowSingle = async (req, res, next) => {
+  const menu_id = req.body.menu_id;
+
+  const menu = await Menu.findById(menu_id);
+  res.render("customer/Payment", {
+    customer: req.session.customer,
+    type: "single",
+    menu: menu,
+
+    msg: null,
+  });
+};
+
 exports.paymentBuyNow = async (req, res, next) => {
   const { type } = req.body;
+
   const { customer } = req.session;
   const c = await Customer.findById(customer._id);
   if (type === "single") {
-    const { menus } = req.body;
-    const menu = await Menu.findById(menus);
+    const { menu_id } = req.body;
+    const menu = await Menu.findById(menu_id);
+    const qty = req.body.quantity | 1;
     if (req.body.amount < menu.price) {
       return res.render("customer/Payment", {
         customer: req.session.customer,
         type: type,
-        menu: req.body.menu,
-
+        menu: menu,
         msg: "Insufficient balance",
       });
     }
+    const menu_array = [];
+    menu_array.push({
+      menu_id: menu._id,
+      quantity: qty,
+    });
     const order = new Order({
       customer: c._id,
-      restaurant: menu.restaurant,
-      menu: menu,
+      restaurants: menu.restaurant,
+      menus: menu_array,
       totalQty: req.body.quantity,
-      price: menu.price * req.body.quantity,
+      price: menu.price * qty,
       status: "pending",
       paymentDetails: {
         cardName: req.body.cardName,
@@ -253,35 +260,41 @@ exports.paymentBuyNow = async (req, res, next) => {
     }
 
     // create multiple order based in menus
-    const orders = [];
 
+    const order = new Order({
+      customer: c._id,
+      menus: cart.menus,
+      totalQty: cart.total,
+      price: cart.price,
+      status: "pending",
+      paymentDetails: {
+        cardName: req.body.cardName,
+        cardNumber: req.body.cardNumber,
+        expiryDate: req.body.expiryDate,
+        cvc: req.body.cvc,
+        billingAddress: req.body.billingAddress,
+        amount: req.body.amount,
+      },
+    });
+    await order.save();
+    const restaurants = [];
+    const r_strings = [];
     for (let i = 0; i < cart.menus.length; i++) {
       const menu = await Menu.findById(cart.menus[i].menu_id);
-      const order = new Order({
-        customer: c._id,
-        restaurant: menu.restaurant,
-        menu: cart.menus[i],
-        totalQty: cart.menus[i].quantity,
-        price: menu.price * cart.menus[i].quantity,
-
-        status: "pending",
-        paymentDetails: {
-          cardName: req.body.cardName,
-          cardNumber: req.body.cardNumber,
-          expiryDate: req.body.expiryDate,
-          cvc: req.body.cvc,
-          billingAddress: req.body.billingAddress,
-          amount: req.body.amount,
-        },
-      });
-      await order.save();
-      const restaurant = await Restaurant.findById(menu.restaurant);
-      restaurant.orders.push(order._id);
-      await restaurant.save();
-
-      orders.push(order._id);
+      if (r_strings.indexOf(menu.restaurant._id.toString()) === -1) {
+        const restaurant = await Restaurant.findById(
+          cart.menus[i].menu_id.restaurant
+        );
+        restaurants.push(restaurant._id);
+        restaurant.orders.push(order._id);
+        r_strings.push(menu.restaurant._id.toString());
+        await restaurant.save();
+      }
     }
-    c.orders = [...c.orders, ...orders];
+    order.restaurants = restaurants;
+
+    await order.save();
+    c.orders.push(order._id);
     await c.save();
     cart.menus = [];
     cart.total = 0;
@@ -290,9 +303,7 @@ exports.paymentBuyNow = async (req, res, next) => {
     res.redirect("/orders");
   }
 };
-exports.trackOrder = async (req, res, next) => {
-  res.render("customer/trackorder");
-};
+
 exports.getOrders = async (req, res, next) => {
   const { customer } = req.session;
   const c = await Customer.findById(customer._id).populate("orders");
@@ -300,4 +311,8 @@ exports.getOrders = async (req, res, next) => {
     orders: c.orders,
     customer: req.session.customer,
   });
+};
+
+exports.trackOrder = async (req, res, next) => {
+  res.render("customer/trackorder");
 };

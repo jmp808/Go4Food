@@ -314,7 +314,10 @@
                 placeholder="Enter the amount"
               />
             </div>
-
+            <% if (type ==="single"){ %>
+            <input type="hidden" name="menu_id" value="<%=menu._id %>">
+            <% }%>
+            <input type="hidden" name="type" value="<%=type %>">
             <div class="form-group">
               <label for="billing-address">Billing Address</label>
               <input

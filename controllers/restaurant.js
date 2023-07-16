@@ -1,6 +1,9 @@
 const Restaurant = require("../models/restaurant");
 const bcrypt = require("bcrypt");
 const Menu = require("../models/menu");
+const fs = require("fs");
+const fileHelper = require("../utils/file");
+
 exports.getLogin = (req, res, next) => {
   res.render("restaurant/signin", {
     msg: null,
@@ -15,20 +18,29 @@ exports.getSingup = (req, res, next) => {
 
 exports.postSignup = async (req, res, next) => {
   const { name, email, cpswd, pswd, address, phone } = req.body;
+
   const image = req.file.filename;
   //console.log(name, email, pswd, cpswd, address, phone);
   if (cpswd !== pswd) {
+    const pathImg = "upload/images/" + image;
+    if (fs.existsSync(pathImg)) {
+      fileHelper.deleteFiles(pathImg);
+    }
     return res.render("restaurant/signup", {
       msg: "Password and confirm password does not match",
     });
   }
-  const r = Restaurant.findOne({ email: email });
-  //console.log(r);
-  // if (r) {
-  //   return res.render("restaurant/signup", {
-  //     msg: "Email already exists",
-  //   });
-  // }
+
+  if (await Restaurant.findOne({ email: email })) {
+    const pathImg = "upload/images/" + image;
+
+    if (fs.existsSync(pathImg)) {
+      fileHelper.deleteFiles(pathImg);
+    }
+    return res.render("restaurant/signup", {
+      msg: "Email already exists",
+    });
+  }
 
   bcrypt
     .hash(pswd, 12)
@@ -44,7 +56,7 @@ exports.postSignup = async (req, res, next) => {
       return restaurant.save();
     })
     .then((result) => {
-      res.redirect("/restaurant/login", {
+      res.render("restaurant/signin", {
         msg: "Account created successfully",
       });
     })
@@ -106,12 +118,10 @@ exports.createMenu = (req, res, next) => {
 exports.orderstatus = (req, res, next) => {
   res.render("restaurant/orderStatus");
 };
-exports.orderNotification = (req, res, next) => {
-  res.render("restaurant/orderNotification");
-};
 
 exports.postCreateMenu = async (req, res, next) => {
   const { title, price, description, t, quantity } = req.body;
+  // return console.log(tags, t);
   const images = req.files.map((f) => f.filename);
   const restaurant = await Restaurant.findById(req.session.restaurant._id);
   const menu = new Menu({
@@ -134,4 +144,14 @@ exports.postCreateMenu = async (req, res, next) => {
       res.redirect("/restaurant/dashboard");
     })
     .catch((err) => console.log(err));
+};
+
+exports.createMenu = (req, res, next) => {
+  res.render("restaurant/createMenu");
+};
+exports.orderstatus = (req, res, next) => {
+  res.render("restaurant/orderStatus");
+};
+exports.orderNotification = (req, res, next) => {
+  res.render("restaurant/orderNotification");
 };

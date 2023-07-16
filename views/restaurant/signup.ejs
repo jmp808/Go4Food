@@ -18,11 +18,20 @@
     </div>
 
     <div class="formContainer">
-      <form action="/restaurant/signup" method="post">
+      <form
+        action="/restaurant/signup"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <div class="registerForm signupform">
           <h1>Sign Up</h1>
           <br />
-          <form id="signup" method="post">
+          <form
+            id="signup"
+            action="/restaurant/signup"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <% if(msg) {%>
             <p style="color: red"><%= msg %></p>
             <% } %>
@@ -90,7 +99,7 @@
               <tr>
                 <td>
                   Upload Logo:
-                  <input required type="file" id="" name=" resturentlogo" />
+                  <input required type="file" id="image" name="images" />
                 </td>
               </tr>
             </table>

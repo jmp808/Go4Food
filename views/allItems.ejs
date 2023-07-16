@@ -84,14 +84,15 @@
               <input type="hidden" name="menu_id" value="<%=per_menus[i]._id %>">
               <button class="prev-button" type="submit">Add To Card</button>
             </form>
-            <form action="/buynow" method="post">
+            <form action="/buynowsingle" method="post">
+ 
               <input type="hidden" name="menu_id" value="<%=per_menus[i]._id %>">
               <button class="next-button">Buy Now</button>
             </form>
             </div>
           </div>
           <% } %>
-          <% } %>
+          
       
           <!-- Add more top-rated restaurant items here -->
         </div>
@@ -99,6 +100,7 @@
           <button class="prev-button">Previous</button>
           <button class="next-button">Next</button>
         </div>
+        <% } %>
         <h2 style="margin-left: 5%; color: #ef3d3d">item</h2>
         <br />
         <div class="item-list">
@@ -123,8 +125,8 @@
                 <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
                 <button class="prev-button" type="submit">Add To Card</button>
               </form>
-              <form action="/buynow" method="post">
-                <input type="hidden" name="type" value="single">
+              <form action="/buynowsingle" method="post">
+                 
                 <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
                 <button class="next-button">Buy Now</button>
               </form>
