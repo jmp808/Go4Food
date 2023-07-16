@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go4Food Restaurant Catalog</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <style>
+    .contentHeader {
+      display: flex;
+      margin: 20px;
+    }
+    .item-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-left: 5%;
+      justify-content: space-around;
+    }
+    .card_item {
+      width: calc(77% - 20px);
+      margin-bottom: 20px;
+      padding: 20px;
+      border: 1px solid #ef3d3d;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .card_item img {
+      width: 100%;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .card_item h3 {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #ef3d3d;
+      text-align: left;
+    }
+
+    .card_item p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #777;
+      text-align: left;
+    }
+    .item_btn {
+      padding: 10px;
+      background-color: #ef3d3d;
+      margin-top: 10px;
+      color: white;
+      width: 200px;
+      border: none;
+      border-radius: 100px;
+      border: 2px solid black;
+      border: 0;
+    }
+
+    .confirm_order_box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .order_info {
+      text-align: left;
+      padding: 20px;
+    }
+    .order_info p {
+      color: #ef3d3d;
+    }
+    .item_btn {
+      background-color: #ef3d3d;
+      color: white;
+      cursor: pointer;
+      padding: 20px;
+      border-radius: 100px;
+      border: 2px solid red;
+    }
+    .item_name {
+      padding: 20px;
+      color: #ef3d3d;
+      border-radius: 100px;
+      border: 2px solid red;
+    }
+  </style>
+  <body>
+    <div class="container" style="max-width: 100%">
+      <%- include('header') %>
+    </div>
+    <div class="content" style="min-height: 100vh; margin-top: 0px">
+      <%- include('sidebar') %>
+      <div class="restaurant-catalog">
+        <h2 style="color: #ef3d3d">Order Process</h2>
+        <br />
+        <div class="item-list">
+          <div class="card_item">
+            <h3 style="color: #ef3d3d; text-align: center">Orders Number</h3>
+            <div class="order_list">
+              <div class="confirm_order_box">
+                <div>
+                  <div class="item_name">preparing Food</div>
+                </div>
+                <div class="confirm_btn">
+                  <button type="button" class="item_btn">Send Update</button>
+                </div>
+              </div>
+            </div>
+            <div class="order_list">
+              <div class="confirm_order_box">
+                <div>
+                  <div class="item_name">Order issue</div>
+                </div>
+                <div class="confirm_btn">
+                  <button type="button" class="item_btn">
+                    Contact Customer
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="order_list">
+              <div class="confirm_order_box">
+                <div>
+                  <div class="item_name">Complete Order</div>
+                </div>
+                <div class="confirm_btn">
+                  <button type="button" class="item_btn">Send Update</button>
+                </div>
+              </div>
+            </div>
+            <div class="order_list">
+              <div class="confirm_order_box">
+                <div>
+                  <div class="item_name">Notify Drivers</div>
+                </div>
+                <div class="confirm_btn">
+                  <button type="button" class="item_btn">Send Update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,4 +11,27 @@
       <button type="submit">Logout</button>
     </form>
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Go4Food Restaurant Catalog</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!-- navbar -->
+      <%- include('header') %>
+      <div
+        class="content"
+        style="min-height: 100vh; margin-top: 0px !important"
+      >
+        <%- include('sidebar') %>
+        <div class="restaurant-catalog">
+          <h1  style="text-transform: uppercase;" >WELCOME To Go4Food <%=customer.name %></h1>
+      </div>
+    </div>
+  </body>
 </html>
+

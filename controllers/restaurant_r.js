@@ -8,6 +8,8 @@ const {
   dashboard,
   createMenu,
   postCreateMenu,
+  orderstatus,
+  
 } = require("./restaurant");
 const is_restaurant_auth = require("../middleware/is_restaurant_auth");
 const upload = require("../utils/upload");
@@ -26,6 +28,7 @@ router.get("/logout", logout);
 
 // dashboard
 router.get("/dashboard", is_restaurant_auth, dashboard);
+router.get("/orderstatus", is_restaurant_auth, orderstatus);
 router.get("/create-menu", is_restaurant_auth, createMenu);
 router.post(
   "/create-menu",

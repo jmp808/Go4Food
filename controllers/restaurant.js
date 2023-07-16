@@ -103,6 +103,9 @@ exports.logout = (req, res, next) => {
 exports.createMenu = (req, res, next) => {
   res.render("restaurant/createMenu");
 };
+exports.orderstatus = (req, res, next) => {
+  res.render("restaurant/orderStatus");
+};
 
 exports.postCreateMenu = async (req, res, next) => {
   const { title, price, description, t, quantity } = req.body;
