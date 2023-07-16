@@ -3,282 +3,89 @@
   <head>
     <title>Go4Food Restaurant Catalog</title>
         <link rel="stylesheet" href="../css/styles.css" />
-        <style>
-            /* Add your custom CSS styles here */
-            body {
-              background-color: #ebebeb;
-              font-family: Arial, sans-serif;
-            }
-        
-            h1 {
-              text-align: center;
-              color: #ff4444;
-              margin-top: 30px;
-            }
-        
-            .container {
-              max-width: 800px;
-              margin: 30px auto;
-              background-color: #ffffff;
-              padding: 20px;
-              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
-        
-            table {
-              width: 100%;
-              border-collapse: collapse;
-            }
-        
-            th, td {
-              padding: 10px;
-              text-align: left;
-            }
-        
-            th {
-              background-color: #ff4444;
-              color: #ffffff;
-              cursor: pointer;
-            }
-        
-            .asc:after {
-              content: "\25b2";
-              display: inline-block;
-              margin-left: 5px;
-            }
-        
-            .desc:after {
-              content: "\25bc";
-              display: inline-block;
-              margin-left: 5px;
-            }
-        
-            td {
-              background-color: #ffffff;
-              color: #333333;
-            }
-        
-            tr:nth-child(even) td {
-              background-color: #f2f2f2;
-            }
-        
-            .search-container {
-                margin-bottom: 20px;
-                padding: 10px;
-                display: flex;
-                justify-content: end;
-            }
-            .search-container  input{
-                 padding: 10px;
-                  width: 200px;
-                  border: none;
-            }
-            .pagination {
-              display: flex;
-              justify-content: center;
-              margin-top: 20px;
-            }
-        
-            .pagination button {
-              margin: 0 4px;
-              padding: 6px 12px;
-              border: none;
-              background-color: #ffffff;
-              color: #ff4444;
-              font-weight: bold;
-              border-radius: 4px;
-              cursor: pointer;
-              transition: background-color 0.3s ease;
-            }
-        
-            .pagination button:hover {
-              background-color: #ff4444;
-              color: #ffffff;
-            }
-        
-            .pagination button.disabled {
-              opacity: 0.5;
-              pointer-events: none;
-            }
-        
-            .search-input {
-              width: 300px;
-              padding: 6px;
-              border: 1px solid #ddd;
-              border-radius: 4px;
-              font-size: 14px;
-            }
-          </style>
-  </head>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+   <style>
+     img{
+         width: 100px;
+         height: auto;
+        margin-right: 10px;
+     }
+   </style>
+    </head>
   <body>
-    <div class="container-fluid">
+    <div class="container-fluid"  style=" margin: 0px; padding: 0px;">
       <!-- navbar -->
       <%- include('header') %>
       <!-- Side bar -->
       <div class="content" style="min-height: 100vh; margin-top: 0px">
         <%- include('sidebar') %>
         <div class="restaurant-catalog">
-            <h1>Menu List</h1>
-            <div class="conatainer">
-                <div class="search-container">
-                    <input type="text" id="search-input" placeholder="Search...">
-                </div>
-                
-                  <table id="data-table">
-                    <thead>
-                      <tr>
-                        <th onclick="sortTable(0)" class="asc">ID</th>
-                        <th >Dish Image</th>
-                        <th onclick="sortTable(2)"  class="asc">Dish Name</th>
-                        <th onclick="sortTable(3)" class="asc">Dish Discription </th>
-                        <th onclick="sortTable(4)" class="asc">Dish Quantity</th>
-                        <th onclick="sortTable(5)" class="asc">Dish price</th>
-                        <th >Dish Teg</th>
-                        <th >Action</th>
+             <div class="listHeader" s style="display: flex; justify-content: space-between;">
+              <h3 style="color: #ef3d3d"> Menu List</h3>
+              <a  href="/restaurant/createmenu" class="btn btn-outline-success">Add Menu</a>
+             </div>
+        
+            <div class="alllist"  style="margin-top: 30px;">
+              <table id="example" class="table table-striped" style="width:100; ">
+                <thead>
+                    <tr>
+                        <th> Dish Id</th>
+                        <th>Name</th>
+                         <th>Discription</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Teg</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <% for(let  i=0; i<20;i++){ %>
+                    <tr>
+                      <td>1</td>
+                      <td> <img src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg" alt=""> Singapore</td>
+                      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. beatae magni temporibus enim itaque officia ipsa fuga.</td>
+                      <td>20 </td>
+                      <td>$183,000</td>
+                      <td> <button type="button" class="btn btn-primary  btn-sm">Teg 1</button></td>
+                      <td>
+                          <div class="actionbtn">
+                             <button type="button" class="btn btn-primary">view</button>
+                             <button  type="button" class="btn btn-warning">Edit</button>
+                             <buttont ype="button" class="btn btn-danger">Delete</button>
 
-
-                      </tr>
-                    </thead>
-                    <tbody>
-                         <%  for( let i=0; i<10; i++) { %>
-                            <tr>
-                                <td> 1</td>
-                                <td>
-                                <td>Dish 1 </td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, neque!</td>
-                                <td>50</td>
-                                <td>20</td>
-                                <td>Data 1</td>
-                                <td>Data 2</td>
-                                <td>Data 3</td>
-                              </tr>
-
-
-                             <% } %>
-                     
+                          </div>
+                      </td>
+                  </tr>
+                     <% } %>
+              
                    
-                      <!-- Add more rows as needed -->
-                    </tbody>
-                  </table>
-                
-                  <div class="pagination">
-                    <button id="prev-button" disabled>&lt;</button>
-                    <span id="page-number">1</span>
-                    <button id="next-button">&gt;</button>
-                  </div>
+                </tbody>
+               
+            </table>
             </div>
-         
-            
           
         
         </div>
     </div>
       <!--  main  -->
     </div>
-    </div>
-    </div>
-    <script>
-    // Pagination functionality
-    const table = document.getElementById("data-table");
-    const rowsPerPage = 8;
-    let currentPage = 1;
-
-    function showPage(page) {
-      const rows = table.getElementsByTagName("tr");
-      const start = (page - 1) * rowsPerPage + 1;
-      const end = start + rowsPerPage;
-
-      for (let i = 1; i < rows.length; i++) {
-        if (i >= start && i < end) {
-          rows[i].style.display = "table-row";
-        } else {
-          rows[i].style.display = "none";
-        }
-      }
-
-      document.getElementById("page-number").textContent = page;
-
-      const prevButton = document.getElementById("prev-button");
-      const nextButton = document.getElementById("next-button");
-
-      prevButton.classList.toggle("disabled", page === 1);
-      nextButton.classList.toggle("disabled", end >= rows.length);
-    }
-
-    function goToPreviousPage() {
-      if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
-      }
-    }
-
-    function goToNextPage() {
-      const rows = table.getElementsByTagName("tr");
-      if (currentPage < Math.ceil(rows.length / rowsPerPage)) {
-        currentPage++;
-        showPage(currentPage);
-      }
-    }
-
-    document.getElementById("prev-button").addEventListener("click", goToPreviousPage);
-    document.getElementById("next-button").addEventListener("click", goToNextPage);
-
-    // Search functionality
-    document.getElementById("search-input").addEventListener("input", function() {
-      const filter = this.value.toUpperCase();
-      const rows = table.getElementsByTagName("tr");
-
-      for (let i = 1; i < rows.length; i++) {
-        const cells = rows[i].getElementsByTagName("td");
-        let found = false;
-
-        for (let j = 0; j < cells.length; j++) {
-          const cellValue = cells[j].textContent || cells[j].innerText;
-
-          if (cellValue.toUpperCase().indexOf(filter) > -1) {
-            found = true;
-            break;
-          }
-        }
-
-        rows[i].style.display = found ? "table-row" : "none";
-      }
-
-      // Reset pagination to the first page
-      currentPage = 1;
-      showPage(currentPage);
-    });
-
-    // Sorting functionality
-    function sortTable(columnIndex) {
-      const rows = Array.from(table.rows).slice(1); // Exclude header row
-      const shouldSortNumber = columnIndex === 1; // Column index 1 is for age
-
-      rows.sort((a, b) => {
-        const cellA = a.cells[columnIndex].textContent.trim();
-        const cellB = b.cells[columnIndex].textContent.trim();
-
-        if (shouldSortNumber) {
-          return Number(cellA) - Number(cellB);
-        } else {
-          return cellA.localeCompare(cellB);
-        }
-      });
-
-      const isAscending = table.rows[0].cells[columnIndex].classList.toggle("asc");
-
-      if (!isAscending) {
-        rows.reverse();
-        table.rows[0].cells[columnIndex].classList.add("desc");
-      } else {
-        table.rows[0].cells[columnIndex].classList.remove("desc");
-      }
-
-      for (let i = 0; i < rows.length; i++) {
-        table.tBodies[0].appendChild(rows[i]);
-      }
-    }
-        // Initial page setup
-        showPage(currentPage);
-      </script>
+    
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+<script>
+   // new DataTable('#example');
+    $('#example').dataTable( {
+  "columnDefs": [
+    { "width": "7%", "targets": 0 },
+    { "width": "15%", "targets": 1 },
+    { "width": "30%", "targets": 2 },
+    { "width": "10%", "targets": 3},
+    { "width": "10%", "targets": 4 },
+    { "width": "10%", "targets": 5 }
+  ]
+} );
+</script>
   </body>
 </html>

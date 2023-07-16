@@ -15,16 +15,16 @@
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
-      margin-left: 5%;
+   
       justify-content: space-around;
     }
     .card_item {
-      width: calc(77% - 20px);
+      width: calc(100% - 20px);
       margin-bottom: 20px;
       padding: 20px;
-      /* background-color: #fff; */
+      background-color: #fff;
       border: 1px solid #ef3d3d;
-      /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);  */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
       border-radius: 5px;
       text-align: center;
     }
@@ -92,7 +92,9 @@
       cursor: pointer;
     }
     .confirm_btn {
+       display: flex;
       padding: 20px;
+       justify-content: space-evenly;
     }
   </style>
   <body>
@@ -129,11 +131,10 @@
                 <div class="confirm_btn">
                 <form action="/restaurant/confirmorder" method="post">
                   <input type="hidden" name="order_id" value="<%=order.order_id %>">
-                  <button type="submit" class="item_btn" style="background-color: green;">Confirm</button>
+                  <button type="submit" class="item_btn" style="background-color: green; margin-right: 5px;">Confirm</button>
                 </form>
                   <form action="/restaurant/cancelorder" method="post">
                     <input type="hidden" name="order_id" value="<%=order.order_id %>">
-                    
                   <button type="submit"  class="item_btn">Cancel</button>
                   </form>
                 </div>

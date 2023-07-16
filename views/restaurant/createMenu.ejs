@@ -4,8 +4,22 @@
     <title>Go4Food Restaurant Catalog</title>
         <link rel="stylesheet" href="../css/styles.css" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-        <link rel="stylesheet" href="../css/multiselect.css"> 
-      
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+       <style>
+        .select2-selection__rendered{
+          padding:  10px 20px  10px 20px !important;
+        }
+        .select2-selection__choice{
+           padding:5px !important;
+            font-size: 18px !important;
+        }
+        .select2-selection__choice span{
+          font-size: 18px !important;
+        }
+       </style>
   </head>
   <body>
     <div class="container-fluid">
@@ -73,18 +87,16 @@
                       <label for="address2" class="dishform-form-label">
                        Dish Teg 
                       </label>
-                      <select multiple="multiple" id="myMulti"  name="tags[]">
-                        <option  value=" item 2">item 2</option>
-                        <option  value="item3">item 3</option>
-                        <option  value="item4">item 4</option>
-                        <option value=" item1">Item 1</option>
-                      </select>
-                      <select multiple="multiple" id="myMulti"  name="t">
-                        <option  value=" item 2">item 2</option>
-                        <option  value="item3">item 3</option>
-                        <option  value="item4">item 4</option>
-                        <option value=" item1">Item 1</option>
-                      </select>
+                     
+                      <select class="form-control select2 select2-hidden-accessible" name="t" multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                        <option   value="Tag1">Tag1</option>
+                        <option   value="Tag2" >Tag2</option>
+                        <option   value="Tag3" >Tag3</option>
+                        <option   value="Tag4" >Tag4</option>
+                        <option   value="Tag5" >Tag5</option>
+                        <option   value="Tag6" >Tag6</option>
+                        <option   value="Tag7" >Tag7</option>
+                    </select>
                     </div>
                     <div class="dishform-input">
                       <div>
@@ -110,9 +122,14 @@
     </div>
     </div>
     </div>
-     <script src="../js/multi.js"></script>
      <script src="../js/multiple-uploader.js"></script>
 <script>
+        $(document).ready(function() {
+          $('.select2').select2({
+          closeOnSelect: false
+      });
+      });
+
 
     let multipleUploader = new MultipleUploader('#multiple-uploader').init({
         maxUpload : 20,

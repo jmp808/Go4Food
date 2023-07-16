@@ -5,7 +5,11 @@
         <link rel="stylesheet" href="../css/styles.css" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
         <link rel="stylesheet" href="../css/multiselect.css"> 
-      
+       <style>
+         a{
+             text-decoration: none;
+         }
+       </style>
   </head>
   <body>
     <div class="container-fluid">
@@ -24,11 +28,11 @@
                 <a href="/restaurant/updateorder/<%=orders[i].order_id %>" >
                 <div class="order">
                     <div class="order-header">
-                        <span class="order-number">Order #<%=orders[i].order_id %></span>
+                        <span class="order-number">Order Id : <%=orders[i].order_id %></span>
                         <span class="order-details">Delivery Address: <%=orders[i].customer.address %></span>
                     </div>
                     <% for(var j=0; j<orders[i].menus.length; j++) {%>
-                    <p>Item <%=j+1 %>: Product <%= orders[i].menus[j].menu.title %> - Quantity: <%= orders[i].menus[j].quantity %> </p>
+                    <p  class="order-details" style=" padding: 10px;  width: 30%;">Item  <%=j+1 %>: Product <%= orders[i].menus[j].menu.title %> - Qty: <%= orders[i].menus[j].quantity %> </p>
                     <% } %>
                    
                     <div class="order-actions">

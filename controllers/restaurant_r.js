@@ -13,6 +13,7 @@ const {
   confirmOrder,
   getConfirmOrders,
   cancelOrder,
+  allMenu,
 } = require("./restaurant");
 const is_restaurant_auth = require("../middleware/is_restaurant_auth");
 const upload = require("../utils/upload");
@@ -43,4 +44,6 @@ router.post(
   is_restaurant_auth,
   postCreateMenu
 );
+router.get("/allmenu", is_restaurant_auth, allMenu);
+
 module.exports = router;

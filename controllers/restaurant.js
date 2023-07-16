@@ -119,10 +119,12 @@ exports.createMenu = (req, res, next) => {
 exports.orderstatus = (req, res, next) => {
   res.render("restaurant/orderStatus");
 };
+exports.allMenu = (req, res, next) => {
+  res.render("restaurant/allMenu");
+};
 
 exports.postCreateMenu = async (req, res, next) => {
-  const { title, price, description, t, quantity } = req.body;
-  // return console.log(tags, t);
+  const { title, price, description, tags, t, quantity } = req.body;
   const images = req.files.map((f) => f.filename);
   const restaurant = await Restaurant.findById(req.session.restaurant._id);
   const menu = new Menu({
