@@ -13,6 +13,13 @@
       color: #ef3d3d;
        border-radius: 5px;
     }
+    .qtyinc a{
+      padding: 0 1vh;
+    color: black;
+    text-decoration: none;
+    border: 1px solid #dee2e6!important;
+     margin: 2px;
+    }
      </style>
   </head>
 
@@ -40,6 +47,9 @@
               <p>Price: $<%=cart.menus[i].menu_id.price*cart.menus[i].quantity %></p>
               <p>Quantity: <%=cart.menus[i].quantity %></p>
             </div>
+            <div class="col qtyinc " style=" width: 50%;">
+              <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+          </div>
             <div class="cart-item-actions">
                 <form action="/remove-from-cart" method="post">
                     <input type="hidden" name="id" value="<%=cart.menus[i].menu_id._id %>" > 
@@ -52,17 +62,17 @@
           <% } %>
           <div class="cart-item">
              <div class="cart-item-details">
-              <h3></h3>
               <p>Total Price: $<%=totalPrice %></p>
               <p>Total Order to be made: <%=qty %></p>
               <p>Total items : <%=cart.total %></p>
-
-              <form action="/buynow" method="post">
-                <input type="hidden" name="type" value="multiple">
-              <button class="remove-item  buttons" style="margin-right: 10px; margin-top: 10px;">Buy Now</button>
-            </form>
-              <button class="remove-item buttons">Pre Planned Order</button>
-
+                   <div style="display: flex">
+                    <form action="/buynow" method="post">
+                      <input type="hidden" name="type" value="multiple">
+                    <button class="remove-item  buttons" style="margin-right: 10px; ">Buy Now</button>
+                  </form>
+                    <button class="remove-item buttons">Pre Planned Order</button>
+                   </div>
+            
             </div>
              
             </div>

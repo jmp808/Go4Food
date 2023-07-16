@@ -8,12 +8,6 @@
         padding: 0;
         box-sizing: border-box;
       }
-
-      body {
-        font-family: "Belanosima", sans-serif;
-        background-color: #f9f9f9;
-      }
-
       .container {
         max-width: 1200px;
         border-radius: 10px;
@@ -209,6 +203,7 @@
                 <div style="font-size: 14px">Qty:1</div>
               </div>
             </div>
+             
             <div class="row lower">
               <div class="col text-left">Subtotal</div>
               <div class="col text-right">$ <%=menu.price %></div>
@@ -225,7 +220,7 @@
             <% }else{ %>
             <p><%=cart.total %> items</p>
             <% for(var i=0; i<menus.length; i++){ %>
-            <div class="items" style="display: flex; margin-top: 10px">
+            <div class="items" style="display: flex; margin-top: 20px">
               <div class="">
                 <img
                   style="width: 70px; height: auto"
@@ -244,6 +239,7 @@
                 <div style="font-size: 14px">Qty:<%=menus[i].quantity %></div>
               </div>
             </div>
+            <hr>
 <% } %>
 <div class="row lower">
   <div class="col text-left">Subtotal</div>
