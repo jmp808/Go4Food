@@ -145,21 +145,42 @@
                 <h1>No orders found</h1>
                 <% }else { %>
                 <% for(var i=0;i<orders.length;i++){ %>
+                <% if(orders[i].status!=="cancel"){ %>
                 <a href="/trackorder/<%=orders[i]._id %>" >
+                <% } %>
                 <div class="order">
                     <div class="order-header">
                         <span class="order-number">Order Id: <%=orders[i]._id %></span>
                         <span class="order-details">Delivery Address: <%=customer.address %></span>
                     </div>
-                    <% for(var j=0; j<orders[i].menus.length; j++) {%>
-                    <p  class="order-details"   style="width: 30%;  margin-top: 10px;">Item <%=j+1 %>: Product <%= orders[i].menus[j].menu_id.title %> - Quantity: <%= orders[i].menus[j].quantity %> </p>
-                    <% } %>
+  
+                    <p class="order-details" style="padding: 10px; width: 30%; background-color:
+                    <% if (orders[i].status === 'cancel') { %>
+                        rgb(250, 184, 184)
+                        <%}else if (orders[i].status === 'pending') { %>
+                           rgb(255,215,0)
+                    
+                    <% } else { %>
+                        rgb(184, 250, 184)
+                    <% } %>;"
+                >
+                    Order Status : <%= orders[i].status %>
+                </p>
+                     <p  class="order-details"   style="width: 30%;  margin-top: 10px;">  Product  : <%= orders[i].menus.menu_id.title %> - Quantity: <%= orders[i].menus.quantity %> </p>
+                
                     <p  style=" margin-top: 20px;">Order Total: $<%=orders[i].price %></p>
+                    <% if(orders[i].status!=="cancel"){ %>
+                </a>
+               
                     <div class="order-actions">
+                        <form action="/cancelorder" method="post">
+                            <input type="hidden" name="order_id" value="<%=orders[i]._id %>">
                         <button class="order-again-button">Cancel Order</button>
+                        </form>
                     </div>
+                <% } %>
                 </div>
-            </a>
+          
                 <% } %>
                 <% } %>
                 <div class="card-body">

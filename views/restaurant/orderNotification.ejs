@@ -115,7 +115,7 @@
               <h3 style="color: #ef3d3d; text-align: center">No orders</h3>
               <% } %>
               <% orders.forEach(function(order){ %>
-              <div class="confirm_order_box">
+              <div class="confirm_order_box" title="Confirm or Cancel Order">
                 <h4 style="margin-top: 10px; color: #ef3d3d">Order Number : <%=order.order_id %></h4>
                 <div class="order_info">
                    
@@ -124,9 +124,9 @@
                   <p class="order_deliver_info">Delivery Phone: <%=order.customer.phone %></p>
                   <!-- Menus -->
                   <p class="order_deliver_info">Menus: </p>
-                  <% order.menus.forEach(function(menu){ %>
-                  <p class="order_deliver_info">- <%=menu.menu.title %> x <%=menu.quantity %> = $ <%=menu.quantity *menu.menu.price%></p>
-                  <% }) %>
+                   
+                  <p class="order_deliver_info">- <%=order.menu.title %> x <%=order.quantity %> = $ <%=order.quantity *order.menu.price%></p>
+                  
                 </div>
                 <div class="confirm_btn">
                 <form action="/restaurant/confirmorder" method="post">

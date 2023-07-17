@@ -218,15 +218,22 @@ exports.paymentBuyNow = async (req, res, next) => {
         msg: "Insufficient balance",
       });
     }
-    const menu_array = [];
-    menu_array.push({
-      menu_id: menu._id,
-      quantity: qty,
-    });
+    if (qty > menu.quantity) {
+      return res.render("customer/Payment", {
+        customer: req.session.customer,
+        type: type,
+        menu: menu,
+        msg: "Insufficient quantity",
+      });
+    }
+
     const order = new Order({
       customer: c._id,
       restaurants: menu.restaurant,
-      menus: menu_array,
+      menus: {
+        menu_id: menu._id,
+        quantity: qty,
+      },
       totalQty: req.body.quantity,
       price: menu.price * qty,
       status: "pending",
@@ -245,6 +252,7 @@ exports.paymentBuyNow = async (req, res, next) => {
     const restaurant = await Restaurant.findById(menu.restaurant);
     restaurant.orders.push(order._id);
     await restaurant.save();
+    menu.quantity = menu.quantity - qty;
 
     res.redirect("/orders");
   } else {
@@ -261,41 +269,48 @@ exports.paymentBuyNow = async (req, res, next) => {
 
     // create multiple order based in menus
 
-    const order = new Order({
-      customer: c._id,
-      menus: cart.menus,
-      totalQty: cart.total,
-      price: cart.price,
-      status: "pending",
-      paymentDetails: {
-        cardName: req.body.cardName,
-        cardNumber: req.body.cardNumber,
-        expiryDate: req.body.expiryDate,
-        cvc: req.body.cvc,
-        billingAddress: req.body.billingAddress,
-        amount: req.body.amount,
-      },
-    });
-    await order.save();
-    const restaurants = [];
-    const r_strings = [];
     for (let i = 0; i < cart.menus.length; i++) {
-      const menu = await Menu.findById(cart.menus[i].menu_id);
-      if (r_strings.indexOf(menu.restaurant._id.toString()) === -1) {
-        const restaurant = await Restaurant.findById(
-          cart.menus[i].menu_id.restaurant
-        );
-        restaurants.push(restaurant._id);
-        restaurant.orders.push(order._id);
-        r_strings.push(menu.restaurant._id.toString());
-        await restaurant.save();
+      if (cart.menus[i].quantity > cart.menus[i].menu_id.quantity) {
+        return res.render("customer/Payment", {
+          customer: req.session.customer,
+          type: type,
+          cart: cart,
+          menus: cart.menus,
+          msg: "Insufficient quantity",
+        });
       }
+      const order = new Order({
+        customer: c._id,
+        restaurants: cart.menus[i].menu_id.restaurant,
+        menus: {
+          menu_id: cart.menus[i].menu_id._id,
+          quantity: cart.menus[i].quantity,
+        },
+        totalQty: cart.menus[i].quantity,
+        price: cart.menus[i].menu_id.price * cart.menus[i].quantity,
+        status: "pending",
+        paymentDetails: {
+          cardName: req.body.cardName,
+          cardNumber: req.body.cardNumber,
+          expiryDate: req.body.expiryDate,
+          cvc: req.body.cvc,
+          billingAddress: req.body.billingAddress,
+          amount: cart.menus[i].menu_id.price * cart.menus[i].quantity,
+        },
+      });
+      await order.save();
+      c.orders.push(order._id);
+      await c.save();
+      const restaurant = await Restaurant.findById(
+        cart.menus[i].menu_id.restaurant
+      );
+      restaurant.orders.push(order._id);
+      await restaurant.save();
+      const menu = await Menu.findById(cart.menus[i].menu_id._id);
+      menu.quantity = menu.quantity - cart.menus[i].quantity;
+      await menu.save();
     }
-    order.restaurants = restaurants;
 
-    await order.save();
-    c.orders.push(order._id);
-    await c.save();
     cart.menus = [];
     cart.total = 0;
     cart.price = 0;
@@ -318,6 +333,7 @@ exports.getOrders = async (req, res, next) => {
   //   return console.log(c.orders);
   res.render("customer/history", {
     orders: c.orders,
+
     customer: req.session.customer,
   });
 };
@@ -331,4 +347,12 @@ exports.trackOrder = async (req, res, next) => {
     order: order,
     customer: req.session.customer,
   });
+};
+
+exports.cancelOrder = async (req, res, next) => {
+  const { order_id } = req.body;
+  const order = await Order.findById(order_id);
+  order.status = "cancel";
+  await order.save();
+  res.redirect("/orders");
 };

@@ -36,7 +36,7 @@ router.get("/updateorder/:id", is_restaurant_auth, orderstatus);
 router.get("/ordernotification", is_restaurant_auth, orderNotification);
 router.get("/confirmorders", is_restaurant_auth, getConfirmOrders);
 router.post("/confirmorder", is_restaurant_auth, confirmOrder);
-router.get("/cancelorder", is_restaurant_auth, cancelOrder);
+router.post("/cancelorder", is_restaurant_auth, cancelOrder);
 router.get("/create-menu", is_restaurant_auth, createMenu);
 router.post(
   "/create-menu",

@@ -25,21 +25,40 @@
                 <h1>No orders found</h1>
                 <% }else { %>
                 <% for(var i=0;i<orders.length;i++){ %>
-                <a href="/restaurant/updateorder/<%=orders[i].order_id %>" >
-                <div class="order">
+                
+                <div class="order" title="Update order track">
+                    <% if(orders[i].status!=="cancel"){ %>
+                    <a href="/restaurant/updateorder/<%=orders[i].order_id %>" >
+                    <% } %>
+
                     <div class="order-header">
                         <span class="order-number">Order Id : <%=orders[i].order_id %></span>
                         <span class="order-details">Delivery Address: <%=orders[i].customer.address %></span>
                     </div>
-                    <% for(var j=0; j<orders[i].menus.length; j++) {%>
-                    <p  class="order-details" style=" padding: 10px;  width: 30%;">Item  <%=j+1 %>: Product <%= orders[i].menus[j].menu.title %> - Qty: <%= orders[i].menus[j].quantity %> </p>
-                    <% } %>
-                   
+                    <p class="order-details" style="padding: 10px; width: 30%; background-color:
+                    <% if (orders[i].status === 'cancel') { %>
+                        rgb(250, 184, 184)
+                    <% } else { %>
+                        rgb(184, 250, 184);
+                    <% } %>;"
+                >
+                    Order Status : <%= orders[i].status %>
+                </p>
+                
+                    <p  class="order-details" style=" padding: 10px;  width: 30%;">Item  1: Product <%= orders[i].menu.title %> - Qty: <%= orders[i].quantity %> </p>
+                    <% if(orders[i].status!=="cancel"){ %>
+                </a>
+                <% } %>
+                <% if(orders[i].status!=="cancel"){ %>
                     <div class="order-actions">
-                        <button class="order-again-button">Cancel Order</button>
+                        <form action="/restaurant/cancelorder" method="post">
+                            <input type="hidden" name="order_id" value="<%=orders[i].order_id %>">
+                        <button type="submit" class="order-again-button">Cancel Order</button>
+                        </form>
                     </div>
+                <% } %>
                 </div>
-            </a>
+          
                 <% } %>
                 <% } %>
  

@@ -124,7 +124,8 @@ exports.allMenu = (req, res, next) => {
 };
 
 exports.postCreateMenu = async (req, res, next) => {
-  const { title, price, description, tags, t, quantity } = req.body;
+  const { title, price, description, t, quantity } = req.body;
+  // return console.log(tags, t);
   const images = req.files.map((f) => f.filename);
   const restaurant = await Restaurant.findById(req.session.restaurant._id);
   const menu = new Menu({
@@ -152,6 +153,7 @@ exports.postCreateMenu = async (req, res, next) => {
 exports.orderstatus = (req, res, next) => {
   res.render("restaurant/orderStatus");
 };
+
 exports.orderNotification = async (req, res, next) => {
   const orders = [];
   const restaurant = await Restaurant.findById(req.session.restaurant._id);
@@ -159,28 +161,20 @@ exports.orderNotification = async (req, res, next) => {
   for (let i = 0; i < restaurant.orders.length; i++) {
     const menus = [];
     const order = await Order.findOne({
-      _id: restaurant.orders[i]._id,
+      _id: restaurant.orders[i],
       status: "pending",
     })
       .populate("menus.menu_id")
       .populate("customer");
     if (order == null) continue;
-    for (let j = 0; j < order.menus.length; j++) {
-      if (
-        order.menus[j].menu_id.restaurant.toString() ==
-        restaurant._id.toString()
-      ) {
-        const menu = await Menu.findById(order.menus[j].menu_id);
-        menus.push({
-          menu: menu,
-          quantity: order.menus[j].quantity,
-        });
-      }
-    }
+    const menu = await Menu.findById(order.menus.menu_id);
+
     orders.push({
       order_id: order._id,
       customer: order.customer,
-      menus: menus,
+
+      menu: menu,
+      quantity: order.menus.quantity,
     });
   }
   // return console.log(orders);
@@ -218,32 +212,24 @@ exports.getConfirmOrders = async (req, res, next) => {
   const restaurant = await Restaurant.findById(req.session.restaurant._id);
   // return console.log(restaurant);
   for (let i = 0; i < restaurant.orders.length; i++) {
-    const menus = [];
+    // get order whose status is not pending
+
     const order = await Order.findOne({
-      _id: restaurant.orders[i]._id,
-      status: "confirmed",
-    })
-      .populate("menus.menu_id")
-      .populate("customer");
+      _id: restaurant.orders[i],
+      status: { $ne: "pending" },
+    });
 
     if (order == null) continue;
-    for (let j = 0; j < order.menus.length; j++) {
-      if (
-        order.menus[j].menu_id.restaurant.toString() ==
-        restaurant._id.toString()
-      ) {
-        const menu = await Menu.findById(order.menus[j].menu_id);
-        menus.push({
-          menu: menu,
-          quantity: order.menus[j].quantity,
-        });
-      }
-    }
+
+    const menu = await Menu.findById(order.menus.menu_id);
+
     orders.push({
       order_id: order._id,
+      status: order.status,
       price: order.price,
       customer: order.customer,
-      menus: menus,
+      menu: menu,
+      quantity: order.menus.quantity,
     });
   }
   // return console.log(orders);
