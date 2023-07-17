@@ -3,18 +3,141 @@
 <head>
     <title>Go4Food - Order History</title>
     <link rel="stylesheet" href="css/styles.css" />
+   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
  <style>
      a{
          text-decoration: none;
      }
+        a:hover{
+           
+            text-decoration: none !important;
+        }
+        .container-fluid {
+           margin: 0;
+           padding: 0;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 7px;
+
+        }
+
+        .small {
+            letter-spacing: 0.5px !important;
+        }
+
+        .card-1 {
+            box-shadow: 2px 2px 10px 0px rgb(190, 108, 170);
+        }
+
+        hr {
+            background-color: rgba(248, 248, 248, 0.667);
+        }
+
+
+        .bold {
+            font-weight: 500;
+        }
+
+        .change-color {
+            color: #AB47BC !important;
+        }
+
+        .card-2 {
+            box-shadow: 1px 1px 3px 0px rgb(112, 115, 139);
+
+        }
+
+        .fa-circle.active {
+            font-size: 8px;
+            color: #AB47BC;
+        }
+
+        .fa-circle {
+            font-size: 8px;
+            color: #aaa;
+        }
+
+        .rounded {
+            border-radius: 2.25rem !important;
+        }
+
+
+        .progress-bar {
+            background-color: #AB47BC !important;
+        }
+
+
+        .progress {
+            height: 5px !important;
+            margin-bottom: 0;
+        }
+
+        .invoice {
+            position: relative;
+            top: -70px;
+        }
+
+        .Glasses {
+            position: relative;
+            top: -12px !important;
+        }
+
+        .card-footer {
+            background-color: #AB47BC;
+            color: #fff;
+        }
+
+        h2 {
+            color: rgb(78, 0, 92);
+            letter-spacing: 2px !important;
+        }
+
+        .display-3 {
+            font-weight: 500 !important;
+        }
+
+        @media (max-width: 479px) {
+            .invoice {
+                position: relative;
+                top: 7px;
+            }
+
+            .border-line {
+                border-right: 0px solid rgb(226, 206, 226) !important;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            h2 {
+                color: rgb(78, 0, 92);
+                font-size: 17px;
+            }
+
+            .display-3 {
+                font-size: 28px;
+                font-weight: 500 !important;
+            }
+        }
+
+        .card-footer small {
+            letter-spacing: 7px !important;
+            font-size: 12px;
+        }
+
+        
  </style>
 </head>
 <body>
     <div class="container-fluid">
-        <%- include('../navbar.ejs') %>
+        <%- include('header.ejs') %>
         
         <div class="content" style="min-height: 100vh; margin-top: 0px !important">
-            <%- include('../sidebar') %>` 
+            <%- include('sidebar') %>` 
             
             <div class="order-history-content">
                 <h1>Order History</h1>
@@ -39,7 +162,57 @@
             </a>
                 <% } %>
                 <% } %>
- 
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card card-2">
+                                <div class="card-body">
+                                    <div class="media">
+                                        <div class="sq align-self-center "> <img class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="https://i.imgur.com/RJOW4BL.jpg" width="135" height="135" /> </div>
+                                        <div class="media-body my-auto text-right">
+                                            <div class="row  my-auto flex-column flex-md-row">
+                                                <div class="col my-auto"> <h6 class="mb-0"> Jack Jacs</h6>  </div>
+                                                <div class="col my-auto"> <small>Qty : 1</small></div>
+                                                <div class="col my-auto"> <small>Price :<h6 class="mb-0">&#8377;3,600.00</h6> </small></div>
+                                                <div class="col my-auto">
+                                               <div class="col-auto my-auto" style=" color: #080809;">
+                                                <div style="font-size: 12px;font-weight: 500;">
+                                                    <div class="_3SbeKb _2cm2Hi" ></div>
+                                                    <span >Delivered on Mar 06, 2022</span>
+                                                    <div class="_30gI7w">Your item has been delivered</div>
+                                                 </div>
+                                                   <div>
+                                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTknIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTggMTgiPgoJPGcgZmlsbD0nbm9uZSc+CgkJPHBvbHlnb24gaWQ9IlNoYXBlIiBmaWxsPSIjMjg3NEYxIiBwb2ludHM9IjkgMTIuMDYyNSAxMy42Mzc1IDE1LjQzNzUgMTEuODYyNSA5Ljk4NzUgMTYuNSA2LjY4NzUgMTAuODEyNSA2LjY4NzUgOSAxLjA2MjUgNy4xODc1IDYuNjg3NSAxLjUgNi42ODc1IDYuMTM3NSA5Ljk4NzUgNC4zNjI1IDE1LjQzNzUiIC8+CgkJPHBvbHlnb24gaWQ9IlNoYXBlIiBwb2ludHM9IjAgMCAxOCAwIDE4IDE4IDAgMTgiIC8+Cgk8L2c+Cjwvc3ZnPg==" class="_1dki8b col-1-5">
+                                                    <small>Rate & Review Projuct </small>
+                                                   </div>
+
+
+
+                                                
+                                            </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <hr class="my-3 "> -->
+                                    <!-- <div class="row">
+                                        <div class="col-md-3 mb-3"> <small> Track Order <span><i class=" ml-2 fa fa-refresh"  aria-hidden="true"></i></span></small> </div>
+                                        <div class="col mt-auto">
+                                            <div class="progress my-auto"> <div class="progress-bar progress-bar  rounded" style="width: 62%" role="progressbar" aria-valuenow="25" aria-valuemin="0"  aria-valuemax="100"></div> </div>
+                                            <div class="media row justify-content-between ">
+                                                <div class="col-auto text-right"><span> <small  class="text-right mr-sm-2"></small> <i class="fa fa-circle active"></i> </span></div>
+                                                <div class="flex-col"> <span> <small class="text-right mr-sm-2">Out for delivary</small><i class="fa fa-circle active"></i></span></div>
+                                                <div class="col-auto flex-col-auto"><small  class="text-right mr-sm-2">Delivered</small><span> <i  class="fa fa-circle"></i></span></div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 
                 <!-- Add more orders here -->
                 
