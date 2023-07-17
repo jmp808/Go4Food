@@ -11,6 +11,7 @@
     />
   </head>
   <style>
+    
     .contentHeader {
       display: flex;
       margin: 20px;
@@ -191,62 +192,134 @@
     <div class="content" style="min-height: 100vh; margin-top: 0px">
       <%- include('sidebar') %>
       <div class="restaurant-catalog">
-        <h2 style="color: #ef3d3d">Order Processs</h2>
-        <br />
+        <h2 style="color: #ef3d3d">Order Processs : # <%=order._id %></h2>
+        <p style="color: #777;"> Cutomer Name : <%=order.customer.name %> </p>
+        <p style="color: #777;"> Cutomer Phone : <%=order.customer.phone %> </p>
+        <p style="color: #777;"> Cutomer Address : <%=order.customer.address %> </p>
+        <p style="color: #777;"> Cutomer Email : <%=order.customer.email %> </p>
+        <p style="color: #340202;"> Product : <%=order.menus.menu_id.title %> X  <%=order.menus.quantity %></p>
+        
 
+        <br />
+     <h3>Update the order by clicking on timeline</h3>
         <div class="custom-track">
-          <div class="custom-step active">
+          <div class="custom-step <% if (order.shippingDetails.orderTracking >= 1) { %>active<% } %>" title="Update: food has prepared">
+            <form action="/restaurant/updateorder" method="post">
+            <input type="hidden" name="order_id" value="<%=order._id %>">
+            <input type="hidden" name="status" value="1">
             <button
-          
+              type="submit"
+              <% if (order.shippingDetails.orderTracking != 0) { %>disabled<% } %>
               style="border: none; background: transparent; cursor: pointer"
             >
               <span class="custom-icon">
-                <i class="fa fa-truck"></i>
+                <i class="fa fa-hamburger" aria-hidden="true"></i>
+
               </span>
             </button>
+          </form>
 
             <span class="custom-text">Preparing Food</span>
           </div>
-          <div class="custom-step active ">
-            <button
-          
-              style="border: none; background: transparent; cursor: pointer"
-            >
-              <span class="custom-icon">
-                <i class="fa fa-check"></i>
-              </span>
-            </button>
+          <div class="custom-step <% if (order.shippingDetails.orderTracking >= 2) { %>active<% } %>" title="Update : packaging complete">
+            
+            <form action="/restaurant/updateorder" method="post">
+              <input type="hidden" name="order_id" value="<%=order._id %>">
+              <input type="hidden" name="status" value="2">
+              <button
+              <% if (order.shippingDetails.orderTracking != 1) { %>disabled<% } %>
+                type="submit"
+                style="border: none; background: transparent; cursor: pointer"
+              >
+                <span class="custom-icon">
+                  <i class="fa fa-check-circle"></i>
+                </span>
+              </button>
+            </form>
 
-            <span class="custom-text">Complete Order</span>
+            <span class="custom-text">Completed Packaging</span>
           </div>
-          <div class="custom-step">
+          <div class="custom-step <% if (order.shippingDetails.orderTracking >= 3) { %>active<% } %>"title="Update : shipping Details">
+         
             <button
+            type="submit"
+            <% if (order.shippingDetails.orderTracking != 2) { %>disabled<% } %>
             onclick="openModal()"  style="border: none; background: transparent; cursor: pointer"
             >
               <span class="custom-icon">
-                <i class="fa fa-user"></i>
+                <i class="fa fa-user-secret"></i>
               </span>
             </button>
-
+            
             <span class="custom-text">Notify Driver</span>
           </div>
-          <div class="custom-step">
-            <button
-              style="border: none; background: transparent; cursor: pointer"
-            >
-              <span class="custom-icon"> <i class="fa fa-box"></i> </span>
-            </button>
-            <span class="custom-text">Driver Pickep</span>
+          <div class="custom-step <% if (order.shippingDetails.orderTracking >= 4) { %>active<% } %>" title="Update : Package has shipped">
+            <form action="/restaurant/updateorder" method="post">
+              <input type="hidden" name="order_id" value="<%=order._id %>">
+              <input type="hidden" name="status" value="4">
+              <button
+                type="submit"
+                <% if (order.shippingDetails.orderTracking != 3) { %>disabled<% } %>
+                style="border: none; background: transparent; cursor: pointer"
+              >
+                <span class="custom-icon">
+                  <i class="fa fa-shipping-fast"></i>
+                </span>
+              </button>
+            </form>
+            <span class="custom-text">Package Shipped</span>
+          </div>
+          <div class="custom-step <% if (order.shippingDetails.orderTracking >= 5) { %>active<% } %>" title="Update : Order delivered">
+            <form action="/restaurant/updateorder" method="post">
+              <input type="hidden" name="order_id" value="<%=order._id %>">
+              <input type="hidden" name="status" value="5">
+              <button
+                type="submit"
+                <% if (order.shippingDetails.orderTracking != 4) { %>disabled<% } %>
+                style="border: none; background: transparent; cursor: pointer"
+              >
+                <span class="custom-icon">
+                  <i class="fa fa-tasks"></i>
+                </span>
+              </button>
+            </form>
+            <span class="custom-text">Delivery Completed</span>
           </div>
         </div>
   <!-- Other steps omitted for brevity -->
+  <ul class="custom-row">
+    <li class="custom-col">
+      <figure class="custom-itemside mb-3">
+        <div class="custom-aside">
+          <img
+            src="/images/<%=order.menus.menu_id.images[0] %>"
+            class="custom-img-sm border"
+          />
+        </div>
+        <figcaption class="custom-info align-self-center">
+          <p class="custom-title">
+            <%=order.menus.menu_id.title %> <br />
+            X <%=order.menus.quantity %>
+          </p>
+          <span class="text-muted"
+            >$ <%=order.menus.menu_id.price %></span
+          >
+        </figcaption>
+      </figure>
+    </li>
+  </ul>
+  <hr />
 </div>
 
 <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
     <h2>Driver Details</h2>
-    <form style="margin-top: 10px;">
+   
+    <form action="/restaurant/updateorderdriver" method="post" style="margin-top: 10px;">
+      <input type="hidden" name="order_id" value="<%=order._id %>">
+       
+      
       <div class="dishform-input">
         <div>
           <label for="firstname" class="dishform-form-label">
@@ -257,6 +330,7 @@
             name="title"
              placeholder="Enter Driver name"
             class="dishform-form-input"
+            required
           />
         </div>
 
@@ -270,10 +344,11 @@
               name="title"
                placeholder="Enter Phone no"
               class="dishform-form-input"
+              required
             />
           </div>
 
-          <button class="dishform-btn" type="submit">Save</button>
+          <button class="dishform-btn" type="submit">Update</button>
 
     </form>
   </div>

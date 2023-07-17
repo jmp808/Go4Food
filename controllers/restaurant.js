@@ -150,8 +150,38 @@ exports.postCreateMenu = async (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.orderstatus = (req, res, next) => {
-  res.render("restaurant/orderStatus");
+exports.orderstatus = async (req, res, next) => {
+  const { order_id } = req.params;
+  const order = await Order.findById(order_id)
+    .populate("customer")
+    .populate("menus.menu_id");
+
+  res.render("restaurant/orderStatus", {
+    order: order,
+    restaurant: req.session.restaurant,
+  });
+};
+
+exports.postUpdateOrder = async (req, res, next) => {
+  const { order_id, status } = req.body;
+  // return console.log(order_id, status);
+  const order = await Order.findById(order_id);
+  order.shippingDetails.orderTracking = status;
+  if (status == 5) {
+    order.status = "delivered";
+  }
+  await order.save();
+  res.redirect("/restaurant/updateorder/" + order_id);
+};
+exports.postUpdateOrderDriver = async (req, res, next) => {
+  const { order_id, title } = req.body;
+  // return console.log(title[0]);
+  const o = await Order.findById(order_id);
+  o.shippingDetails.deliveryPerson = title[0];
+  o.shippingDetails.phone = title[1];
+  o.shippingDetails.orderTracking = 3;
+  await o.save();
+  res.redirect("/restaurant/updateorder/" + order_id);
 };
 
 exports.orderNotification = async (req, res, next) => {

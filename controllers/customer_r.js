@@ -13,6 +13,7 @@ const {
   paymentBuyNow,
   buyNowSingle,
   trackOrder,
+  cancelOrder,
 } = require("./customer");
 const express = require("express");
 const is_customer = require("../middleware/is_customer");
@@ -37,5 +38,5 @@ router.post("/buynowsingle", is_customer, buyNowSingle);
 router.post("/payment", is_customer, paymentBuyNow);
 
 router.get("/trackorder/:id", is_customer, trackOrder);
-
+router.post("/cancelorder", is_customer, cancelOrder);
 module.exports = router;

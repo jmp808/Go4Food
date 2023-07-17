@@ -330,10 +330,16 @@ exports.getOrders = async (req, res, next) => {
         model: "Menu",
       },
     });
-  //   return console.log(c.orders);
-  res.render("customer/history", {
-    orders: c.orders,
 
+  //   return console.log(c.orders);
+  // delivered orders
+  const delivered_orders = c.orders.filter((o) => o.status === "delivered");
+  const rest_delivered_orders = c.orders.filter(
+    (o) => o.status !== "delivered"
+  );
+  res.render("customer/history", {
+    orders: rest_delivered_orders,
+    delivered_orders: delivered_orders,
     customer: req.session.customer,
   });
 };

@@ -145,9 +145,9 @@
                 <h1>No orders found</h1>
                 <% }else { %>
                 <% for(var i=0;i<orders.length;i++){ %>
-                <% if(orders[i].status!=="cancel"){ %>
+ 
                 <a href="/trackorder/<%=orders[i]._id %>" >
-                <% } %>
+            
                 <div class="order">
                     <div class="order-header">
                         <span class="order-number">Order Id: <%=orders[i]._id %></span>
@@ -169,8 +169,9 @@
                      <p  class="order-details"   style="width: 30%;  margin-top: 10px;">  Product  : <%= orders[i].menus.menu_id.title %> - Quantity: <%= orders[i].menus.quantity %> </p>
                 
                     <p  style=" margin-top: 20px;">Order Total: $<%=orders[i].price %></p>
-                    <% if(orders[i].status!=="cancel"){ %>
                 </a>
+                    <% if(orders[i].status!=="cancel" && orders[i].status!=="delivered"){ %>
+            
                
                     <div class="order-actions">
                         <form action="/cancelorder" method="post">
@@ -185,21 +186,23 @@
                 <% } %>
                 <div class="card-body">
                     <div class="row">
+                        <%for(var i =0; i<delivered_orders.length; i++){ %>
                         <div class="col">
                             <div class="card card-2">
                                 <div class="card-body">
                                     <div class="media">
-                                        <div class="sq align-self-center "> <img class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="https://i.imgur.com/RJOW4BL.jpg" width="135" height="135" /> </div>
+                                        <div class="sq align-self-center "> <img class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="/images/<%=delivered_orders[i].menus.menu_id.images[0] %>" width="135" height="135" /> </div>
                                         <div class="media-body my-auto text-right">
                                             <div class="row  my-auto flex-column flex-md-row">
-                                                <div class="col my-auto"> <h6 class="mb-0"> Jack Jacs</h6>  </div>
-                                                <div class="col my-auto"> <small>Qty : 1</small></div>
-                                                <div class="col my-auto"> <small>Price :<h6 class="mb-0">&#8377;3,600.00</h6> </small></div>
+                                                <div class="col my-auto"> <h6 class="mb-0"> <%=delivered_orders[i].menus.menu_id.title  %> </h6>  </div>
+                                                <div class="col my-auto"> <small>Qty : <%=delivered_orders[i].totalQty %></small></div>
+                                                <div class="col my-auto"> <small>Price :<h6 class="mb-0">&#8377;<%=delivered_orders[i].price %></h6> </small></div>
                                                 <div class="col my-auto">
                                                <div class="col-auto my-auto" style=" color: #080809;">
                                                 <div style="font-size: 12px;font-weight: 500;">
                                                     <div class="_3SbeKb _2cm2Hi" ></div>
-                                                    <span >Delivered on Mar 06, 2022</span>
+                                                    <% var dates = new Date(delivered_orders[i].updatedAt) %>
+                                                    <span >Delivered on <%=dates %></span>
                                                     <div class="_30gI7w">Your item has been delivered</div>
                                                  </div>
                                                    <div>
@@ -232,6 +235,7 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
                 </div>
                 
                 

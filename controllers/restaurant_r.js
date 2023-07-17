@@ -14,6 +14,8 @@ const {
   getConfirmOrders,
   cancelOrder,
   allMenu,
+  postUpdateOrder,
+  postUpdateOrderDriver,
 } = require("./restaurant");
 const is_restaurant_auth = require("../middleware/is_restaurant_auth");
 const upload = require("../utils/upload");
@@ -32,7 +34,9 @@ router.get("/logout", logout);
 
 // dashboard
 router.get("/dashboard", is_restaurant_auth, dashboard);
-router.get("/updateorder/:id", is_restaurant_auth, orderstatus);
+router.get("/updateorder/:order_id", is_restaurant_auth, orderstatus);
+router.post("/updateorder", is_restaurant_auth, postUpdateOrder);
+router.post("/updateorderdriver", is_restaurant_auth, postUpdateOrderDriver);
 router.get("/ordernotification", is_restaurant_auth, orderNotification);
 router.get("/confirmorders", is_restaurant_auth, getConfirmOrders);
 router.post("/confirmorder", is_restaurant_auth, confirmOrder);

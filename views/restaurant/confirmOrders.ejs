@@ -49,7 +49,7 @@
                     <% if(orders[i].status!=="cancel"){ %>
                 </a>
                 <% } %>
-                <% if(orders[i].status!=="cancel"){ %>
+                <% if(orders[i].status!=="cancel"  && orders[i].status!=="delivered"){ %>
                     <div class="order-actions">
                         <form action="/restaurant/cancelorder" method="post">
                             <input type="hidden" name="order_id" value="<%=orders[i].order_id %>">

@@ -56,8 +56,21 @@ const orderSchema = new Schema(
         type: String,
         default: "Yet to be assigned",
       },
+      customerExpectedTime: {
+        type: String,
+        default: "Today",
+      },
+      orderTracking: {
+        type: Number,
+        default: 0,
+      },
+    },
+    review: {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
     },
   },
+
   { timestamps: true }
 );
 
