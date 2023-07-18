@@ -6,130 +6,104 @@
    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
  <style>
-     a{
-         text-decoration: none;
-     }
-        a:hover{
-           
-            text-decoration: none !important;
-        }
-        .container-fluid {
-           margin: 0;
-           padding: 0;
-        }
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
-        p {
-            font-size: 14px;
-            margin-bottom: 7px;
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+}
 
-        }
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.custom-itemside {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+}
 
-        .small {
-            letter-spacing: 0.5px !important;
-        }
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/*  star */
+.visuhide {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+}
 
-        .card-1 {
-            box-shadow: 2px 2px 10px 0px rgb(190, 108, 170);
-        }
-
-        hr {
-            background-color: rgba(248, 248, 248, 0.667);
-        }
-
-
-        .bold {
-            font-weight: 500;
-        }
-
-        .change-color {
-            color: #AB47BC !important;
-        }
-
-        .card-2 {
-            box-shadow: 1px 1px 3px 0px rgb(112, 115, 139);
-
-        }
-
-        .fa-circle.active {
-            font-size: 8px;
-            color: #AB47BC;
-        }
-
-        .fa-circle {
-            font-size: 8px;
-            color: #aaa;
-        }
-
-        .rounded {
-            border-radius: 2.25rem !important;
-        }
-
-
-        .progress-bar {
-            background-color: #AB47BC !important;
-        }
-
-
-        .progress {
-            height: 5px !important;
-            margin-bottom: 0;
-        }
-
-        .invoice {
-            position: relative;
-            top: -70px;
-        }
-
-        .Glasses {
-            position: relative;
-            top: -12px !important;
-        }
-
-        .card-footer {
-            background-color: #AB47BC;
-            color: #fff;
-        }
-
-        h2 {
-            color: rgb(78, 0, 92);
-            letter-spacing: 2px !important;
-        }
-
-        .display-3 {
-            font-weight: 500 !important;
-        }
-
-        @media (max-width: 479px) {
-            .invoice {
-                position: relative;
-                top: 7px;
-            }
-
-            .border-line {
-                border-right: 0px solid rgb(226, 206, 226) !important;
-            }
-
-        }
-
-        @media (max-width: 700px) {
-
-            h2 {
-                color: rgb(78, 0, 92);
-                font-size: 17px;
-            }
-
-            .display-3 {
-                font-size: 28px;
-                font-weight: 500 !important;
-            }
-        }
-
-        .card-footer small {
-            letter-spacing: 7px !important;
-            font-size: 12px;
-        }
-
-        
+.star__container:hover .star__item, .star__radio:checked ~ .star__item {
+  filter: grayscale(0);
+}
+.star__item:hover ~ .star__item, .star__item, .star__container:not(:hover) > .star__radio:nth-of-type(5):checked ~ .star__item:nth-of-type(5) ~ .star__item, .star__container:not(:hover) > .star__radio:nth-of-type(4):checked ~ .star__item:nth-of-type(4) ~ .star__item, .star__container:not(:hover) > .star__radio:nth-of-type(3):checked ~ .star__item:nth-of-type(3) ~ .star__item, .star__container:not(:hover) > .star__radio:nth-of-type(2):checked ~ .star__item:nth-of-type(2) ~ .star__item, .star__container:not(:hover) > .star__radio:nth-of-type(1):checked ~ .star__item:nth-of-type(1) ~ .star__item {
+  filter: grayscale(1);
+}
+.star__radio:nth-of-type(1):checked ~ .star__item:nth-of-type(1)::before {
+  transform: scale(1.5);
+  transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+}
+.star__radio:nth-of-type(2):checked ~ .star__item:nth-of-type(2)::before {
+  transform: scale(1.5);
+  transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+}
+.star__radio:nth-of-type(3):checked ~ .star__item:nth-of-type(3)::before {
+  transform: scale(1.5);
+  transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+}
+.star__radio:nth-of-type(4):checked ~ .star__item:nth-of-type(4)::before {
+  transform: scale(1.5);
+  transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+}
+.star__radio:nth-of-type(5):checked ~ .star__item:nth-of-type(5)::before {
+  transform: scale(1.5);
+  transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+}
+.star__container {
+  display: flex;
+  /* margin: auto; */
+   width: 20%;
+  border-radius: 0.25em;
+ 
+  transition: box-shadow 0.3s ease;
+}
+.star__item {
+  display: inline-flex;
+  width: 1.25em;
+  height: 1.5em;
+}
+.star__item::before {
+  content: "⭐️";
+  display: inline-block;
+  margin: auto;
+  font-size: 0.75em;
+  vertical-align: top;
+  backface-visibility: hidden;
+  transform-origin: 50% 33.3%;
+  transition: transform 0.3s ease-out;
+}
  </style>
 </head>
 <body>
@@ -193,44 +167,30 @@
                                     <div class="media">
                                         <div class="sq align-self-center "> <img class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" src="/images/<%=delivered_orders[i].menus.menu_id.images[0] %>" width="135" height="135" /> </div>
                                         <div class="media-body my-auto text-right">
-                                            <div class="row  my-auto flex-column flex-md-row">
-                                                <div class="col my-auto"> <h6 class="mb-0"> <%=delivered_orders[i].menus.menu_id.title  %> </h6>  </div>
-                                                <div class="col my-auto"> <small>Qty : <%=delivered_orders[i].totalQty %></small></div>
-                                                <div class="col my-auto"> <small>Price :<h6 class="mb-0">&#8377;<%=delivered_orders[i].price %></h6> </small></div>
-                                                <div class="col my-auto">
+                                            <div class="row  my-auto flex-column flex-md-row"  style="align-items: center;">
+                                                <div class="col"> <h6 class="mb-0"> <%=delivered_orders[i].menus.menu_id.title  %> </h6>  </div>
+                                                <div class="col "> <small>Qty : <%=delivered_orders[i].totalQty %></small></div>
+                                                <div class="col "> <small>Price :<h6 class="mb-0">&#8377;<%=delivered_orders[i].price %></h6> </small></div>
+                                              
                                                <div class="col-auto my-auto" style=" color: #080809;">
                                                 <div style="font-size: 12px;font-weight: 500;">
                                                     <div class="_3SbeKb _2cm2Hi" ></div>
                                                     <% var dates = new Date(delivered_orders[i].updatedAt) %>
-                                                    <span >Delivered on <%=dates %></span>
-                                                    <div class="_30gI7w">Your item has been delivered</div>
+                                                    <span >Delivered on <%=dates.toLocaleDateString() %></span>
+                                                    <div   style="color: rgb(51, 211, 51);">Your item has been delivered</div>
                                                  </div>
                                                    <div>
                                                     <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTknIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTggMTgiPgoJPGcgZmlsbD0nbm9uZSc+CgkJPHBvbHlnb24gaWQ9IlNoYXBlIiBmaWxsPSIjMjg3NEYxIiBwb2ludHM9IjkgMTIuMDYyNSAxMy42Mzc1IDE1LjQzNzUgMTEuODYyNSA5Ljk4NzUgMTYuNSA2LjY4NzUgMTAuODEyNSA2LjY4NzUgOSAxLjA2MjUgNy4xODc1IDYuNjg3NSAxLjUgNi42ODc1IDYuMTM3NSA5Ljk4NzUgNC4zNjI1IDE1LjQzNzUiIC8+CgkJPHBvbHlnb24gaWQ9IlNoYXBlIiBwb2ludHM9IjAgMCAxOCAwIDE4IDE4IDAgMTgiIC8+Cgk8L2c+Cjwvc3ZnPg==" class="_1dki8b col-1-5">
-                                                    <small>Rate & Review Projuct </small>
+                                                    <small  onclick="openModal()" style="color: rgb(0, 102, 255);">Rate & Review Project</small>
                                                    </div>
-
-
-
-                                                
                                             </div>
 
-                                                </div>
+                                              
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <hr class="my-3 "> -->
-                                    <!-- <div class="row">
-                                        <div class="col-md-3 mb-3"> <small> Track Order <span><i class=" ml-2 fa fa-refresh"  aria-hidden="true"></i></span></small> </div>
-                                        <div class="col mt-auto">
-                                            <div class="progress my-auto"> <div class="progress-bar progress-bar  rounded" style="width: 62%" role="progressbar" aria-valuenow="25" aria-valuemin="0"  aria-valuemax="100"></div> </div>
-                                            <div class="media row justify-content-between ">
-                                                <div class="col-auto text-right"><span> <small  class="text-right mr-sm-2"></small> <i class="fa fa-circle active"></i> </span></div>
-                                                <div class="flex-col"> <span> <small class="text-right mr-sm-2">Out for delivary</small><i class="fa fa-circle active"></i></span></div>
-                                                <div class="col-auto flex-col-auto"><small  class="text-right mr-sm-2">Delivered</small><span> <i  class="fa fa-circle"></i></span></div>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                            
+                                 
                                 </div>
                             </div>
                         </div>
@@ -244,5 +204,72 @@
             </div>
         </div>
     </div>
+    
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div style=" display: flex; justify-content: space-between;">
+            <h2>Rate & Review Project</h2>
+            <span class="close" onclick="closeModal()">&times;</span>
+
+        </div>
+
+        
+     
+      <form action="#" method="post" style="margin-top: 10px;">
+        <input type="hidden" name="order_id" value="">
+         
+        
+        <div class="dishform-input">
+          <div>
+            <label for="Rating" class="dishform-form-label">
+                Rating
+              </label>
+            <span class="star__container">
+                <input type="radio" name="rating" value="1" id="star-1" class="star__radio visuhide">
+                <input type="radio" name="rating" value="2" id="star-2" class="star__radio visuhide">
+                <input type="radio" name="rating" value="3" id="star-3" class="star__radio visuhide">
+                <input type="radio" name="rating" value="4" id="star-4" class="star__radio visuhide">
+                <input type="radio" name="rating" value="5" id="star-5" class="star__radio visuhide">
+              
+                <label class="star__item" for="star-1"><span class="visuhide">1 star</span></label>
+                <label class="star__item" for="star-2"><span class="visuhide">2 stars</span></label>
+                <label class="star__item" for="star-3"><span class="visuhide">3 stars</span></label>
+                <label class="star__item" for="star-4"><span class="visuhide">4 stars</span></label>
+                <label class="star__item" for="star-5"><span class="visuhide">5 stars</span></label>
+              </span>
+          </div>
+  
+          <div class="dishform-input">
+            <div>
+              <label for="firstname" class="dishform-form-label">
+                Review
+              </label>
+              <textarea
+                type="text"
+                name="feedback"
+                 placeholder="Write feedback (option)"
+                class="dishform-form-input"
+               
+              ></textarea>
+            </div>
+  
+            <button class="dishform-btn" type="submit">Done</button>
+  
+      </form>
+    </div>
+  </div>
+  <script>
+    function openModal() {
+var modal = document.getElementById("myModal");
+modal.style.display = "block";
+}
+
+function closeModal() {
+var modal = document.getElementById("myModal");
+modal.style.display = "none";
+}
+var activeStepIndex = 0;
+
+  </script>
 </body>
 </html>

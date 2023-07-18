@@ -7,6 +7,14 @@
   scroll-behavior: smooth;
   box-sizing: border-box;
 }
+a {
+  text-decoration: none !important;
+}
+
+.container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
 .titleContainer {
   color: #ef3d3d;

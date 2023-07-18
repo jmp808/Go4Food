@@ -14,6 +14,8 @@ const {
   buyNowSingle,
   trackOrder,
   cancelOrder,
+  dishDetails,
+  profile,
 } = require("./customer");
 const express = require("express");
 const is_customer = require("../middleware/is_customer");
@@ -39,4 +41,7 @@ router.post("/payment", is_customer, paymentBuyNow);
 
 router.get("/trackorder/:id", is_customer, trackOrder);
 router.post("/cancelorder", is_customer, cancelOrder);
+router.get("/dishdetails", is_customer, dishDetails);
+router.get("/profile", is_customer, profile);
+
 module.exports = router;

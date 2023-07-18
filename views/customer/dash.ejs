@@ -9,12 +9,12 @@
   <body>
     <div class="container-fluid">
       <!-- navbar -->
-      <%- include('../navbar.ejs') %>
+      <%- include('header.ejs') %>
       <div
         class="content"
         style="min-height: 100vh; margin-top: 0px !important"
       >
-        <%- include('sidebar') %>
+      <%- include('sidebar') %>
         <div class="restaurant-catalog">
           <h1  style="text-transform: uppercase;" >WELCOME To Go4Food <%=customer.name %></h1>
       </div>

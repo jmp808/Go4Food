@@ -362,3 +362,9 @@ exports.cancelOrder = async (req, res, next) => {
   await order.save();
   res.redirect("/orders");
 };
+exports.dishDetails = async (req, res, next) => {
+  res.render("customer/singlemenu");
+};
+exports.profile = async (req, res, next) => {
+  res.render("customer/Profile");
+};
