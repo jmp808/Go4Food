@@ -4,7 +4,7 @@ const Restaurant = require("../models/restaurant");
 exports.getAllMenus = async (req, res, next) => {
   const page = parseInt(req.query.page) || 1; // Get the page number from query parameters, default to 1 if not provided
   const perPageMenu = await getMenuLimited(page);
-  //   return console.log(perPageMenu);
+  // console.log(perPageMenu);
   // lates by date
   Menu.find()
     .populate("restaurant")

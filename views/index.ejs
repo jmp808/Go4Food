@@ -1,179 +1,42 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Go4Food Restaurant Catalog</title>
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <style>
-    .slider {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
+<header class="header">
+  <a href="/" class="logo">Go4<span class="yellow">food</span></a>
 
-    .cards-container {
-      display: flex;
-      transition: transform 0.3s ease-in-out;
-      width: calc(30% - 20px);
-    }
-
-    .card {
-      flex: 0 0 100%;
-      width: calc(50% - 20px);
-      padding: 20px;
-      box-sizing: border-box;
-      /* opacity: 0.5; */
-      transition: opacity 0.3s ease-in-out;
-       margin: 10px;
-    }
-
-    .card.active {
-      opacity: 1;
-    }
-
-    .card img {
-      /* width: 100px; */
-      height: auto;
-      width: 100%;
-
-  max-height: 150px;
-  object-fit: cover;
-  border-radius: 5px;
-    }
-
-    .card-content {
-      text-align: center;
-    }
-
-    .slider-buttons {
-      margin-top: 20px;
-      text-align: center;
-     
-    }
-
-    .slider-buttons button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-       border: none;
-      background: #ef3d3d;
-      color: white;
-       border-radius: 5px;
-    }
-    .view-buttons  {
-      padding: 10px 10px;
-      font-size: 16px;
-      cursor: pointer;
-       border: none;
-        border:  1px solid #ef3d3d;
-      color: #ef3d3d;
-       border-radius: 5px;
-    }
-  </style>
-  <body>
-    <div class="container-fluid">
-      <!-- navbar -->
-      <%- include('navbar') %>
-      <div
-        class="content"
-        style="min-height: 100vh; margin-top: 0px !important"
+  <nav
+    class="navbar"
+    style="display: flex; justify-content: center; text-align: center"
+  >
+    <form class="search-form">
+      <input
+        type="text"
+        placeholder="Search..."
+        style="padding: 5px 5px 5px 5px; border: none"
+      />
+      <button
+        type="submit"
+        style="border: none; background: transparent; margin: 5px"
       >
-        <%- include('sidebar') %>
-        <div class="restaurant-catalog">
-          <h1>Restaurant Catalog</h1>
-          <h2>Top Rated Restaurants</h2>
-          <br />
-          <div class="restaurant-list">
-            <div class="slider">
-              <div class="cards-container">
-                <%  for(let i=0 ;i<8 ;i++) { %>
-                  <div class="card  restaurant-item ">
-                    <img src="https://houstonpizza.ca/wp-content/uploads/2022/09/gourmet-beef-pizza.png" alt="Image 1">
-                    <div class="card-content">
-                      <h3>Houston's Pizza</h3>
-                      <p>Address: Lorem ipsum dolor sit amet</p>
-                      <p>Rating: 4.8/5</p>
-                    </div>
-                    <button class="view-buttons">View</button>
-                  </div>
-                 <% } %>
-              
-             
-            </div>
-            <div class="slider-buttons">
-              <button class="prev-btn">&lt; Previous</button>
-              <button class="next-btn">Next &gt;</button>
-            </div>
-          </div>
-        </div>
-      
-
-        <h2>All Restaurants</h2>
-        <br />
-        <div class="restaurant-list">
-        <%  for(let i=0; i<6; i++ ){ %>
-          <div class="restaurants-item">
-            <img
-              src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?cs=srgb&dl=pexels-engin-akyurt-1437267.jpg&fm=jpg"
-              alt="Restaurant 3"
-            />
-            <h3>Luigi's Pasta</h3>
-            <p>Address: Lorem ipsum dolor sit amet</p>
-            <p>Rating: 4.0/5</p>
-
-            <button class="view-buttons">View</button>
-          </div>
-      <%   }  %>
-
-            
-      
-          <!-- Add more restaurants here -->
-        </div>
-      
-      </div>
+        <img
+          width="20"
+          src="https://img.icons8.com/ios/50/search--v1.png"
+          alt="search--v1"
+        />
+      </button>
+    </form>
+    <div style="justify-content: center; display: flex; align-items: center">
+      <a href="#services">Menu</a>
+      <a href="#about">Restaurant</a>
+      <a href="/login">Login</a>
+      <img
+        width="20"
+        src="https://img.icons8.com/ios-filled/50/FA5252/shopping-cart.png"
+        alt="shopping-cart"
+      />
     </div>
-    <script>
-        const cardsContainer = document.querySelector('.cards-container');
-        const cards = document.querySelectorAll('.card');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
+    <!-- <a href="" class="btn" style="padding: 1rem">Make an Order</a> -->
+  </nav>
 
-        let currentIndex = 0;
-        const cardWidth = cards[0].offsetWidth;
-        const visibleCards = Math.floor(cardsContainer.offsetWidth / cardWidth); // Number of visible cards at a time
-
-        prevBtn.addEventListener('click', showPrevCard);
-        nextBtn.addEventListener('click', showNextCard);
-
-        function showPrevCard() {
-          currentIndex--;
-          if (currentIndex < 0) {
-            currentIndex = cards.length - visibleCards;
-          }
-          updateSlider();
-        }
-
-        function showNextCard() {
-          currentIndex++;
-          if (currentIndex > cards.length - visibleCards) {
-            currentIndex = 0;
-          }
-          updateSlider();
-        }
-
-        function updateSlider() {
-          const offset = -currentIndex * cardWidth;
-          cardsContainer.style.transform = `translateX(${offset}px)`;
-
-          for (let i = 0; i < cards.length; i++) {
-            cards[i].classList.remove('active');
-          }
-          
-          for (let i = currentIndex; i < currentIndex + visibleCards; i++) {
-            cards[i].classList.add('active');
-          }
-        }
-
-    </script>
-  </body>
-</html>
+  <!-- Hamburger -->
+  <div class="hamburger">
+    <img src="./images/grid-outline.svg" alt="" />
+  </div>
+</header>

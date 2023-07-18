@@ -1018,3 +1018,127 @@ h1 {
   background: rgba(255, 0, 0, 0.6);
   pointer-events: unset;
 }
+:root {
+  --black: #1f1f1f;
+  --white: #fff;
+  --yellow: #ef3d3d;
+  --deep-yellow: #ffc727;
+  --bg-yellow: #fffaf1;
+  --btn-yellow: #ffd4d4;
+  --footer-yellow: #fff9e9;
+  --grey: #737373;
+  --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+  --transition: all 0.2s linear;
+}
+
+/*  navbar */
+
+/* Header */
+.yellow {
+  color: var(--yellow);
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: black;
+}
+
+.navbar a {
+  font-weight: 500;
+  transition: var(--transition);
+  /* padding: 1rem; */
+  padding: 0rem 1rem 0rem 1rem;
+  color: black;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar a:not(:last-child) {
+  margin-right: 0rem;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
+}
+
+.btn {
+  display: inline-block;
+  color: var(--yellow);
+  background-color: var(--btn-yellow);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  box-shadow: var(--box-shadow);
+}
+
+.header .hamburger img {
+  width: 3rem;
+}
+
+.header .hamburger {
+  display: none;
+}
+
+@media (max-width: 996px) {
+  .logo {
+    font-size: 3rem;
+  }
+
+  .navbar a {
+    padding: 0.5rem;
+  }
+
+  .navbar a:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .navbar {
+    position: fixed;
+    /* top: 9rem; */
+    left: 0;
+    right: 0;
+    width: 90%;
+    padding: 2.5rem;
+    margin: 0 auto;
+    box-shadow: var(--box-shadow);
+    background-color: var(--white);
+    text-align: center;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: 0.4s;
+    top: -100%;
+  }
+
+  .header .navbar a:last-child {
+    display: none;
+  }
+
+  .header .hamburger {
+    display: block;
+  }
+
+  .navbar.show {
+    top: 9rem;
+  }
+}

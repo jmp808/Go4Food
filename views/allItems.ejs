@@ -48,96 +48,201 @@
       color: #777;
       text-align: left;
     }
+
+
+
+.recipe,.img-box {
+  display: flex;
+   flex-direction: column;
+}
+
+
+.img-box img {
+    width: 350px;
+     height: auto;
+  
+     object-fit: cover;
+     object-position: 50% 50%;
+}
+ 
+
+.recipe-content {
+  /* padding: 16px 32px; */
+   width: 350px;
+}
+
+.recipe-tag {
+  display: inline-block;
+  margin: 8px;
+  font-size: 0.875em;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #ef3d3d;
+}
+.recipe-title {
+  
+   text-align: left;
+}
+.recipe-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.recipe-rating {
+  font-size: 1.2em;
+
+  color: #ef3d3d;
+}
+
+
+.recipe-save {
+   margin: 10px;
+  display: flex;
+  align-items: center;
+  padding: 6px 14px 6px 12px;
+  border-radius: 4px;
+  border: 2px solid currentColor;
+  color: #ef3d3d;
+  background: none;
+  cursor: pointer;
+}
+.recipe-save svg {
+  margin-right: 6px;
+}
+
+.big {
+  line-height: 1.55;
+  padding: 24px;
+  background-color: #fff;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
   </style>
   <body>
-    <div class="container" style="max-width: 100%">
+    <!-- <div class="container" style="max-width: 100%"> -->
       <%- include('navbar') %>
-    </div>
-    <div class="content" style="max-height: 100%; margin-top: 0px">
-      <%- include('sidebar') %>
-      <div class="restaurant-catalog">
-        <div class="name" style="display: flex; justify-content: space-between">
-          <h1 style="color: #ef3d3d">Restaurant name</h1>
-         
-        </div>
-        <h2 style="margin-left: 5%; color: #ef3d3d">Top Rated item</h2>
-        <br />
-        <div class="item-list">
- 
-          <% if(per_menus.length==0){ %>
-          <h1>No items found</h1>
-          <% }else { %>
-          <% for(var i=0;i<per_menus.length;i++){ %>
-          <div class="card_item">
-            <h3><%=per_menus[i].restaurant.name %>'s</h3>
-            <img
-              src="/images/<%=per_menus[i].images[0] %>"
-              alt="Restaurant 1"
-            />
+    <!-- </div> -->
+    <div class="restaurant-catalog" style="margin-top: 5rem;">
+      <h2 style="margin-left: 5%; color: #ef3d3d">Top Rated item</h2>
+      <br />
+      <h1 style="color: black;" ><% per_menus.lengths  %></h1>
+      <div class="item-list">
 
-            <p>
-              <strong><%=per_menus[i].title %></strong>
-              <%=per_menus[i].description %>
-            </p>
-            <div class="button-container">
-              <form action="/cart" method="post">
-              <input type="hidden" name="menu_id" value="<%=per_menus[i]._id %>">
+        <% if(per_menus.length==0){ %>
+        <h1>No items found</h1>
+        <% }else { %>
+        <% for(var i=0;i<per_menus.length;i++){ %>
+         
+        <div class="card_item">
+          <h3><%=per_menus[i].restaurant.name %>'s</h3>
+          <img
+            src="/images/<%=per_menus[i].images[0] %>"
+            alt="Restaurant 1"
+          />
+
+          <p>
+            <strong><%=per_menus[i].title %></strong>
+            <%=per_menus[i].description %>
+          </p>
+          <div class="button-container">
+            <form action="/cart" method="post">
+            <input type="hidden" name="menu_id" value="<%=per_menus[i]._id %>">
+            <button class="prev-button" type="submit">Add To Card</button>
+          </form>
+          <form action="/buynowsingle" method="post">
+
+            <input type="hidden" name="menu_id" value="<%=per_menus[i]._id %>">
+            <button class="next-button">Buy Now</button>
+          </form>
+          </div>
+        </div>
+        <% } %>
+        
+    
+        <!-- Add more top-rated restaurant items here -->
+      </div>
+      <div class="button-container">
+        <button class="prev-button">Previous</button>
+        <button class="next-button">Next</button>
+      </div>
+      <% } %>
+      <h2 style="margin-left: 5%; color: #ef3d3d">item</h2>
+      <br />
+      <div class="item-list">
+      <% if(allMenus.length==0){ %>
+        <h1>No items found</h1>
+        <% }else { %>
+        <% for(var i=0;i<allMenus.length;i++){ %>
+
+        <div class="card_item">
+          <h3><%=allMenus[i].restaurant.name %>'s</h3>
+          <img
+            src="/images/<%=allMenus[i].images[0] %>"
+            alt="Restaurant 1"
+          />
+
+          <p>
+            <strong><%=allMenus[i].title %></strong>
+            <%=allMenus[i].description %>
+          </p>
+          <div class="button-container">
+            <form action="/cart" method="post">
+              <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
               <button class="prev-button" type="submit">Add To Card</button>
             </form>
             <form action="/buynowsingle" method="post">
- 
-              <input type="hidden" name="menu_id" value="<%=per_menus[i]._id %>">
+               
+              <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
               <button class="next-button">Buy Now</button>
             </form>
-            </div>
           </div>
-          <% } %>
-          
-      
-          <!-- Add more top-rated restaurant items here -->
         </div>
-        <div class="button-container">
-          <button class="prev-button">Previous</button>
-          <button class="next-button">Next</button>
-        </div>
-        <% } %>
-        <h2 style="margin-left: 5%; color: #ef3d3d">item</h2>
-        <br />
-        <div class="item-list">
-        <% if(allMenus.length==0){ %>
-          <h1>No items found</h1>
-          <% }else { %>
-          <% for(var i=0;i<allMenus.length;i++){ %>
-
-          <div class="card_item">
-            <h3><%=allMenus[i].restaurant.name %>'s</h3>
-            <img
-              src="/images/<%=allMenus[i].images[0] %>"
-              alt="Restaurant 1"
-            />
-
-            <p>
-              <strong><%=allMenus[i].title %></strong>
-              <%=allMenus[i].description %>
-            </p>
-            <div class="button-container">
-              <form action="/cart" method="post">
-                <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
-                <button class="prev-button" type="submit">Add To Card</button>
-              </form>
-              <form action="/buynowsingle" method="post">
-                 
-                <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
-                <button class="next-button">Buy Now</button>
-              </form>
-            </div>
-          </div>
-          <% } %>
-          <% } %>
         
-          <!-- Add more top-rated restaurant items here -->
-        </div>
+        <% } %>
+        <% } %>
+        <div class="big">
+          <article class="recipe">
+           <div class="img-box">
+             <img src="https://i.pinimg.com/originals/df/4b/54/df4b54f1689acdfce039a984aa57bbbd.jpg" width="1500" height="1368" alt="">
+           </div>
+           <div class="recipe-content">
+             <p class="recipe-tags">
+               <span class="recipe-tag">Gluten Free</span>
+               <span class="recipe-tag">Main dish</span>
+             </p>
+       
+             <h1 class="recipe-title"><a href="#">Gluten Free Pan Pizza</a></h1>
+             <h4 class="recipe-title"><a href="#">Rs.400</a></h4>
+       
+             <p class="recipe-metadata">
+               <span class="recipe-rating">★★★★<span>☆</span></span>
+               <span class="recipe-votes">(12 votes)</span>
+             </p>
+       
+             <p class="recipe-desc">It really is possible to make excellent gluten free pizza at home in your own oven with our recipes and techniques.</p>
+         <div  style="display: flex;">
+  
+           <button class="recipe-save" type="button" >
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000"><path d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z" fill="currentColor"/></svg>
+             Add to Cart
+           </button>
+     
+           <button class="recipe-save" type="button">
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000"><path d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z" fill="currentColor"/></svg>
+             Buy Now
+           </button>
+     
+         </div>
+           </div>
+         </article>
+       </div>
+        <!-- Add more top-rated restaurant items here -->
       </div>
+    
     </div>
+ 
   </body>
 </html>
