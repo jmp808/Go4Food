@@ -308,8 +308,25 @@ exports.postEditMenu = async (req, res, next) => {
   if (t == undefined) {
     t = menu.tags;
   }
+  if (quantity == undefined) {
+    quantity = menu.quantity;
+  }
   var images = menu.images;
-  if (req.files) {
+  // return console.log(req.files.length);
+  if (req.files.length == 0) {
+    images = menu.images;
+  }
+  if (title == undefined) {
+    title = menu.title;
+  }
+  if (price == undefined) {
+    price = menu.price;
+  }
+  if (description == undefined) {
+    description = menu.description;
+  }
+
+  if (req.files.length > 0) {
     images = req.files.map((f) => f.filename);
     // delete those images from upload folder
     for (let i = 0; i < menu.images.length; i++) {
