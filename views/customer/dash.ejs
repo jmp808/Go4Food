@@ -47,25 +47,26 @@
             <div class="column">
               <div class="card" style=" text-align: left;">
                 <h5  style=" font-size: 16px;padding: 10px"> Total Order</h5>
-                <h1>24</h1>
+                <h1><%=customer.orders.length %></h1>
               </div>
             </div>
             <div class="column">
               <div class="card" style=" text-align: left;">
                 <h5  style=" font-size: 16px;padding: 10px"> Total Reviews</h5>
-                <h1>124</h1>
+                <h1><%=customer.reviews.length %></h1>
               </div>
             </div>
             <div class="column">
               <div class="card"  style=" text-align: left;">
                 <h5  style=" font-size: 16px;padding: 10px"> Total Rating</h5>
-                <h1>224</h1>
+                <h1><%=customer.reviews.length %></h1>
               </div>
             </div>
             <div class="column">
               <div class="card"  style=" text-align: left;">
                 <h5  style=" font-size: 16px;padding: 10px">Today</h5>
-                <h1>2-12-34</h1>
+                <% var date  = new Date() %>
+                <h1><%=date %></h1>
               </div>
             </div>
           </div>

@@ -96,9 +96,12 @@ exports.logout = (req, res, next) => {
   res.redirect("/login");
 };
 
-exports.getDash = (req, res, next) => {
+exports.getDash = async (req, res, next) => {
+  const customer = await Customer.findById(req.session.customer._id)
+    .populate("orders")
+    .populate("reviews");
   res.render("customer/dash", {
-    customer: req.session.customer,
+    customer: customer,
   });
 };
 

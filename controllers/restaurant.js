@@ -105,12 +105,12 @@ exports.postLogin = (req, res, next) => {
 
 exports.dashboard = async (req, res, next) => {
   // pending oreder nums
-  const num_pending_orders = await Order.find({
+  var num_pending_orders = await Order.find({
     restaurant: req.session.restaurant._id,
-    status: "pending",
   }).then((orders) => {
     return orders.length;
   });
+  // filter and
   const menus_name = [];
   const menus_orders = [];
   const menus = await Menu.find({ restaurant: req.session.restaurant._id });
@@ -118,7 +118,7 @@ exports.dashboard = async (req, res, next) => {
     // remove space from menu name
     menus_name.push(menus[i].title);
     const orders = await Order.find({ "menus.menu_id": menus[i]._id });
-    menus_orders.push(orders.length);
+    menus_orders.push(orders.length + orders.history);
   }
   res.render("restaurant/dashboard", {
     restaurant: req.session.restaurant,
