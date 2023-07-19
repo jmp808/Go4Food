@@ -21,39 +21,7 @@
       margin-left: 5%;
        margin-right: 5%;
     }
-    /* .card_item {
-      width: calc(33% - 20px);
-      margin-bottom: 20px;
-      padding: 20px;
-      background-color: #fff;
-      border: 1px solid #e0e0e0;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      text-align: center;
-    }
-
-    .card_item img {
-      width: 100%;
-      max-height: 150px;
-      object-fit: cover;
-      border-radius: 5px;
-    }
-
-    .card_item h3 {
-      margin: 10px 0;
-      font-size: 18px;
-      color: #ef3d3d;
-      text-align: left;
-    }
-
-    .card_item p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #777;
-      text-align: left;
-    }
- */
-
+ 
 
 .recipe,.img-box {
   display: flex;
@@ -164,9 +132,6 @@
         <h1>No items found</h1>
         <% }else { %>
         <% for(var i=0;i<allMenus.length;i++){ %>
-
-  
-          
         <div class="big">
           <a href="/dish/<%=allMenus[i]._id %>">
           <article class="recipe">
@@ -188,7 +153,8 @@
              <a href="/dish/<%=allMenus[i]._id %>">
              <h1 class="recipe-title"><a href="/dish/<%=allMenus[i]._id %>"><%=allMenus[i].title %></a></h1>
              <h4 class="recipe-title"><a href="/dish/<%=allMenus[i]._id %>"><%=allMenus[i].price %></a></h4>
-     
+             <p style="font-size: 16px; padding: 5px;"><%=allMenus[i].description%></p>
+
              <p class="recipe-metadata">
               <span class="recipe-rating">
                 <%var sum = 0; %>
@@ -212,7 +178,6 @@
           <form action="/cart" method="post">
             <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
               <button class="recipe-save" type="submit" >
-             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000"><path d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z" fill="currentColor"/></svg>
              Add to Cart
            </button>
           </form>
@@ -220,15 +185,12 @@
              
             <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
             <button class="recipe-save" type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000"><path d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z" fill="currentColor"/></svg>
               Buy Now
             </button>
           </form>
   
         
-     
-          
-     
+  
          </div>
            </div>
          </article>
