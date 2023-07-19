@@ -51,7 +51,11 @@
                       <td><%=menus[i].quantity %> </td>
                       <% } %>
                       <td>$<%=menus[i].price %></td>
-                      <td> <button type="button" class="btn btn-primary  btn-sm">Teg 1</button></td>
+                      <td> 
+                        <% for(var j=0; j<menus[i].tags.length; j++){ %>
+                          <a type="button" class="btn btn-primary  btn-sm"><%=menus[i].tags[i] %></a>
+                             <%} %>
+                      </td>
                       <td>
                           <div class="actionbtn">
 
