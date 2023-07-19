@@ -21,38 +21,7 @@
       margin-left: 5%;
        margin-right: 5%;
     }
-    /* .card_item {
-      width: calc(33% - 20px);
-      margin-bottom: 20px;
-      padding: 20px;
-      background-color: #fff;
-      border: 1px solid #e0e0e0;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      text-align: center;
-    }
-
-    .card_item img {
-      width: 100%;
-      max-height: 150px;
-      object-fit: cover;
-      border-radius: 5px;
-    }
-
-    .card_item h3 {
-      margin: 10px 0;
-      font-size: 18px;
-      color: #ef3d3d;
-      text-align: left;
-    }
-
-    .card_item p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #777;
-      text-align: left;
-    }
- */
+   
 
 
 .recipe,.img-box {
@@ -63,7 +32,7 @@
 
 .img-box img {
     width: 300px;
-     height: auto;
+     height: 165px;
   
      object-fit: cover;
      object-position: 50% 50%;
@@ -71,7 +40,6 @@
  
 
 .recipe-content {
-  /* padding: 16px 32px; */
    width: 300px;
 }
 
@@ -132,9 +100,7 @@
 
   </style>
   <body>
-    <!-- <div class="container" style="max-width: 100%"> -->
       <%- include('navbar') %>
-    <!-- </div> -->
     <div class="restaurant-catalog" style="margin-top: 5rem;">
       <h2 style="margin-left: 5%; color: #ef3d3d">Top Rated item</h2>
       <br />
@@ -177,6 +143,7 @@
 3 stars (weight of 0.5)
 2 stars (weight of 0.25)
 1 star (weight of 0) -->
+<p style="font-size: 16px; padding: 5px;"><%=per_menus[i].description%></p>
                       <p class="recipe-metadata">
                         <span class="recipe-rating">
                           <%var sum = 0; %>
@@ -192,7 +159,7 @@
                           <%for(var j=0;j<5-rating;j++){ %>
                             <span>☆</span>
                           <% } %>
-                         <span class="recipe-votes">(<%=per_menus[i].reviews.length %> votes)</span>
+                         <span class="recipe-votes">(<%=per_menus[i].reviews.length %> star)</span>
                       </p>
                 </a>
                    <div  style="display: flex;">
@@ -260,7 +227,8 @@
              <a href="/dish/<%=allMenus[i]._id %>">
              <h1 class="recipe-title"><a href="/dish/<%=allMenus[i]._id %>"><%=allMenus[i].title %></a></h1>
              <h4 class="recipe-title"><a href="/dish/<%=allMenus[i]._id %>"><%=allMenus[i].price %></a></h4>
-     
+             <p style="font-size: 16px; padding: 5px;"><%=allMenus[i].description%></p>
+
              <p class="recipe-metadata">
               <span class="recipe-rating">
                 <%var sum = 0; %>
@@ -294,9 +262,6 @@
               Buy Now
             </button>
           </form>
-  
-        
-     
           
      
          </div>
