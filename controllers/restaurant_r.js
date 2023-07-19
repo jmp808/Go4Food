@@ -16,6 +16,9 @@ const {
   allMenu,
   postUpdateOrder,
   postUpdateOrderDriver,
+  deleteMenu,
+  getEditMenu,
+  postEditMenu,
 } = require("./restaurant");
 const is_restaurant_auth = require("../middleware/is_restaurant_auth");
 const upload = require("../utils/upload");
@@ -49,5 +52,13 @@ router.post(
   postCreateMenu
 );
 router.get("/allmenu", is_restaurant_auth, allMenu);
+router.post("/delete-menu", is_restaurant_auth, deleteMenu);
+router.post("/edit-menu", is_restaurant_auth, getEditMenu);
+router.post(
+  "/post-edit-menu",
+  upload.array("images", 10),
+  is_restaurant_auth,
+  postEditMenu
+);
 
 module.exports = router;

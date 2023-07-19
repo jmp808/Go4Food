@@ -40,19 +40,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                   <% for(let  i=0; i<20;i++){ %>
+                   <% for(let  i=0; i<menus.length;i++){ %>
                     <tr>
-                      <td>1</td>
-                      <td> <img src="https://cdn.mos.cms.futurecdn.net/worFPAMTijgqMedCUTfap7.jpg" alt=""> Singapore</td>
-                      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. beatae magni temporibus enim itaque officia ipsa fuga.</td>
-                      <td>20 </td>
-                      <td>$183,000</td>
+                      <td style="max-width: 5px; overflow: hidden; text-overflow: ellipsis;"><%=menus[i]._id %></td>
+                      <td> <img src="/images/<%=menus[i].images[0] %>" alt=""> <%=menus[i].title %></td>
+                      <td><%=menus[i].description %></td>
+                      <% if(menus[i].quantity==0){ %>
+                      <td>Out of Stock</td>
+                      <% }else{ %>
+                      <td><%=menus[i].quantity %> </td>
+                      <% } %>
+                      <td>$<%=menus[i].price %></td>
                       <td> <button type="button" class="btn btn-primary  btn-sm">Teg 1</button></td>
                       <td>
                           <div class="actionbtn">
-                             <button type="button" class="btn btn-primary">view</button>
-                             <button  type="button" class="btn btn-warning">Edit</button>
-                             <buttont ype="button" class="btn btn-danger">Delete</button>
+
+                             <a href="/menu/<%=menus[i]._id %>"   class="btn btn-primary">view</a>
+                             <form action="/restaurant/edit-menu" method="post">
+                              <input type="hidden" name="menu_id" value="<%=menus[i]._id %>"> 
+                             <button  type="submit" class="btn btn-warning">Edit</button>
+                            </form>
+                            <form action="/restaurant/delete-menu" method="post">
+                              <input type="hidden" name="menu_id" value="<%=menus[i]._id %>"> 
+                             <button type="submit" class="btn btn-danger">Delete</button>
+                             </form>
 
                           </div>
                       </td>

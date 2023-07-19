@@ -35,6 +35,10 @@ const orderSchema = new Schema(
       type: String,
       default: "pending",
     },
+    scheduled: {
+      type: String,
+      default: "false",
+    },
     paymentDetails: {
       cardName: String,
       cardNumber: String,
@@ -65,6 +69,12 @@ const orderSchema = new Schema(
         default: 0,
       },
     },
+    history: [
+      {
+        type: String,
+        default: "Order Placed",
+      },
+    ],
     review: {
       type: Schema.Types.ObjectId,
       ref: "Review",

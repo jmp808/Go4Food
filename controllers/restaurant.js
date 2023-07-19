@@ -119,8 +119,12 @@ exports.createMenu = (req, res, next) => {
 exports.orderstatus = (req, res, next) => {
   res.render("restaurant/orderStatus");
 };
-exports.allMenu = (req, res, next) => {
-  res.render("restaurant/allMenu");
+exports.allMenu = async (req, res, next) => {
+  const menus = await Menu.find({ restaurant: req.session.restaurant._id });
+  res.render("restaurant/allMenu", {
+    menus: menus,
+    restaurant: req.session.restaurant,
+  });
 };
 
 exports.postCreateMenu = async (req, res, next) => {
@@ -267,4 +271,61 @@ exports.getConfirmOrders = async (req, res, next) => {
   res.render("restaurant/confirmOrders", {
     orders: orders,
   });
+};
+
+exports.deleteMenu = async (req, res, next) => {
+  const { menu_id } = req.body;
+  const menu = await Menu.findById(menu_id);
+  const restaurant = await Restaurant.findById(req.session.restaurant._id);
+  restaurant.menu.pull(menu_id);
+  // delete those images from upload folder
+  for (let i = 0; i < menu.images.length; i++) {
+    const pathImg = "upload/images/" + menu.images[i];
+    if (fs.existsSync(pathImg)) {
+      fileHelper.deleteFiles(pathImg);
+    }
+  }
+  // remove order whose menu is deleted
+
+  await Order.findOneAndDelete({ "menus.menu_id": menu_id });
+  await restaurant.save();
+  await Menu.findByIdAndDelete(menu_id);
+  res.redirect("/restaurant/allmenu");
+};
+
+exports.getEditMenu = async (req, res, next) => {
+  const { menu_id } = req.body;
+  const menu = await Menu.findById(menu_id);
+  res.render("restaurant/edit-menu", {
+    menu: menu,
+  });
+};
+
+exports.postEditMenu = async (req, res, next) => {
+  var { menu_id, title, price, description, t, quantity } = req.body;
+  // return console.log(t, req.files);
+  const menu = await Menu.findById(menu_id);
+  if (t == undefined) {
+    t = menu.tags;
+  }
+  var images = menu.images;
+  if (req.files) {
+    images = req.files.map((f) => f.filename);
+    // delete those images from upload folder
+    for (let i = 0; i < menu.images.length; i++) {
+      const pathImg = "upload/images/" + menu.images[i];
+      if (fs.existsSync(pathImg)) {
+        fileHelper.deleteFiles(pathImg);
+      }
+    }
+  }
+
+  menu.title = title;
+  menu.price = price;
+  menu.description = description;
+  menu.tags = t;
+  menu.quantity = quantity;
+  menu.images = images;
+  await menu.save();
+  res.redirect("/restaurant/allmenu");
 };

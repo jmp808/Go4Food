@@ -343,6 +343,26 @@ exports.getOrders = async (req, res, next) => {
     customer: req.session.customer,
   });
 };
+exports.getSchedule = async (req, res, next) => {
+  const customer = await Customer.findById(req.session.customer._id)
+    .populate("orders")
+    .populate({
+      path: "orders",
+      populate: {
+        path: "menus.menu_id",
+        model: "Menu",
+      },
+    });
+  const orders = customer.orders.filter((o) => o.status === "delivered");
+
+  res.render("customer/schedule", {
+    customer: req.session.customer,
+    orders: orders,
+  });
+};
+exports.postSchedule = async (req, res, next) => {
+  const { order_id, date, time } = req.body;
+};
 
 exports.trackOrder = async (req, res, next) => {
   const { id } = req.params;
@@ -362,9 +382,14 @@ exports.cancelOrder = async (req, res, next) => {
   await order.save();
   res.redirect("/orders");
 };
+
+exports.getProfile = async (req, res, next) => {
+  const { customer } = req.session;
+  res.render("customer/Profile", {
+    customer: req.session.customer,
+  });
+};
+
 exports.dishDetails = async (req, res, next) => {
   res.render("customer/singlemenu");
-};
-exports.profile = async (req, res, next) => {
-  res.render("customer/Profile");
 };
