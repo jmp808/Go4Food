@@ -118,6 +118,7 @@ exports.getCart = async (req, res, next) => {
       res.render("customer/cart", {
         customer: req.session.customer,
         cart: cart,
+        msg: null,
       });
     });
 };
@@ -407,8 +408,11 @@ exports.rating = async (req, res, next) => {
   // 2 stars (weight of 0.25)
   // 1 star (weight of 0)
   var rating = req.body.rating;
+  // and order id is different
   const index = menu.reviews.findIndex(
-    (r) => r.customer.toString() === c._id.toString()
+    (r) =>
+      r.customer.toString() === c._id.toString() &&
+      r.order === req.body.order_id
   );
   if (index !== -1) {
     const review = await Review.findById(menu.reviews[index]);
@@ -434,4 +438,59 @@ exports.rating = async (req, res, next) => {
   await menu.save();
 
   res.redirect("/orders");
+};
+
+exports.incCart = async (req, res, next) => {
+  const { id } = req.body;
+
+  const { customer } = req.session;
+  const c = await Customer.findById(customer._id);
+  const cart = await Cart.findById(c.cart).populate("menus.menu_id");
+  const menu_to_inc = cart.menus.find(
+    (m) => m.menu_id._id.toString() === id.toString()
+  );
+  //   return console.log(menu_to_remove);
+  if (menu_to_inc.menu_id.quantity <= menu_to_inc.quantity) {
+    return res.render("customer/cart", {
+      customer: req.session.customer,
+      cart: cart,
+      msg: "Insufficient quantity",
+    });
+  }
+  cart.total = cart.total + 1;
+  cart.price = cart.price + menu_to_inc.menu_id.price;
+
+  menu_to_inc.quantity = menu_to_inc.quantity + 1;
+
+  await cart.save();
+  res.redirect("/cart");
+};
+
+exports.decCart = async (req, res, next) => {
+  const { id } = req.body;
+
+  const { customer } = req.session;
+  const c = await Customer.findById(customer._id);
+  const cart = await Cart.findById(c.cart).populate("menus.menu_id");
+  const menu_to_dec = cart.menus.find(
+    (m) => m.menu_id._id.toString() === id.toString()
+  );
+  //   return console.log(menu_to_remove);
+  if (menu_to_dec.quantity === 1) {
+    // remvoe the menu from cart
+    cart.total = cart.total - 1;
+    cart.price = cart.price - menu_to_dec.menu_id.price;
+    // remove from order menus
+    cart.menus = cart.menus.filter((m) => m.menu_id._id.toString() !== id);
+    await cart.save();
+
+    return res.redirect("/cart");
+  }
+  cart.total = cart.total - 1;
+  cart.price = cart.price - menu_to_dec.menu_id.price;
+
+  menu_to_dec.quantity = menu_to_dec.quantity - 1;
+
+  await cart.save();
+  res.redirect("/cart");
 };

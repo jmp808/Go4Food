@@ -20,6 +20,8 @@ const {
   rating,
   getSchedule,
   postSchedule,
+  incCart,
+  decCart,
 } = require("./customer");
 const express = require("express");
 const is_customer = require("../middleware/is_customer");
@@ -35,6 +37,9 @@ router.post("/logout", logout);
 router.get("/dashboard", is_customer, getDash);
 router.get("/cart", is_customer, getCart);
 router.post("/cart", is_customer, addToCart);
+router.post("/increment", is_customer, incCart);
+router.post("/decrement", is_customer, decCart);
+
 router.get("/orders", is_customer, getOrders);
 router.get("/trackorder", is_customer, trackOrder);
 router.post("/remove-from-cart", is_customer, removeFromCart);

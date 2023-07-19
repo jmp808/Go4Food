@@ -8,6 +8,8 @@ exports.getAllMenus = async (req, res, next) => {
   // lates by date
   Menu.find()
     .populate("restaurant")
+    .populate("reviews")
+
     .then((menus) => {
       res.render("allItems", {
         per_menus: perPageMenu,
@@ -23,15 +25,14 @@ exports.getAllMenus = async (req, res, next) => {
 // get only 3 menu then next three menu
 const getMenuLimited = () => {
   // based one review rating and number of orders
+  // whose number of orders is more
   return Menu.find()
+
     .populate("restaurant")
     .populate("reviews")
-    .sort({ "review.rating": -1 })
+
     .then((menus) => {
       return menus;
-    })
-    .catch((err) => {
-      console.log(err);
     });
 };
 

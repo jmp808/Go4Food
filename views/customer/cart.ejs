@@ -37,6 +37,9 @@
           <% if((cart.menus.length)==0 ){%>
             <h2>Cart is empty</h2>
             <% }else{ %>
+              <% if(msg){ %>
+                <p style="color: red"><%=msg %></p>
+              <% } %>
                 <% var totalPrice =0; var qty=0 %>
                 <% for(var i=0;i<cart.menus.length;i++){ %>
 
@@ -48,7 +51,17 @@
               <p>Quantity: <%=cart.menus[i].quantity %></p>
             </div>
             <div class="col qtyinc " style=" width: 50%;">
-              <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+             
+
+              <form action="/decrement" method="post">
+                <input type="hidden" name="id" value="<%=cart.menus[i].menu_id._id %>" > 
+                <button type="submit">-</button>
+              </form><a href="#" class="border"><%=cart.menus[i].quantity %></a>
+              
+              <form action="/increment" method="post">
+                <input type="hidden" name="id" value="<%=cart.menus[i].menu_id._id %>" > 
+                <button type="submit">+</button>
+              </form>
           </div>
             <div class="cart-item-actions">
                 <form action="/remove-from-cart" method="post">

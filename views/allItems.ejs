@@ -184,6 +184,8 @@
                             <%  sum = sum + per_menus[i].reviews[j].rating %>
                           <% } %>
                           <%var rating = sum/per_menus[i].reviews.length; rating = Math.floor(rating) %>
+                          <% if (sum===0) {rating=0} %>
+
                           <%for(var j=0;j<rating;j++){ %>
                             <span>★</span>
                           <% } %>
@@ -268,6 +270,8 @@
                   <%  sum = sum + allMenus[i].reviews[j].rating %>
                 <% } %>
                 <%var rating = sum/allMenus[i].reviews.length; rating = Math.floor(rating) %>
+                <% if (sum===0) {rating=0} %>
+
                 <%for(var j=0;j<rating;j++){ %>
                   <span>★</span>
                 <% } %>

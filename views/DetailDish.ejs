@@ -198,6 +198,7 @@
                                     <%  sum = sum + menu.reviews[j].rating %>
                                   <% } %>
                                   <%var rating = sum/menu.reviews.length; rating = Math.floor(rating) %>
+                                  <% if (sum===0) {rating=0} %>
                                   <%for(var j=0;j<rating;j++){ %>
                                     <span>★</span>
                                   <% } %>
