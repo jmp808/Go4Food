@@ -149,31 +149,55 @@
                 <div class="card-wrapper swiper-wrapper">
                   <% for(var i=0;i<per_menus.length;i++){ %>
                   <div class="swiper-slide">
+
                   <div class="big">
+                    <a href="/dish/<%=allMenus[i]._id %>">
                     <article class="recipe">
                     <div class="img-box">
                       <img src="/images/<%=per_menus[i].images[0] %>" width="1500" height="1368" alt="">
                     </div>
                     <div class="recipe-content">
+                    </a>
                       <p class="recipe-tags">
                         
-                        <span class="recipe-tag">Gluten Free</span>
-                        <span class="recipe-tag">Main dish</span>
-                      </p>
-                
-                      <h1 class="recipe-title"><a href="#"><%=per_menus[i].title %></a></h1>
-                      <h4 class="recipe-title"><a href="#"><%=allMenus[i].price %></a></h4>
-                
+                        <% for(var j=0;per_menus[i].tags.length; j++ ) {%>
+                          <a href="/dishtags/<%=per_menus[i].tags[j] %> ">
+                        <span class="recipe-tag"><%=per_menus[i].tags[j] %></span>
+                      </a>
+                        <% if(j>2){ break;}%>
+                          
+                        <% } %>
+                       </p>
+                       <a href="/dish/<%=allMenus[i]._id %>">
+                      <h1 class="recipe-title">   <a href="/dish/<%=allMenus[i]._id %>"><%=per_menus[i].title %></a></h1>
+                      <h4 class="recipe-title">   <a href="/dish/<%=allMenus[i]._id %>"><%=per_menus[i].price %></a></h4>
+                <!-- Weighted average = (sum of (value * weight)) / sum of weights
+5 stars (weight of 1)
+4 stars (weight of 0.75)
+3 stars (weight of 0.5)
+2 stars (weight of 0.25)
+1 star (weight of 0) -->
                       <p class="recipe-metadata">
-                        <span class="recipe-rating">★★★★<span>☆</span></span>
-                        <span class="recipe-votes">(12 votes)</span>
+                        <span class="recipe-rating">
+                          <%var sum = 0; %>
+                          <%for(var j=0;j<per_menus[i].reviews.length; j++) {%>
+                            <%  sum = sum + per_menus[i].reviews[j].rating %>
+                          <% } %>
+                          <%var rating = sum/per_menus[i].reviews.length; rating = Math.floor(rating) %>
+                          <%for(var j=0;j<rating;j++){ %>
+                            <span>★</span>
+                          <% } %>
+                          <%for(var j=0;j<5-rating;j++){ %>
+                            <span>☆</span>
+                          <% } %>
+                         <span class="recipe-votes">(<%=per_menus[i].reviews.length %> votes)</span>
                       </p>
-                
-                      <p class="recipe-desc">   <%=per_menus[i].description %></p>
-                  <div  style="display: flex;">
+                </a>
+                   <div  style="display: flex;">
                     <form action="/cart" method="post">
                       <input type="hidden" name="menu_id" value="<%=per_menus[i]._id %>">
                         <button class="recipe-save" type="submit" >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000"><path d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z" fill="currentColor"/></svg>
                       Add to Cart
                     </button>
                     </form>
@@ -181,6 +205,7 @@
 
                       <input type="hidden" name="menu_id" value="<%=per_menus[i]._id %>">
                       <button class="recipe-save" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000"><path d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z" fill="currentColor"/></svg>
                         Buy Now
                       </button>
                     </form>
@@ -215,30 +240,49 @@
   
           
         <div class="big">
+          <a href="/dish/<%=allMenus[i]._id %>">
           <article class="recipe">
            <div class="img-box">
              <img src="/images/<%=allMenus[i].images[0] %>" width="1500" height="1368" alt="">
            </div>
            <div class="recipe-content">
-             <p class="recipe-tags">
-               
-               <span class="recipe-tag">Gluten Free</span>
-               <span class="recipe-tag">Main dish</span>
+          </a>
+            <p class="recipe-tags">
+                        
+              <% for(var j=0;allMenus[i].tags.length; j++ ) {%>
+                <a href="/dishtags/<%=allMenus[i].tags[j] %> ">
+              <span class="recipe-tag"><%=allMenus[i].tags[j] %></span>
+            </a>
+              <% if(j>2){ break;}%>
+                
+              <% } %>
              </p>
-       
-             <h1 class="recipe-title"><a href="#"><%=allMenus[i].title %></a></h1>
-             <h4 class="recipe-title"><a href="#"><%=allMenus[i].price %></a></h4>
-       
+             <a href="/dish/<%=allMenus[i]._id %>">
+             <h1 class="recipe-title"><a href="/dish/<%=allMenus[i]._id %>"><%=allMenus[i].title %></a></h1>
+             <h4 class="recipe-title"><a href="/dish/<%=allMenus[i]._id %>"><%=allMenus[i].price %></a></h4>
+     
              <p class="recipe-metadata">
-               <span class="recipe-rating">★★★★<span>☆</span></span>
-               <span class="recipe-votes">(12 votes)</span>
-             </p>
-       
-             <p class="recipe-desc">  <%=allMenus[i].description %></p>
-         <div  style="display: flex;">
+              <span class="recipe-rating">
+                <%var sum = 0; %>
+                <%for(var j=0;j<allMenus[i].reviews.length; j++) {%>
+                  <%  sum = sum + allMenus[i].reviews[j].rating %>
+                <% } %>
+                <%var rating = sum/allMenus[i].reviews.length; rating = Math.floor(rating) %>
+                <%for(var j=0;j<rating;j++){ %>
+                  <span>★</span>
+                <% } %>
+                <%for(var j=0;j<5-rating;j++){ %>
+                  <span>☆</span>
+                <% } %>
+               <span class="recipe-votes">(<%=allMenus[i].reviews.length %> votes)</span>
+            </p>
+      
+       </a>
+          <div  style="display: flex;">
           <form action="/cart" method="post">
             <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
               <button class="recipe-save" type="submit" >
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000"><path d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z" fill="currentColor"/></svg>
              Add to Cart
            </button>
           </form>
@@ -246,6 +290,7 @@
              
             <input type="hidden" name="menu_id" value="<%=allMenus[i]._id %>">
             <button class="recipe-save" type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000"><path d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z" fill="currentColor"/></svg>
               Buy Now
             </button>
           </form>

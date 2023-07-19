@@ -16,6 +16,10 @@ const {
   cancelOrder,
   dishDetails,
   profile,
+  getProfile,
+  rating,
+  getSchedule,
+  postSchedule,
 } = require("./customer");
 const express = require("express");
 const is_customer = require("../middleware/is_customer");
@@ -42,5 +46,7 @@ router.post("/payment", is_customer, paymentBuyNow);
 router.get("/trackorder/:id", is_customer, trackOrder);
 router.post("/cancelorder", is_customer, cancelOrder);
 router.get("/dishdetails", is_customer, dishDetails);
+
+router.post("/rating", is_customer, rating);
 
 module.exports = router;

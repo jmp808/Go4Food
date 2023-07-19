@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Go4Food Restaurant Catalog</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
      .dish-panel {
@@ -75,7 +75,7 @@
   <body>
     <div class="container-fluid"  style="margin: 0; padding: 0;">
       <!-- navbar -->
-      <%- include('header.ejs') %>
+      <!-- <%- include('./restaurant/header.ejs') %> -->
       <div
         class="content"
         style="min-height: 100vh; margin-top: 0px !important"
@@ -91,15 +91,18 @@
                     
                       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="padding: 20px;">
                         <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img class="d-block w-100" src="http://metropolitanhost.com/themes/themeforest/react/costic/assets/img/costic/banner-2.jpg" alt="First slide">
+                          <% for(let i=0; i<menu.images.length; i++){ %>
+
+                          <div class="carousel-item 
+                          <% if(i==0){ %>
+                            active
+                          <% } %>
+
+                          ">
+                            <img class="d-block w-100" src="/images/<%=menu.images[i] %>" alt="First slide">
                           </div>
-                          <div class="carousel-item">
-                            <img class="d-block w-100" src="http://metropolitanhost.com/themes/themeforest/react/costic/assets/img/costic/banner-2.jpg" alt="Second slide">
-                          </div>
-                          <div class="carousel-item">
-                            <img class="d-block w-100" src="http://metropolitanhost.com/themes/themeforest/react/costic/assets/img/costic/banner-2.jpg" alt="Third slide">
-                          </div>
+                          <% } %>
+ 
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -121,15 +124,24 @@
                             <tbody>
                                <tr>
                                   <th scope="row">Price</th>
-                                  <td>$15</td>
+                                  <td>$ <%=menu.price %></td>
                                </tr>
                                <tr>
                                   <th scope="row">Product Category</th>
-                                  <td>Veg</td>
+                                  <% for(let i=0; i<menu.tags.length; i++){ %>
+                                  <a href="/dishtag/<%=menu.tags[i] %>">
+                                  <td><%=menu.tags[i] %></td>
+                                </a>
+                                  <% } %>
                                </tr>
                                <tr>
                                   <th scope="row">Availiblity</th>
-                                  <td><span class="badge badge-pill badge-primary" style="  background: #ef3d3d;">In stock</span></td>
+                                  <td><span class="badge badge-pill badge-primary" style="  background: #ef3d3d;">
+                                    <% if(menu.quantity==0){ %>
+                                      Out of Stock
+                                    <% }else{ %>
+                                    In stock</span></td>
+                                    <% } %>
                                </tr>
                                <tr>
                                   <th scope="row">Delivery Charges</th>
@@ -142,19 +154,25 @@
                             </tbody>
                          </table>
                          <div class="new">
-                           <button type="button" class="btn btn-primary" style="
+                          <form action="/cart" method="post">
+                            <input type="hidden" name="menu_id" value="<%=menu._id %>">
+                              <button class="recipe-save" type="submit" >
+                           <button type="submit" class="btn btn-primary" style="
                            background: #ef3d3d;
                            padding: 10px 30px 10px 30px;
                            border: none;
                            outline: none;
-                       ">Edit</button>
-                           <button type="button" class="btn btn-secondary"
+                       ">Add to Cart</button>
+                       </form>
+                       <form action="/buynowsingle" method="post">
+                        <input type="hidden" name="menu_id" value="<%=menu._id %>">
+                           <button type="submit" class="btn btn-secondary"
                            style="
                           
                            padding: 10px 30px 10px 30px;
                            border: none;
                            outline: none;
-                       ">Delete</button></div>
+                       ">Buy Now</button></form></div>
                       </div>
                    </div>
                 </div>
@@ -162,18 +180,34 @@
                    <div class="dish-panel dish-panel-fh">
                       <div class="dish-panel-body">
                          <h4 class="section-title bold">Product Details </h4>
-                         <p class="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book type and scrambled it to make a type specimen book.</p>
+                         <p class="description"><%=menu.description %></p>
                       </div>
                       <div class="dish-quick-stats">
                          <div class="dish-stats-grid">
                             <i class="fa fa-bullhorn"></i>
-                            <p class="dish-text-dark">1,033</p>
+                            <p class="dish-text-dark"><%=num_orders %></p>
                             <span>Total Order</span>
                          </div>
                          <div class="dish-stats-grid">
                             <i class="fa fa-heart"></i>
-                            <p class="dish-text-dark">3,039</p>
-                            <span>Favourite</span>
+                            <p class="dish-text-dark">
+                              <p class="recipe-metadata">
+                                <span class="recipe-rating">
+                                  <%var sum = 0; %>
+                                  <%for(var j=0;j<menu.reviews.length; j++) {%>
+                                    <%  sum = sum + menu.reviews[j].rating %>
+                                  <% } %>
+                                  <%var rating = sum/menu.reviews.length; rating = Math.floor(rating) %>
+                                  <%for(var j=0;j<rating;j++){ %>
+                                    <span>★</span>
+                                  <% } %>
+                                  <%for(var j=0;j<5-rating;j++){ %>
+                                    <span>☆</span>
+                                  <% } %>
+                                 <span class="recipe-votes">(<%=menu.reviews.length %> votes)</span>
+                              </p>
+                            </p>
+                            <span>Rating</span>
                          </div>
                       </div>
                    </div>

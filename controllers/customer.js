@@ -4,6 +4,7 @@ const Menu = require("../models/menu");
 const bcrypt = require("bcrypt");
 const Order = require("../models/order");
 const Restaurant = require("../models/restaurant");
+const Review = require("../models/review");
 
 exports.login = (req, res, next) => {
   res.render("customer/signin", {
@@ -392,4 +393,45 @@ exports.getProfile = async (req, res, next) => {
 
 exports.dishDetails = async (req, res, next) => {
   res.render("customer/singlemenu");
+};
+
+exports.rating = async (req, res, next) => {
+  const { menu_id } = req.body;
+  const menu = await Menu.findById(menu_id).populate("reviews");
+
+  const { customer } = req.session;
+  const c = await Customer.findById(customer._id);
+  // 5 stars (weight of 1)
+  // 4 stars (weight of 0.75)
+  // 3 stars (weight of 0.5)
+  // 2 stars (weight of 0.25)
+  // 1 star (weight of 0)
+  var rating = req.body.rating;
+  const index = menu.reviews.findIndex(
+    (r) => r.customer.toString() === c._id.toString()
+  );
+  if (index !== -1) {
+    const review = await Review.findById(menu.reviews[index]);
+    review.rating = rating;
+    review.comment = req.body.comment;
+    await review.save();
+
+    return res.redirect("/orders");
+  }
+
+  const review = new Review({
+    customer: c._id,
+    menu: menu._id,
+    rating: rating,
+    comment: req.body.comment,
+    order: req.body.order_id,
+  });
+  // if customer already reviewd this menu then update
+
+  await review.save();
+  menu.reviews.push(review._id);
+  c.reviews.push(review._id);
+  await menu.save();
+
+  res.redirect("/orders");
 };

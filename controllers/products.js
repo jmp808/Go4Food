@@ -1,6 +1,6 @@
 const Menu = require("../models/menu");
 const Restaurant = require("../models/restaurant");
-
+const Order = require("../models/order");
 exports.getAllMenus = async (req, res, next) => {
   const page = parseInt(req.query.page) || 1; // Get the page number from query parameters, default to 1 if not provided
   const perPageMenu = await getMenuLimited(page);
@@ -21,16 +21,37 @@ exports.getAllMenus = async (req, res, next) => {
 };
 
 // get only 3 menu then next three menu
-const getMenuLimited = (rpage) => {
-  const page = parseInt(rpage) || 1; // Get the page number from query parameters, default to 1 if not provided
-  const perPage = 3; // Number
-  const skip = (page - 1) * perPage;
+const getMenuLimited = () => {
+  // based one review rating and number of orders
   return Menu.find()
     .populate("restaurant")
-    .skip(skip)
-    .limit(perPage)
+    .populate("reviews")
+    .sort({ "review.rating": -1 })
     .then((menus) => {
       return menus;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.getMenu = async (req, res, next) => {
+  const id = req.params.id;
+
+  const num_orders = await Order.find({ "menus.menu_id": id }).then(
+    (orders) => {
+      return orders.length;
+    }
+  );
+  Menu.findById(id)
+    .populate("restaurant")
+    .populate("reviews")
+    .then((menu) => {
+      res.render("DetailDish", {
+        menu: menu,
+        num_orders: num_orders,
+        msg: null,
+      });
     })
     .catch((err) => {
       console.log(err);

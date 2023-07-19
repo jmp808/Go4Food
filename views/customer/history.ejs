@@ -181,7 +181,7 @@
                                                  </div>
                                                    <div>
                                                     <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTYnIGhlaWdodD0nMTknIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTggMTgiPgoJPGcgZmlsbD0nbm9uZSc+CgkJPHBvbHlnb24gaWQ9IlNoYXBlIiBmaWxsPSIjMjg3NEYxIiBwb2ludHM9IjkgMTIuMDYyNSAxMy42Mzc1IDE1LjQzNzUgMTEuODYyNSA5Ljk4NzUgMTYuNSA2LjY4NzUgMTAuODEyNSA2LjY4NzUgOSAxLjA2MjUgNy4xODc1IDYuNjg3NSAxLjUgNi42ODc1IDYuMTM3NSA5Ljk4NzUgNC4zNjI1IDE1LjQzNzUiIC8+CgkJPHBvbHlnb24gaWQ9IlNoYXBlIiBwb2ludHM9IjAgMCAxOCAwIDE4IDE4IDAgMTgiIC8+Cgk8L2c+Cjwvc3ZnPg==" class="_1dki8b col-1-5">
-                                                    <small  onclick="openModal()" style="color: rgb(0, 102, 255);">Rate & Review Project</small>
+                                                    <small title="Click to rate"   onclick="openModal(menu_id='<%=delivered_orders[i].menus.menu_id._id%>', title ='<%=delivered_orders[i].menus.menu_id.title%>', order_id ='<%=delivered_orders[i]._id %>' )" style="color: rgb(0, 102, 255); cursor: pointer; ">Rate & Review Project</small>
                                                    </div>
                                             </div>
 
@@ -213,12 +213,12 @@
 
         </div>
 
-        
+        <p id="title_menu"></p>
      
-      <form action="#" method="post" style="margin-top: 10px;">
-        <input type="hidden" name="order_id" value="">
-         
-        
+      <form action="/rating" method="post" style="margin-top: 10px;">
+        <input type="hidden" id="menu__id" name="menu_id" >
+         <input type="hidden" id="order__id" name="order_id" >
+        <p id="title_menu"></p>
         <div class="dishform-input">
           <div>
             <label for="Rating" class="dishform-form-label">
@@ -246,7 +246,7 @@
               </label>
               <textarea
                 type="text"
-                name="feedback"
+                name="comment"
                  placeholder="Write feedback (option)"
                 class="dishform-form-input"
                
@@ -259,8 +259,16 @@
     </div>
   </div>
   <script>
-    function openModal() {
+    function openModal(menu_id, title) {
+      var menu_id_input = document.getElementById("menu__id");
+menu_id_input.value = menu_id;
+var title_input = document.getElementById("title_menu");
+title_input.innerHTML = title;
+var order_id_input = document.getElementById("order__id");
+order_id_input.value = order_id;
 var modal = document.getElementById("myModal");
+
+
 modal.style.display = "block";
 }
 
