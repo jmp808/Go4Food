@@ -11,6 +11,10 @@
          height: auto;
         margin-right: 10px;
      }
+     .actionbtn div{
+        padding: 10px;
+     }
+    
    </style>
     </head>
   <body>
@@ -27,7 +31,7 @@
              </div>
         
             <div class="alllist"  style="margin-top: 30px;">
-              <table id="example" class="table table-striped" style="width:100; ">
+              <table id="example" class="table table-striped"">
                 <thead>
                     <tr>
                         <th> Dish Id</th>
@@ -43,7 +47,9 @@
                    <% for(let  i=0; i<menus.length;i++){ %>
                     <tr>
                       <td style="max-width: 5px; overflow: hidden; text-overflow: ellipsis;"><%=menus[i]._id %></td>
-                      <td> <img src="/images/<%=menus[i].images[0] %>" alt=""> <%=menus[i].title %></td>
+                      <td> <img src="/images/<%=menus[i].images[0] %>" alt=""> 
+                        <p><%=menus[i].title %></p>
+                      </td>
                       <td><%=menus[i].description %></td>
                       <% if(menus[i].quantity==0){ %>
                       <td>Out of Stock</td>
@@ -53,21 +59,28 @@
                       <td>$<%=menus[i].price %></td>
                       <td> 
                         <% for(var j=0; j<menus[i].tags.length; j++){ %>
-                          <a type="button" class="btn btn-primary  btn-sm"><%=menus[i].tags[i] %></a>
+                          <a  style= "margin: 5px;" button" class="btn btn-primary  btn-sm"><%=menus[i].tags[i] %></a>
                              <%} %>
                       </td>
                       <td>
-                          <div class="actionbtn">
-
-                             <a href="/menu/<%=menus[i]._id %>"   class="btn btn-primary">view</a>
-                             <form action="/restaurant/edit-menu" method="post">
-                              <input type="hidden" name="menu_id" value="<%=menus[i]._id %>"> 
-                             <button  type="submit" class="btn btn-warning">Edit</button>
-                            </form>
+                          <div class="actionbtn" style=" display: flex; padding: 10px;">
+                             <div>
+                              <a href="/menu/<%=menus[i]._id %>"   class="btn btn-primary">view</a>
+                             </div>
+                             <div>
+                              <form action="/restaurant/edit-menu" method="post">
+                                <input type="hidden" name="menu_id" value="<%=menus[i]._id %>"> 
+                               <button  type="submit" class="btn btn-warning">Edit</button>
+                              </form>
+                             </div>
+                             <div>
+                              
                             <form action="/restaurant/delete-menu" method="post">
                               <input type="hidden" name="menu_id" value="<%=menus[i]._id %>"> 
-                             <button type="submit" class="btn btn-danger">Delete</button>
+                              <button type="submit" class="btn btn-danger">Delete</button>
                              </form>
+                             </div>
+                           
 
                           </div>
                       </td>
