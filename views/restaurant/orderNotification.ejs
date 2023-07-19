@@ -122,6 +122,19 @@
                   <p class="order_customer_info">Customer info: <%=order.customer.name %></p>
                   <p class="order_deliver_info">Delivery Address: <%=order.customer.address %></p>
                   <p class="order_deliver_info">Delivery Phone: <%=order.customer.phone %></p>
+                  <p class="order_deliver_info">Order Status: <%=order.status %></p>
+                  
+                  <p class="order_deliver_info">Order Date: <%=order.updatedAt %></p>
+                  <% if(order.scheduled==="true") {%>
+                   <% if(order.frequency=="daily"){ %>
+                    <!-- date tomorrow  order.createdAt +1-->
+                
+                  <p class="order_deliver_info">Order Expectency: <%=order.frequency %></p>
+                  <% }else if(order.frequency=="weekly"){ %>
+                  <p class="order_deliver_info">Order Expectency: <%=order.frequency %></p>
+                   <%}}else{ %>
+                  <p class="order_deliver_info">Order Expectency: ASAP</p>
+                  <% } %>
                   <!-- Menus -->
                   <p class="order_deliver_info">Menus: </p>
                    

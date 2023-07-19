@@ -179,6 +179,8 @@
                    </div>
                 </div>
                 <div class=" col-md-6">
+ 
+
                    <div class="dish-panel dish-panel-fh">
                       <div class="dish-panel-body">
                          <h4 class="section-title bold">Product Details </h4>
@@ -207,6 +209,7 @@
                                   <%for(var j=0;j<5-rating;j++){ %>
                                     <span>☆</span>
                                   <% } %>
+                                  </span>
                                  <span class="recipe-votes">(<%=menu.reviews.length %> votes)</span>
                               </p>
                             </p>
@@ -216,16 +219,39 @@
                    </div>
                 </div>
                 <div class=" col-md-12">
+                  <h4 class="section-title bold">Product reviews</h4>
+                  <% if(menu.reviews.length==0){ %>
+                    <p>No reviews yet</p>
+                  <% } %>
+                <% for(var i=0; i<menu.reviews.length; i++){ %>
                  <div class="dish-panel dish-panel-fh"  style="padding: 10px; margin: 0px;">
                     <div  style="padding: 0.5rem;">
-                       <h4 class="section-title bold">Anubhav Raj</h4>
+                       <h4 class="section-title bold"><%=menu.reviews[i].customer.name %></h4>
                       </div>
                        <div  style="display: flex; margin: 10px;;  ">
-                          <samp style=" border-radius: 8px;  margin-right: 5px;  width: 30px; height: 30px; background-color: green;padding: 5px; color: #fff; ">3*</samp>
-                          <p class="description"  style="padding-bottom: 10px;"><%=menu.description %></p>
+                        <p class="recipe-metadata">Rate: 
+                          <samp style=" border-radius: 8px;  margin-right: 5px;  width: 30px; height: 30px; background-color: green;padding: 5px; color: #fff;display: flex;justify-content: center; ">
+                            <span class="recipe-rating">
+                              <%var sum = 0; %>
+                              <%for(var j=0;j<menu.reviews.length; j++) {%>
+                                <%  sum = sum + menu.reviews[j].rating %>
+                              <% } %>
+                              <%var rating = sum/menu.reviews.length; rating = Math.floor(rating) %>
+                              <% if (sum===0) {rating=0} %>
+                              <%for(var j=0;j<rating;j++){ %>
+                                <span>★</span>
+                              <% } %>
+                              <%for(var j=0;j<5-rating;j++){ %>
+                                <span>☆</span>
+                              <% } %>
+                              </span>
+                          </samp>
+                        </p>
+                          <p class="description"  style="padding-bottom: 10px;">Feedback: <%=menu.reviews[i].comment %></p>
                        </div>
                    
                  </div>
+                 <%} %>
               </div>
              </div>
       </div>

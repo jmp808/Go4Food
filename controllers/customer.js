@@ -5,6 +5,8 @@ const bcrypt = require("bcrypt");
 const Order = require("../models/order");
 const Restaurant = require("../models/restaurant");
 const Review = require("../models/review");
+const fs = require("fs");
+const fileHelper = require("../utils/file");
 
 exports.login = (req, res, next) => {
   res.render("customer/signin", {
@@ -425,6 +427,36 @@ exports.getProfile = async (req, res, next) => {
   res.render("customer/Profile", {
     customer: req.session.customer,
   });
+};
+
+exports.getEditProfile = async (req, res, next) => {
+  const { customer } = req.session;
+
+  res.render("customer/edit-profile", {
+    customer: req.session.customer,
+  });
+};
+exports.postEditProfile = async (req, res, next) => {
+  const { customer } = req.session;
+  const c = await Customer.findById(customer._id);
+  const { name, email, address, phone } = req.body;
+  // return console.log(req.body);
+  console.log(name);
+  c.name = name;
+  c.email = email;
+  c.address = address;
+  c.phone = phone;
+  console.log(req.file);
+  if (req.file) {
+    const pathImg = "upload/images/" + c.image;
+    if (fs.existsSync(pathImg)) {
+      fileHelper.deleteFiles(pathImg);
+    }
+    c.image = req.file.filename;
+  }
+
+  await c.save();
+  res.redirect("/profile");
 };
 
 exports.rating = async (req, res, next) => {

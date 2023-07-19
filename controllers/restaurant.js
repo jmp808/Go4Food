@@ -4,6 +4,7 @@ const Menu = require("../models/menu");
 const fs = require("fs");
 const fileHelper = require("../utils/file");
 const Order = require("../models/order");
+const exp = require("constants");
 
 exports.getLogin = (req, res, next) => {
   res.render("restaurant/signin", {
@@ -132,6 +133,51 @@ exports.logout = (req, res, next) => {
   res.redirect("/restaurant/login");
 };
 
+exports.getProfile = async (req, res, next) => {
+  const num_pending_orders = await Order.find({
+    restaurant: req.session.restaurant._id,
+    status: "pending",
+  }).then((orders) => {
+    return orders.length;
+  });
+  res.render("restaurant/Profile", {
+    restaurant: req.session.restaurant,
+    num_pending_orders: num_pending_orders,
+  });
+};
+exports.getEditprofile = async (req, res, next) => {
+  const num_pending_orders = await Order.find({
+    restaurant: req.session.restaurant._id,
+    status: "pending",
+  }).then((orders) => {
+    return orders.length;
+  });
+  res.render("restaurant/edit-profile", {
+    restaurant: req.session.restaurant,
+    num_pending_orders: num_pending_orders,
+  });
+};
+
+exports.postEditprofile = async (req, res, next) => {
+  const { name, email, address, phone } = req.body;
+  const restaurant = await Restaurant.findById(req.session.restaurant._id);
+  restaurant.name = name;
+  restaurant.email = email;
+  restaurant.address = address;
+  restaurant.phone = phone;
+  if (req.file) {
+    const image = req.file.filename;
+    const pathImg = "upload/images/" + restaurant.image;
+    if (fs.existsSync(pathImg)) {
+      fileHelper.deleteFiles(pathImg);
+    }
+    restaurant.image = image;
+  }
+
+  await restaurant.save();
+  res.redirect("/restaurant/profile");
+};
+
 exports.createMenu = async (req, res, next) => {
   const num_pending_orders = await Order.find({
     restaurant: req.session.restaurant._id,
@@ -256,7 +302,11 @@ exports.orderNotification = async (req, res, next) => {
     orders.push({
       order_id: order._id,
       customer: order.customer,
-
+      scheduled: order.scheduled,
+      frequency: order.frequency,
+      price: order.price,
+      status: order.status,
+      updatedAt: order.updatedAt,
       menu: menu,
       quantity: order.menus.quantity,
     });

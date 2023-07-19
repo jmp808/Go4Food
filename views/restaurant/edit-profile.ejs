@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Go4Food - Profile Info</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <style>
       .profile-content {
         width: 50%;
@@ -75,16 +75,18 @@
         <div class="restaurant-catalog">
           <div class="container profile-content">
             <h1>Profile Information</h1>
-            <form action="/get-editprofile" method="post">
-              <input type="hidden" name="user_id" value="<%=customer._id %>" />
+            <form
+              action="/restaurant/post-editprofile"
+              method="post"
+              enctype="multipart/form-data"
+            >
               <div class="profile-info">
                 <label for="email">Email</label>
                 <input
                   type="text"
                   id="email"
-                  value="<%=customer.email %>"
+                  value="<%=restaurant.email %>"
                   name="email"
-                  readonly
                 />
               </div>
 
@@ -94,19 +96,16 @@
                   type="text"
                   id="username"
                   name="name"
-                  value="<%=customer.name %>"
-                  readonly
+                  value="<%=restaurant.name %>"
                 />
               </div>
-
               <div class="profile-info">
                 <label for="address">Phone</label>
                 <input
                   type="text"
                   id="address"
+                  value="<%=restaurant.phone %>"
                   name="phone"
-                  value="<%=customer.phone %>"
-                  readonly
                 />
               </div>
 
@@ -115,16 +114,21 @@
                 <input
                   type="text"
                   id="address"
+                  value=" <%=restaurant.address %>"
                   name="address"
-                  value="<%=customer.address %>"
-                  readonly
                 />
               </div>
 
               <div class="profile-picture">
-                <img src="/images/<%=customer.image %>" alt="Profile Picture" />
+                <img
+                  src="/images/<%=restaurant.image %>"
+                  alt="Profile Picture"
+                />
               </div>
-              <input type="hidden" name="images" value="<%=customer.image %>" />
+              <div class="profile-info">
+                <label for="address">Upload Profile</label>
+                <input type="file" name="images" id="images" />
+              </div>
               <button type="submit" class="edit-button">Edit</button>
             </form>
           </div>

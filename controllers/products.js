@@ -48,6 +48,13 @@ exports.getMenu = async (req, res, next) => {
   Menu.findById(id)
     .populate("restaurant")
     .populate("reviews")
+    .populate({
+      path: "reviews",
+      populate: {
+        path: "customer",
+        model: "Customer",
+      },
+    })
     .then((menu) => {
       res.render("DetailDish", {
         menu: menu,

@@ -22,9 +22,12 @@ const {
   postSchedule,
   incCart,
   decCart,
+  getEditProfile,
+  postEditProfile,
 } = require("./customer");
 const express = require("express");
 const is_customer = require("../middleware/is_customer");
+const upload = require("../utils/upload");
 
 const router = express.Router();
 
@@ -53,7 +56,21 @@ router.post("/cancelorder", is_customer, cancelOrder);
 
 router.get("/schedule", is_customer, getSchedule);
 router.post("/schedule", is_customer, postSchedule);
+router.get("/profile", is_customer, getProfile);
 
 router.post("/rating", is_customer, rating);
+router.post(
+  "/get-editprofile",
+
+  is_customer,
+  getEditProfile
+);
+router.post(
+  "/post-editprofile",
+
+  is_customer,
+  upload.single("images"),
+  postEditProfile
+);
 
 module.exports = router;

@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Go4Food - Profile Info</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <style>
       .profile-content {
         width: 50%;
@@ -75,39 +75,69 @@
         <div class="restaurant-catalog">
           <div class="container profile-content">
             <h1>Profile Information</h1>
-
-            <div class="profile-info">
-              <label for="email">Email</label>
+            <form action="/restaurant/get-editprofile" method="post">
               <input
-                type="text"
-                id="email"
-                value="john.doe@example.com"
-                readonly
+                type="hidden"
+                name="user_id"
+                value="<%=restaurant._id %>"
               />
-            </div>
+              <div class="profile-info">
+                <label for="email">Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  value="<%=restaurant.email %>"
+                  name="email"
+                  readonly
+                />
+              </div>
 
-            <div class="profile-info">
-              <label for="username">Name</label>
-              <input type="text" id="username" value="johndoe123" readonly />
-            </div>
+              <div class="profile-info">
+                <label for="username">Name</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="name"
+                  value="<%=restaurant.name %>"
+                  readonly
+                />
+              </div>
 
-            <div class="profile-info">
-              <label for="address">Delivery Address</label>
+              <div class="profile-info">
+                <label for="address">Phone</label>
+                <input
+                  type="text"
+                  id="address"
+                  name="phone"
+                  value="<%=restaurant.phone %>"
+                  readonly
+                />
+              </div>
+
+              <div class="profile-info">
+                <label for="address">Delivery Address</label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  value="<%=restaurant.address %>"
+                  readonly
+                />
+              </div>
+
+              <div class="profile-picture">
+                <img
+                  src="/images/<%=restaurant.image %>"
+                  alt="Profile Picture"
+                />
+              </div>
               <input
-                type="text"
-                id="address"
-                value="123 Main St, Cityville"
-                readonly
+                type="hidden"
+                name="images"
+                value="<%=restaurant.image %>"
               />
-            </div>
-
-            <div class="profile-picture">
-              <img
-                src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/profile-pic-male_4811a1.svg"
-                alt="Profile Picture"
-              />
-            </div>
-            <button class="edit-button">Edit</button>
+              <button type="submit" class="edit-button">Edit</button>
+            </form>
           </div>
         </div>
       </div>
