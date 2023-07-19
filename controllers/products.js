@@ -91,15 +91,18 @@ exports.getSearch = async (req, res, next) => {
   // search on eithe name, tags, description
   const menus = await Menu.find({
     $or: [
-      { name: { $regex: search, $options: "$i" } },
+      { title: { $regex: search, $options: "$i" } },
+      { tags: { $regex: search, $options: "$i" } },
       { description: { $regex: search, $options: "$i" } },
     ],
   })
+
     .populate("restaurant")
     .populate("reviews")
     .then((menus) => {
       return menus;
     });
+
   res.render("search", {
     allMenus: menus,
     allRestaurent: restaurant,
