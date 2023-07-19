@@ -75,14 +75,16 @@
   <body>
     <div class="container-fluid"  style="margin: 0; padding: 0;">
       <!-- navbar -->
-      <!-- <%- include('./restaurant/header.ejs') %> -->
-      <div
+      <%- include('navbar.ejs') %>
+      <!-- <div
         class="content"
         style="min-height: 100vh; margin-top: 0px !important"
-      >
-        <%- include('sidebar') %>
-        <div class="restaurant-catalog"  style="background-color: #F0F0FA;">
-            <div class="row"  style="padding: 30px;">
+      > -->
+        <!-- <%- include('sidebar') %> -->
+        <div class="restaurant-catalog"  style="background-color: #F0F0FA;  margin-top: 50px;">
+            <div class="row"  style="     padding: 65px;
+            width: 80%;
+            margin: auto;">
                 <div class="col-md-12">
                    <div class="dish-panel">
                       <div class="dish-panel-header">
@@ -215,7 +217,7 @@
                 </div>
              </div>
       </div>
-    </div>
+    <!-- </div> -->
   
      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
