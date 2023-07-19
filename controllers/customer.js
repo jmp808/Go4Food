@@ -335,7 +335,9 @@ exports.getOrders = async (req, res, next) => {
 
   //   return console.log(c.orders);
   // delivered orders
-  const delivered_orders = c.orders.filter((o) => o.status === "delivered");
+  const delivered_orders = c.orders.filter(
+    (o) => o.status === "delivered" || o.history > 0
+  );
   const rest_delivered_orders = c.orders.filter(
     (o) => o.status !== "delivered"
   );
@@ -386,6 +388,10 @@ exports.postSchedule = async (req, res, next) => {
     order.scheduled = "true";
     order.frequency = frequency;
     order.status = "pending";
+    order.shippingDetails.deliveryPerson = "Yet to be assigned";
+    order.shippingDetails.phone = "Yet to be assigned";
+    order.shippingDetails.orderTracking = 0;
+    order.shippingDetails.expectedTime = frequency;
     var history = order.history || 0;
     // return console.log(order);
     order.history = history + 1;
