@@ -102,9 +102,28 @@ exports.postLogin = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.dashboard = (req, res, next) => {
+exports.dashboard = async (req, res, next) => {
+  // pending oreder nums
+  const num_pending_orders = await Order.find({
+    restaurant: req.session.restaurant._id,
+    status: "pending",
+  }).then((orders) => {
+    return orders.length;
+  });
+  const menus_name = [];
+  const menus_orders = [];
+  const menus = await Menu.find({ restaurant: req.session.restaurant._id });
+  for (let i = 0; i < menus.length; i++) {
+    // remove space from menu name
+    menus_name.push(menus[i].title);
+    const orders = await Order.find({ "menus.menu_id": menus[i]._id });
+    menus_orders.push(orders.length);
+  }
   res.render("restaurant/dashboard", {
     restaurant: req.session.restaurant,
+    num_pending_orders: num_pending_orders,
+    menus_name: menus_name,
+    menus_orders: menus_orders,
   });
 };
 
@@ -113,17 +132,42 @@ exports.logout = (req, res, next) => {
   res.redirect("/restaurant/login");
 };
 
-exports.createMenu = (req, res, next) => {
-  res.render("restaurant/createMenu");
+exports.createMenu = async (req, res, next) => {
+  const num_pending_orders = await Order.find({
+    restaurant: req.session.restaurant._id,
+    status: "pending",
+  }).then((orders) => {
+    return orders.length;
+  });
+  res.render("restaurant/createMenu", {
+    restaurant: req.session.restaurant,
+    num_pending_orders: num_pending_orders,
+  });
 };
-exports.orderstatus = (req, res, next) => {
-  res.render("restaurant/orderStatus");
+exports.orderstatus = async (req, res, next) => {
+  const num_pending_orders = await Order.find({
+    restaurant: req.session.restaurant._id,
+    status: "pending",
+  }).then((orders) => {
+    return orders.length;
+  });
+  res.render("restaurant/orderStatus", {
+    restaurant: req.session.restaurant,
+    num_pending_orders: num_pending_orders,
+  });
 };
 exports.allMenu = async (req, res, next) => {
   const menus = await Menu.find({ restaurant: req.session.restaurant._id });
+  const num_pending_orders = await Order.find({
+    restaurant: req.session.restaurant._id,
+    status: "pending",
+  }).then((orders) => {
+    return orders.length;
+  });
   res.render("restaurant/allMenu", {
     menus: menus,
     restaurant: req.session.restaurant,
+    num_pending_orders: num_pending_orders,
   });
 };
 
@@ -159,10 +203,16 @@ exports.orderstatus = async (req, res, next) => {
   const order = await Order.findById(order_id)
     .populate("customer")
     .populate("menus.menu_id");
-
+  const num_pending_orders = await Order.find({
+    restaurant: req.session.restaurant._id,
+    status: "pending",
+  }).then((orders) => {
+    return orders.length;
+  });
   res.render("restaurant/orderStatus", {
     order: order,
     restaurant: req.session.restaurant,
+    num_pending_orders: num_pending_orders,
   });
 };
 
@@ -212,9 +262,16 @@ exports.orderNotification = async (req, res, next) => {
     });
   }
   // return console.log(orders);
-
+  const num_pending_orders = await Order.find({
+    restaurant: req.session.restaurant._id,
+    status: "pending",
+  }).then((orders) => {
+    return orders.length;
+  });
   res.render("restaurant/orderNotification", {
     orders: orders,
+    restaurant: req.session.restaurant,
+    num_pending_orders: num_pending_orders,
   });
 };
 
@@ -244,6 +301,12 @@ exports.cancelOrder = async (req, res, next) => {
 exports.getConfirmOrders = async (req, res, next) => {
   const orders = [];
   const restaurant = await Restaurant.findById(req.session.restaurant._id);
+  const num_pending_orders = await Order.find({
+    restaurant: req.session.restaurant._id,
+    status: "pending",
+  }).then((orders) => {
+    return orders.length;
+  });
   // return console.log(restaurant);
   for (let i = 0; i < restaurant.orders.length; i++) {
     // get order whose status is not pending
@@ -270,6 +333,8 @@ exports.getConfirmOrders = async (req, res, next) => {
 
   res.render("restaurant/confirmOrders", {
     orders: orders,
+    restaurant: req.session.restaurant,
+    num_pending_orders: num_pending_orders,
   });
 };
 
@@ -296,8 +361,17 @@ exports.deleteMenu = async (req, res, next) => {
 exports.getEditMenu = async (req, res, next) => {
   const { menu_id } = req.body;
   const menu = await Menu.findById(menu_id);
+  const num_pending_orders = await Order.find({
+    restaurant: req.session.restaurant._id,
+    status: "pending",
+  }).then((orders) => {
+    return orders.length;
+  });
+
   res.render("restaurant/edit-menu", {
     menu: menu,
+    restaurant: req.session.restaurant,
+    num_pending_orders: num_pending_orders,
   });
 };
 

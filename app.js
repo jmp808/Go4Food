@@ -42,13 +42,6 @@ app.use("/restaurant", restaurantRoutes);
 app.use(customerRoutes);
 app.use(productsRoutes);
 
-app.get("/payment", (req, res) => {
-  res.render("Payment");
-});
-app.get("/allrestaurent", (req, res) => {
-  res.render("allrestaurent");
-});
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

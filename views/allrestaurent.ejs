@@ -135,9 +135,9 @@
       <%- include('navbar') %>
     <!-- </div> -->
     <div class="restaurant-catalog" style="margin-top: 5rem;">
-      <h2 style="margin-left: 5%; color: #ef3d3d">Top Rated Restaurant</h2>
+      <h2 style="margin-left: 5%; color: #ef3d3d">Top Rated  : Restaurant</h2>
       <br />
-      <div class="item-list">
+      <!-- <div class="item-list">
         <div class="slide-container swiper">
             <div class="slide-content">
                 <div class="card-wrapper swiper-wrapper">
@@ -180,21 +180,25 @@
             <button class="swiper-button-next swiper-navBtn"></button>
             <button class="swiper-button-prev swiper-navBtn"></button>
           </div>
-      </div>
+      </div> -->
 
       <h2 style="margin-left: 5%; color: #ef3d3d">Restaurant</h2>
       <br />
       <div class="item-list">
+        <% for (var i=0; i<allRestaurent.length; i++) {%>
+          <a href="/restaurant-detail/<%=allRestaurent[i]._id %>">
         <div class="big">
           <article class="recipe">
            <div class="img-box">
-             <img src="https://b.zmtcdn.com/data/brand_creatives/logos/c38f7540bcc5a38e918856ac06409056_1504531339.png?output-format=webp" width="1500" height="1368" alt="">
+             <img src="/images/<%=allRestaurent[i].image %>" width="1500" height="1368" alt="restaurant">
            </div>
            <div class="recipe-content">
-             <h1   style=" color: #ef3d3d;"><a href="#">Mcdonals</a></h1>
+             <h1   style=" color: #ef3d3d;"><a href="#"><%=allRestaurent[i].name %></a></h1>
            </div>
          </article>
        </div>
+      </a>
+    <% } %>
       </div>
     
        

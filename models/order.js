@@ -39,6 +39,11 @@ const orderSchema = new Schema(
       type: String,
       default: "false",
     },
+    frequency: {
+      type: String,
+      default: "false",
+    },
+
     paymentDetails: {
       cardName: String,
       cardNumber: String,
@@ -69,12 +74,10 @@ const orderSchema = new Schema(
         default: 0,
       },
     },
-    history: [
-      {
-        type: String,
-        default: "Order Placed",
-      },
-    ],
+    history: {
+      type: Number,
+      default: 0,
+    },
     review: {
       type: Schema.Types.ObjectId,
       ref: "Review",

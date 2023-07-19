@@ -1,10 +1,10 @@
 <div class="sidebar" style="border-radius: 0px">
   <ul>
-    <li><a href="dashboard">Home</a></li>
+    <li><a href="/restaurant/dashboard">Home</a></li>
     <li><a href="/restaurant/allmenu">Menu</a></li>
     <li>
       <a href="/restaurant/ordernotification"
-        >Order Notification
+        >Order Notification <% if(num_pending_orders>0) {%>
         <strong
           style="
             background: white;
@@ -13,14 +13,13 @@
             font-size: 20px;
             border-radius: 50%;
           "
-          >2</strong
-        ></a
+        >
+          <%=num_pending_orders %> </strong
+        ><% } %></a
       >
     </li>
     <li><a href="/restaurant/confirmorders">Confirm Orders</a></li>
-    <li><a href="schedule.html">Analytics</a></li>
 
-    <li><a href="profile.html">Restaurant Info</a></li>
     <li>
       <form action="/restaurant/logout" method="post">
         <a>

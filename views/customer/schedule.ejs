@@ -169,9 +169,10 @@
           <img src="https://i.imgur.com/fVuzO73.png" />
           <h2 style="margin-left: 10px">Go4Food</h2>
         </div>
-        <form class="search-form">
+        <form class="search-form" method="get" action="/search">
           <input
             type="text"
+            name="search"
             class="search-input"
             placeholder="Search for orders..."
           />
@@ -186,7 +187,7 @@
           <h1>Schedule Order</h1>
 
           <h2>Choose an Order</h2>
-          <form action="/schedul" method="post">
+          <form action="/schedule" method="post">
           <div class="order-list">
             <% if(orders.length==0){%>
             <h1>No orders found</h1>
@@ -210,7 +211,7 @@
           <div class="schedule-options">
             <div>
               <label for="frequency">Delivery Frequency:</label>
-              <select id="frequency">
+              <select id="frequency" name="frequency">
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
               </select>

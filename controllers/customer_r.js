@@ -50,7 +50,9 @@ router.post("/payment", is_customer, paymentBuyNow);
 
 router.get("/trackorder/:id", is_customer, trackOrder);
 router.post("/cancelorder", is_customer, cancelOrder);
-router.get("/dishdetails", is_customer, dishDetails);
+
+router.get("/schedule", is_customer, getSchedule);
+router.post("/schedule", is_customer, postSchedule);
 
 router.post("/rating", is_customer, rating);
 

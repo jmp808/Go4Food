@@ -5,10 +5,11 @@
     class="navbar"
     style="display: flex; justify-content: center; text-align: center"
   >
-    <form class="search-form">
+    <form method="get" action="/search" class="search-form">
       <input
         type="text"
         placeholder="Search..."
+        name="search"
         style="padding: 5px 5px 5px 5px; border: none"
       />
       <button
@@ -25,7 +26,11 @@
     <div style="justify-content: center; display: flex; align-items: center">
       <a href="/">Menu</a>
       <a href="/allrestaurent">Restaurant</a>
+      <% if(customer){ %>
+      <a href="/dashboard">Dashboard</a>
+      <% }else{ %>
       <a href="/login">Login</a>
+      <% } %>
       <img
         width="20"
         src="https://img.icons8.com/ios-filled/50/FA5252/shopping-cart.png"

@@ -13,7 +13,7 @@
         <%- include('sidebar') %>
         <div class="restaurant-catalog">
             <h1>Restaurant Catalog</h1>
-            <%= restaurant.name %>
+            <h2>Welcome <%= restaurant.name %></h2>
 
             <div>
               <canvas id="myChart"></canvas>
@@ -27,14 +27,17 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       const ctx = document.getElementById('myChart');
+      const labels = '<%=menus_name %>'
+      const order = '<%=menus_orders %>'
+ 
     
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          labels:  labels.split(","),
           datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: '# of Orders',
+            data:  order.split(","),
             borderWidth: 1
           }]
         },

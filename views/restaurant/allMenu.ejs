@@ -59,13 +59,13 @@
                       <td>$<%=menus[i].price %></td>
                       <td> 
                         <% for(var j=0; j<menus[i].tags.length; j++){ %>
-                          <a  style= "margin: 5px;" button" class="btn btn-primary  btn-sm"><%=menus[i].tags[i] %></a>
+                          <a  style= "margin: 5px;" button" class="btn btn-primary  btn-sm"><%=menus[i].tags[j] %></a>
                              <%} %>
                       </td>
                       <td>
                           <div class="actionbtn" style=" display: flex; padding: 10px;">
                              <div>
-                              <a href="/menu/<%=menus[i]._id %>"   class="btn btn-primary">view</a>
+                              <a href="/dish/<%=menus[i]._id %>"   class="btn btn-primary">view</a>
                              </div>
                              <div>
                               <form action="/restaurant/edit-menu" method="post">

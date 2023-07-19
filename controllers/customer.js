@@ -363,7 +363,36 @@ exports.getSchedule = async (req, res, next) => {
   });
 };
 exports.postSchedule = async (req, res, next) => {
-  const { order_id, date, time } = req.body;
+  const { check, frequency } = req.body;
+  // if type of check is not array
+  // return console.log(Array.isArray(check));
+  if (Array.isArray(check)) {
+    for (let i = 0; i < check.length; i++) {
+      const order = await Order.findById(check[i]);
+      order.scheduled = "true";
+      order.frequency = frequency;
+      order.status = "pending";
+
+      var history = order.history || 0;
+      order.shippingDetails.deliveryPerson = "Yet to be assigned";
+      order.shippingDetails.phone = "Yet to be assigned";
+      order.shippingDetails.orderTracking = 0;
+      order.shippingDetails.expectedTime = frequency;
+      order.history = history + 1;
+      await order.save();
+    }
+  } else {
+    const order = await Order.findById(check);
+    order.scheduled = "true";
+    order.frequency = frequency;
+    order.status = "pending";
+    var history = order.history || 0;
+    // return console.log(order);
+    order.history = history + 1;
+    await order.save();
+  }
+
+  res.redirect("/schedule");
 };
 
 exports.trackOrder = async (req, res, next) => {
@@ -390,10 +419,6 @@ exports.getProfile = async (req, res, next) => {
   res.render("customer/Profile", {
     customer: req.session.customer,
   });
-};
-
-exports.dishDetails = async (req, res, next) => {
-  res.render("customer/singlemenu");
 };
 
 exports.rating = async (req, res, next) => {
