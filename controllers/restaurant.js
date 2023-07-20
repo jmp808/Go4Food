@@ -105,8 +105,9 @@ exports.postLogin = (req, res, next) => {
 
 exports.dashboard = async (req, res, next) => {
   // pending oreder nums
-  var num_pending_orders = await Order.find({
+  const num_pending_orders = await Order.find({
     restaurant: req.session.restaurant._id,
+    status: "pending",
   }).then((orders) => {
     return orders.length;
   });
