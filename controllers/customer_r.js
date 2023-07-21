@@ -24,6 +24,7 @@ const {
   decCart,
   getEditProfile,
   postEditProfile,
+  first,
 } = require("./customer");
 const express = require("express");
 const is_customer = require("../middleware/is_customer");
@@ -32,6 +33,7 @@ const upload = require("../utils/upload");
 const router = express.Router();
 
 router.get("/login", login);
+router.get("/first", first);
 router.get("/signup", signup);
 router.post("/signup", postSignup);
 router.post("/login", postLogin);

@@ -74,7 +74,7 @@ exports.postLogin = (req, res, next) => {
             req.session.customer = customer;
             return req.session.save((err) => {
               //   console.log(err);
-              res.redirect("/dashboard");
+              res.redirect("/");
             });
           }
           res.render("customer/signin", {
@@ -531,7 +531,9 @@ exports.incCart = async (req, res, next) => {
   await cart.save();
   res.redirect("/cart");
 };
-
+exports.first = async (req, res, next) => {
+  res.render("customer/first");
+};
 exports.decCart = async (req, res, next) => {
   const { id } = req.body;
 

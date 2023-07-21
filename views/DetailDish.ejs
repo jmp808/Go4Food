@@ -224,14 +224,15 @@
                     <p>No reviews yet</p>
                   <% } %>
                 <% for(var i=0; i<menu.reviews.length; i++){ %>
-                 <div class="dish-panel dish-panel-fh"  style="padding: 10px; margin: 0px;">
+                 <div class="dish-panel"  style="padding: 10px; margin: 0px;">
                     <div  style="padding: 0.5rem;">
                        <h4 class="section-title bold"><%=menu.reviews[i].customer.name %></h4>
                       </div>
-                       <div  style="display: flex; margin: 10px;;  ">
-                        <p class="recipe-metadata">Rate: 
+                       <div  style="display: flex; margin: 10px; flex-direction: column;  ">
+                        <p class="recipe-metadata" style="display: flex;"> 
+                          <span  style="margin-right: 7px;">Rate:</span>
                           <samp style=" border-radius: 8px;  margin-right: 5px;  width: 30px; height: 30px; background-color: green;padding: 5px; color: #fff;display: flex;justify-content: center; ">
-                            <span class="recipe-rating">
+                            <span class="recipe-rating" style="text-align: center;">
                               <%var sum = 0; %>
                               <%for(var j=0;j<menu.reviews.length; j++) {%>
                                 <%  sum = sum + menu.reviews[j].rating %>

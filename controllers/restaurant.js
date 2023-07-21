@@ -402,7 +402,7 @@ exports.deleteMenu = async (req, res, next) => {
     }
   }
   // remove order whose menu is deleted
-
+  const orders = await Order.deleteMany({ "menus.menu_id": menu_id });
   await Order.findOneAndDelete({ "menus.menu_id": menu_id });
   await restaurant.save();
   await Menu.findByIdAndDelete(menu_id);
