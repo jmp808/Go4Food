@@ -8,6 +8,11 @@ Department of Computer Science, University of Regina.
 
 Develop a web-based application that allows users to order food from various restaurants. Implement features such as user registration, menu browsing, placing orders, and order tracking. Highlight benefits like convenience, a wide range of restaurant options, and user-friendly interfaces.
 
+## Online Server
+
+(pending)
+
+
 ## Team Members
 - Adnan Uddin Mohammed
 - Justine Jhon Papeleras
