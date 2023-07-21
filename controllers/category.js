@@ -1,11 +1,11 @@
 const express = require('express');
-const {Category} = require('../model/category');
-const {findByIdAndRemove} = require('../model/role');
+const { restart } = require('nodemon');
+const {Category, Category} = require('../model/category');
 const router = express.Router;
 
 router.get('/', async (req, res) =>
 {
-    const categoryList = await = Category.find();
+    const categoryList = await Category.find();
 
     if (!categoryList)
     {
@@ -13,6 +13,18 @@ router.get('/', async (req, res) =>
     }
 
     res.send(categoryList);
+})
+
+router.get('/:id', async(req,res) =>
+{
+    const Category = await Category.findById(req.params.id);
+
+    if (!category)
+    {
+        res.status(500).json({message: 'Category is missing!'})
+    }
+
+    res.status(200).send(category);
 })
 
 router.post('/', async (req, res) =>
