@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", true);
 exports.connectDB = () => {
   mongoose
-    .connect("mongodb://127.0.0.1:27017", {
+    .connect("mongodb+srv://ami949:Udy5uDvKv6NfaEaZ@cluster0.deyjolf.mongodb.net/", {
       dbName: "Go4Food",
       useNewUrlParser: true,
       useUnifiedTopology: true,
