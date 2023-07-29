@@ -16,7 +16,7 @@ const app = express();
 
 // session store
 const store = new mongoDbStore({
-  uri: "mongodb://127.0.0.1:27017/Go4Food",
+  uri: "mongodb+srv://ami949:Udy5uDvKv6NfaEaZ@cluster0.deyjolf.mongodb.net/",
   collection: "sessions",
 });
 
