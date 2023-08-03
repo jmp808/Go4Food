@@ -10,7 +10,7 @@ Develop a web-based application that allows users to order food from various res
 
 ## Online Server
 
-http://go4food.xyz/](https://go4food.xyz/first
+https://go4food.xyz/first
 
 
 ## Team Members
